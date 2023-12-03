@@ -1,7 +1,7 @@
 '''
 解参数测试文件
 Version: 1.0.0.231203a
-Suthor: CooooldWind_
+Author: CooooldWind_
 '''
 import pprint
 import encode_sec_key
