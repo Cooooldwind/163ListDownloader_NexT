@@ -1,9 +1,5 @@
 '''
-<<<<<<< HEAD
-version: 1.0.0.231112a
-=======
-version: 1.0.0.23111202c
->>>>>>> ac56c3b482c3ce6c89418dbd5d31ee99f1c38ab4
+version: 1.0.0.231202a
 docstring: 全局参数
 author: CooooldWind_
 '''

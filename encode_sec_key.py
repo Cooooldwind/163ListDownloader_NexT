@@ -1,5 +1,5 @@
 '''
-version: 1.0.0.231112a
+version: 1.0.0.231202a
 docstring: 网易云weapi解码
 author: CooooldWind_, 半岛的孤城
 '''
