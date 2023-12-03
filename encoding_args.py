@@ -1,7 +1,7 @@
 '''
-version: 1.0.0.231202a
-docstring: 全局参数
-author: CooooldWind_
+全局参数
+Version: 1.0.0.231203a
+Author: CooooldWind_
 '''
 USER_AGENTS = (
 "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 2.0.50727; Media Center PC 6.0)",

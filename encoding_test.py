@@ -1,10 +1,10 @@
 '''
-version: 1.0.0.231202a
-docstring: 测试文件
-author: CooooldWind_
+解参数测试文件
+Version: 1.0.0.231203a
+Suthor: CooooldWind_
 '''
-import encode_sec_key
 import pprint
+import encode_sec_key
 
 pprint.pprint(
     encode_sec_key.NeteaseParams(

@@ -1,7 +1,9 @@
 '''
-version: 1.0.0.231202a
-docstring: 网易云weapi解码
-author: CooooldWind_, 半岛的孤城
+网易云WeAPI6解码
+Version: 1.0.0.231203a
+Author: CooooldWind_, 半岛的孤城
+References: 
+1. 网易云解参数（获取网易云歌词，获取评论同理）[https://www.bilibili.com/read/cv12754897/]
 '''
 
 import random
@@ -9,10 +11,10 @@ import json
 from base64 import b64encode
 import requests
 from Crypto.Cipher import AES
-from encoding_args import *
+from encoding_args import USER_AGENTS, FUNC_F, SEC_KEY
 
 class NeteaseParams:
-    '''解码类'''
+    '''WeAPI6解码类'''
     def __init__(self, encode_data, url):
         self.encode_data = encode_data
         self.url = url
@@ -50,4 +52,7 @@ class NeteaseParams:
         get_headers = {
             'User-Agent': random.choice(USER_AGENTS)
         }
-        return requests.post(self.url, data = get_data, headers = get_headers, timeout = 10).json()
+        return requests.post(self.url,
+                             data = get_data,
+                             headers = get_headers,
+                             timeout = 10).json()
