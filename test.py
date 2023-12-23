@@ -6,6 +6,3 @@ test_p.get_resource()
 for i in test_p.tracks:
     i.get_resource()
     pprint.pprint(i.info)
-'''
-2998665333
-'''
