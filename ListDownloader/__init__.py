@@ -29,9 +29,11 @@ class Playlist:
         result = encode_sec_key.NeteaseParams(
             encode_data = self.encode_data,
             url = PLAYLIST_API).get_resource()
-        self.creater = result['playlist']['userId']
+        try: self.creater = result['playlist']['userId']
+        except KeyError: return -1
         self.track_id = result['playlist']['trackIds']
         self.tracks = [self.Song({'id': i['id']}, str(self.creater)) for i in self.track_id]
+        return 0
     class Song(threading.Thread):
         '''Song子类'''
         def __init__(self, id, user_id):
