@@ -6,8 +6,10 @@ Author: CooooldWind_
 from . import encode_sec_key
 from .global_args import PLAYLIST_API, SONG_INFO_API, SONG_FILE_API_2, LEVEL, LYRIC_API
 from PIL import Image
-from mutagen.flac import FLAC
-from mutagen.id3 import ID3,APIC
+from mutagen.flac import FLAC, Picture
+from mutagen.mp3 import MP3, EasyMP3
+from mutagen.id3 import ID3, APIC, USLT, Encoding
+from mutagen.easyid3 import EasyID3
 import threading
 import requests
 import random
@@ -57,11 +59,17 @@ class Playlist:
                 for i in self.response['ar']:
                     tmp.append(i['name'])
                 self.info.update({'artist': tmp})
+                tmp = ""
+                for i in self.response['ar']:
+                    tmp += i['name']
+                    if i != self.response['ar'][-1]: tmp += ", "
+                self.info.update({'artist_str': tmp})
         def song_download(self, level, dir, filename):
             '下载音乐'
             song_request_url = SONG_FILE_API_2 + "id=" + self.info['id'] + "&level=" + LEVEL[level + 1]
             response = requests.get(url = song_request_url).json()['data'][0]
             self.info.update({'song_url': response['url']})
+            self.info.update({'song_type': response['type']})
             music_file = open(dir + filename + '.' + response['type'], 'wb+')
             rate = int(0)
             source = requests.get(self.info['song_url'], stream = True, allow_redirects = True)
@@ -74,7 +82,7 @@ class Playlist:
             music_file.close()
         def lyric_download(self, dir, filename):
             '''下载歌词'''
-            lyric_file = open(dir + filename + '.lrc','w+',encoding = 'utf-8')
+            lyric_file = open(dir + filename + '.lrc', 'w+', encoding = 'utf-8')
             encode_data = {'csrf_token':"",
                         'id':self.info['id'],
                         'lv':'-1',
@@ -104,16 +112,53 @@ class Playlist:
             cover_file_type = cover_file.format
             cover_file_out = cover_file.resize((size, size))
             cover_file_out.save(dir + filename + '.jpg', cover_file_type)
-        def attribute_write(self, dir, filename, type, ):
+        def attribute_write(self, dir, filename, type):
             if type == "flac":
                 music_file = FLAC(dir + filename + ".flac")
-                music_file['title'] = self.info['name']
-                music_file['album'] = self.info['album']
-                tmp = ""
-                for i in self.info['artist']:
-                    tmp = tmp + i
-                    if i != self.info['artist'][-1]: tmp = tmp + "; "
-                music_file['artist'] = tmp
-                music_file.save()
-                print(music_file.values())
+            elif type == "mp3":
+                music_file = EasyMP3(dir + filename + ".mp3")
+            else: return -1
+            music_file['title'] = self.info['name']
+            music_file['album'] = self.info['album']
+            tmp = ""
+            for i in self.info['artist']:
+                tmp = tmp + i
+                if i != self.info['artist'][-1]: tmp = tmp + "; "
+            music_file['artist'] = tmp
+            music_file.save()
+        def cover_write(self, dir, filename, type, cover_dir, cover_filename):
+            '''写入专辑封面'''
+            if type == "flac":
+                music_file = FLAC(dir + filename + ".flac")
+            elif type == "mp3":
+                music_file = ID3(dir + filename + ".mp3")
+            else: return -1
+            cover_file = open(cover_dir + cover_filename + '.jpg', 'rb+')
+            if type == "flac":
+                music_file.clear_pictures()
+                cover = Picture()
+                cover.data = cover_file.read()
+                cover.mime = 'image/jpeg'
+                music_file.add_picture(cover)
+            elif type == "mp3":
+                music_file['APIC'] = APIC(encoding = 3,
+                                          mime = 'image/jpeg',
+                                          type = 3,
+                                          desc = u'Cover',
+                                          data = cover_file.read())
+            music_file.save()
+        def lyric_write(self, dir, filename, type, lyric_dir, lyric_filename):
+            if type == "flac":
+                music_file = FLAC(dir + filename + ".flac")
+                lyric_file = open(lyric_dir + lyric_filename + '.lrc', 'r+', encoding = 'utf-8')
+                music_file['lyrics'] = lyric_file.read()
+            elif type == "mp3":
+                music_file = ID3(dir + filename + ".mp3")
+                lyric_file = open(lyric_dir + lyric_filename + '.lrc', 'r+', encoding = 'utf-8')
+                music_file.setall("USLT", [USLT(encoding=Encoding.UTF8, format=2, type=1, text=lyric_file.read())])
+                #music_file['lyrics'] = lyric_file.read()
+            else: return -1
+            music_file.save()
+
+            
             
