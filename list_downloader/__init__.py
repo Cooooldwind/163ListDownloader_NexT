@@ -87,8 +87,7 @@ class Playlist:
             self.downloading_info['value'] = 0
             song_request_url = SONG_FILE_API_2 + "id=" + self.info['id']
             song_request_url = song_request_url + "&level=" + LEVEL[level - 1]
-            print(requests.get(url = song_request_url, timeout = 5).text)
-            response = requests.get(url = song_request_url, timeout = 5).json()['data'][0]
+            response = requests.get(url = song_request_url, timeout = 20).json()['data'][0]
             self.info.update({'song_url': response['url']})
             self.info.update({'song_type': response['type']})
             music_filename = dir + filename + '.' + response['type']
@@ -97,7 +96,7 @@ class Playlist:
                 source = requests.get(self.info['song_url'],
                                       stream = True,
                                       allow_redirects = True,
-                                      timeout = 5)
+                                      timeout = 20)
                 totalsize = int(source.headers['Content-Length'])
                 for data in source.iter_content(chunk_size = 1024):
                     music_file.write(data)
@@ -132,7 +131,7 @@ class Playlist:
                 source = requests.get(url = self.info['cover_url'],
                                       stream = True,
                                       allow_redirects = True,
-                                      timeout = 5)
+                                      timeout = 20)
                 totalsize = int(source.headers['Content-Length'])
                 for data in source.iter_content(chunk_size = 1024):
                     cover_file.write(data)

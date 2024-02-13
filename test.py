@@ -22,7 +22,7 @@ def func(id, d, fnf, lv, t_sum):
                 back = False
         if back:
             break
-        time.sleep(0.2)
+        time.sleep(0.5)
 
 if __name__ == "__main__":
     d = str(input("dir: "))
