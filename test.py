@@ -1,5 +1,5 @@
-import ListDownloader
-test_p = ListDownloader.Playlist("id") #把id删掉，填上歌单id
+import list_downloader
+test_p = list_downloader.Playlist("id") #把id删掉，填上歌单id
 test_p.get_resource()
 d = "dir" #把dir删掉填上存储目录，务必以正斜杠或反斜杠结尾
 def run(waiting):
