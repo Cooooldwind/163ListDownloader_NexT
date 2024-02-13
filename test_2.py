@@ -1,4 +1,6 @@
 import list_downloader
+from alive_progress import alive_bar
+from tqdm import trange
 test_p = list_downloader.Playlist("9293890250") #把id删掉，填上歌单id
 test_p.get_resource()
 d = "C:\\Users\\Administrator\\Downloads\\dik\\" #把dir删掉填上存储目录，务必以正斜杠或反斜杠结尾

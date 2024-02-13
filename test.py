@@ -10,7 +10,7 @@ def func(id, d, fnf, lv, t_sum):
     tc = threading.Semaphore(t_sum)
     for p in test_p.tracks:
         p.get_resource()
-        p.initialize(d, tc, fnf, lv)
+        p.initialize(tc, fnf, lv, d)
     for p in test_p.tracks:
         p.start()
         time.sleep(0)

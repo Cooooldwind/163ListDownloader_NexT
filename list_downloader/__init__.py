@@ -7,6 +7,7 @@ import threading
 import random
 import time
 import requests
+import os
 from PIL import Image
 from mutagen.flac import FLAC, Picture
 from mutagen.mp3 import EasyMP3
@@ -53,7 +54,7 @@ class Playlist:
             self.info = {}
             self.response = None
             self.downloading_info = {
-                'id': self.id,
+                'id': None,
                 'state': 0,
                 'value': 0.00
             }
@@ -81,6 +82,7 @@ class Playlist:
                 if i != self.response['ar'][-1]:
                     tmp += ", "
             self.info.update({'artist_str': tmp})
+            self.downloading_info['id'] = self.info['id']
         def song_download(self, level, dir, filename):
             '下载音乐'
             self.downloading_info['state'] = 1
@@ -232,8 +234,15 @@ class Playlist:
             self.downloading_info['value'] = 1
             self.finish = True
             return 0
-        def initialize(self, d, tc, fnf, lv):
-            self.d = d
+        def initialize(self, tc, fnf, lv, d = ""):
+            if d[-1:1] != "/" and d[-1:1] != "\\":
+                try:
+                    os.makedirs("download/")
+                    self.d = "download/"
+                except:
+                    pass
+            else:
+                self.d = d
             self.tc = tc
             self.fnf = fnf
             self.lv = lv

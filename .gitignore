@@ -3,4 +3,5 @@ test.spec
 build/
 dist/
 dl/
+download/
 .gitignore
