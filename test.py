@@ -1,28 +1,23 @@
+import time
+import pprint
+import threading
 import list_downloader
-test_p = list_downloader.Playlist("id") #把id删掉，填上歌单id
+test_p = list_downloader.Playlist("9293890250") #把id删掉，填上歌单id
 test_p.get_resource()
-d = "dir" #把dir删掉填上存储目录，务必以正斜杠或反斜杠结尾
-def run(waiting):
-    fn = waiting.info['name'] + " - " + waiting.info['artist_str'] #两个互换就是“歌手-歌曲名”的形式
-    waiting.song_download(3, d, fn) #歌曲下载。第一个参数是音质，1~8如下。
-    '''
-    1 standard 标准
-    2 higher 较高
-    3 exhigh 极高
-    4 lossless 无损
-    5 hires Hi-Res模式
-    6 jyeffect 高清环绕声
-    7 sky 沉浸环绕声
-    8 jymaster 超清母带
-    '''
-    tp = waiting.info['song_type']
-    waiting.lyric_download(d, fn) #歌词下载
-    waiting.cover_download(d, fn) #封面下载
-    waiting.attribute_write(d, fn, tp) #属性填写
-    waiting.cover_write(d, fn, tp, d, fn) #封面注入到属性
-    waiting.lyric_write(d, fn, tp, d, fn) #歌词注入到属性
-
+d = "C:\\Users\\Administrator\\Downloads\\dik\\" #把dir删掉填上存储目录，务必以正斜杠或反斜杠结尾
+tc = threading.Semaphore(4)
 for p in test_p.tracks:
     p.get_resource()
+    p.initialize(d, tc)
 for p in test_p.tracks:
-    run(p)
+    p.start()
+    time.sleep(0)
+while True:
+    back = True
+    for p in test_p.tracks:
+        if p.finish == False:
+            pprint.pprint(p.downloading_info)
+            back = False
+    if back:
+        break
+    time.sleep(1)
