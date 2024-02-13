@@ -234,15 +234,8 @@ class Playlist:
             self.downloading_info['value'] = 1
             self.finish = True
             return 0
-        def initialize(self, tc, fnf, lv, d = ""):
-            if d[-1:1] != "/" and d[-1:1] != "\\":
-                try:
-                    os.makedirs("download/")
-                    self.d = "download/"
-                except:
-                    pass
-            else:
-                self.d = d
+        def initialize(self, tc, fnf, lv, d = "download/"):
+            self.d = d
             self.tc = tc
             self.fnf = fnf
             self.lv = lv
