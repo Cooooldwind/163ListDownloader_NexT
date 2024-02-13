@@ -60,6 +60,7 @@ class Playlist:
             self.finish = False
             self.d = None
             self.fnf = None
+            self.lv = 1
         def get_resource(self):
             '''获取更加详细的数据'''
             pure_response = encode_sec_key.NeteaseParams(
@@ -231,10 +232,11 @@ class Playlist:
             self.downloading_info['value'] = 1
             self.finish = True
             return 0
-        def initialize(self, d, tc, fnf):
+        def initialize(self, d, tc, fnf, lv):
             self.d = d
             self.tc = tc
             self.fnf = fnf
+            self.lv = lv
         def run(self):
             with self.tc:
                 fn = str(self.fnf)
@@ -243,7 +245,7 @@ class Playlist:
                 fn = fn.replace("$name$", self.info['name'])
                 fn = fn.replace("$album$", self.info['album'])
                 fn = fn.replace("$$", "$")
-                self.song_download(3, self.d, fn) #歌曲下载。第一个参数是音质，1~8如下。
+                self.song_download(self.lv, self.d, fn) #歌曲下载。第一个参数是音质，1~8如下。
                 tp = self.info['song_type']
                 self.lyric_download(self.d, fn) #歌词下载
                 self.cover_download(self.d, fn) #封面下载
