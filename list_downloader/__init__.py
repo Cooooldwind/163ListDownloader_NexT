@@ -86,7 +86,8 @@ class Playlist:
             self.downloading_info['state'] = 1
             self.downloading_info['value'] = 0
             song_request_url = SONG_FILE_API_2 + "id=" + self.info['id']
-            song_request_url = song_request_url + "&level=" + LEVEL[level + 1]
+            song_request_url = song_request_url + "&level=" + LEVEL[level - 1]
+            print(requests.get(url = song_request_url, timeout = 5).text)
             response = requests.get(url = song_request_url, timeout = 5).json()['data'][0]
             self.info.update({'song_url': response['url']})
             self.info.update({'song_type': response['type']})
