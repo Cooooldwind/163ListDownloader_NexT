@@ -1,6 +1,6 @@
 '''
-__init__.py
-Version: 1.0.0.240213a
+list_downloader/__init__.py
+Core.Ver.1.0.0.240213a
 Author: CooooldWind_
 '''
 import threading

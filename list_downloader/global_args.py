@@ -1,7 +1,7 @@
 '''
-全局参数
-Version: 1.0.0.231218a
-Author: CooooldWind_
+list_downloader/global_args.py
+Core.Ver.1.0.0.240213a
+Author: CooooldWind_, 是青旨啊
 '''
 USER_AGENTS = (
 "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 2.0.50727; Media Center PC 6.0)",
@@ -18,6 +18,6 @@ SEC_KEY = "6ea19f618d09893013feb207e6953ab0d04831ccf86095147970745a825a0f3288ad0
 PLAYLIST_API = "https://music.163.com/weapi/v6/playlist/detail?"
 SONG_INFO_API = "https://music.163.com/weapi/v3/song/detail"
 SONG_FILE_API = "https://music.163.com/weapi/song/enhance/player/url/v1?"
-SONG_FILE_API_2 = "http://api.tunefree.fun/ncm/song/?"
+SONG_FILE_API_2 = "http://api.tunefree.fun/ncm/song/?" #Specially Thanks: @是青旨啊
 LYRIC_API = "https://music.163.com/weapi/song/lyric?csrf_token="
 LEVEL = ['standard','higher','exhigh','lossless','hires','jyeffect','jymaster','sky']

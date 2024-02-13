@@ -1,6 +1,6 @@
 '''
 网易云WeAPI解码
-Version: 1.0.0.231218a
+Core.Ver.1.0.0.231218a
 Author: CooooldWind_, 半岛的孤城
 References: 
 1. 网易云解参数（获取网易云歌词，获取评论同理）[https://www.bilibili.com/read/cv12754897/]
