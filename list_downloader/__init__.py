@@ -59,7 +59,7 @@ class Playlist:
                 'value': 0.00
             }
             self.finish = False
-            self.d = None
+            self.d = "download/"
             self.fnf = None
             self.lv = 1
         def get_resource(self):
@@ -235,7 +235,13 @@ class Playlist:
             self.finish = True
             return 0
         def initialize(self, tc, fnf, lv, d = "download/"):
-            self.d = d
+            if d != self.d and d != "":
+                self.d = d
+            else:
+                try:
+                    os.makedirs("download/")
+                except FileExistsError:
+                    pass
             self.tc = tc
             self.fnf = fnf
             self.lv = lv
