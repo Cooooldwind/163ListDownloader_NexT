@@ -57,6 +57,8 @@ class Playlist:
         Song子类，存储每个歌曲。
 
         包括元信息，各种函数。
+
+        常用的有info['id'/'name'/'artist'/'album']和downloading_info['id'/'state'/'value']
         '''
         def __init__(self, id, user_id):
             threading.Thread.__init__(self)
