@@ -8,6 +8,7 @@ import random
 import time
 import requests
 import os
+import eyed3
 from PIL import Image
 from mutagen.flac import FLAC, Picture
 from mutagen.mp3 import EasyMP3
@@ -276,11 +277,11 @@ class Playlist:
                     music_file.add_picture(cover)
                     self.downloading_info['value'] = 0.7
                 elif type == "mp3":
-                    music_file['APIC'] = APIC(encoding = 3,
-                                              mime = 'image/jpeg',
-                                              type = 3,
-                                              desc = 'Cover',
-                                              data = cover_file.read())
+                    music_file.add(APIC(encoding = 3,
+                                        mime = 'image/jpeg',
+                                        type = 3,
+                                        desc = u'Cover',
+                                        data = cover_file.read()))
                     self.downloading_info['value'] = 0.7
             music_file.save()
             self.downloading_info['value'] = 1
@@ -326,13 +327,13 @@ class Playlist:
             self.downloading_info['value'] = 1
             self.finish = True
             return 0
-        def initialize(self, tc = threading.Semaphore(8), fnf = "$name$ - $artist$", lv = 1, d = "download/"):
+        def initialize(self, tc_sum = int(), fnf = "$name$ - $artist$", lv = 1, d = "download/"):
             '''
             初始化参数。
 
             参数：
 
-            tc：多线程控制器：threading.Semaphore(int)的形式（必须引入threading库）默认8线程；
+            tc_sum：多线程的线程数：默认8；
 
             fnf：文件名的格式，以下是文件名格式的规范:
 
@@ -355,7 +356,7 @@ class Playlist:
                     os.makedirs("download/")
                 except FileExistsError:
                     pass
-            self.tc = tc
+            self.tc = threading.Semaphore(tc_sum)
             self.fnf = fnf
             self.lv = lv
         def run(self):
