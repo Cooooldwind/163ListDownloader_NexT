@@ -15,8 +15,21 @@ from mutagen.id3 import ID3, APIC, USLT, Encoding
 from . import encode_sec_key
 from .global_args import PLAYLIST_API, SONG_INFO_API, SONG_FILE_API_2, LEVEL, LYRIC_API
 
+def clean(s):
+    '''清空有悖于标准的字符的函数。'''
+    dirty = ["/","\\",":","*","\"","?","|","<",">"]
+    for i in dirty:
+        s = s.replace(i,"")
+    return s
+
 class Playlist:
-    '''Playlist类'''
+    '''
+    Playlist类。
+
+    用tracks表示每一首歌。
+
+    tracks里面都是Song类。
+    '''
     def __init__(self, id):
         self.id = str(id)
         self.encode_data = {
@@ -28,7 +41,7 @@ class Playlist:
         self.track_id = None
         self.tracks = None
     def get_resource(self):
-        '''获取数据'''
+        '''初步获取数据：歌单内的歌曲都是些什么。'''
         result = encode_sec_key.NeteaseParams(
             encode_data = self.encode_data,
             url = PLAYLIST_API).get_resource()
@@ -40,7 +53,11 @@ class Playlist:
         self.tracks = [self.Song({'id': i['id']}, str(self.creater)) for i in self.track_id]
         return 0
     class Song(threading.Thread):
-        '''Song子类'''
+        '''
+        Song子类，存储每个歌曲。
+
+        包括元信息，各种函数。
+        '''
         def __init__(self, id, user_id):
             threading.Thread.__init__(self)
             self.tc = threading.Semaphore(8)
@@ -63,7 +80,11 @@ class Playlist:
             self.fnf = None
             self.lv = 1
         def get_resource(self):
-            '''获取更加详细的数据'''
+            '''
+            获取更加详细的数据。
+
+            （其实就是元信息）
+            '''
             pure_response = encode_sec_key.NeteaseParams(
                 encode_data = self.encode_data,
                 url = SONG_INFO_API)
@@ -83,8 +104,21 @@ class Playlist:
                     tmp += ", "
             self.info.update({'artist_str': tmp})
             self.downloading_info['id'] = self.info['id']
-        def song_download(self, level, dir, filename):
-            '下载音乐'
+        def song_download(self, dir = str(), filename = str(), level = 1):
+            '''
+            下载音乐。
+
+            参数：
+
+            dir：存储路径（结尾必须是“/”或“\”）；
+
+            filename：文件名（不含后缀）；
+
+            level：音质（默认为1，从低到高，不超过8）。
+            '''
+            if level > 8 or level < 1:
+                return -1
+            filename = clean(filename)
             self.downloading_info['state'] = 1
             self.downloading_info['value'] = 0
             song_request_url = SONG_FILE_API_2 + "id=" + self.info['id']
@@ -108,8 +142,16 @@ class Playlist:
                         time.sleep(0.01)
             self.downloading_info['value'] = 1
             return 0
-        def lyric_download(self, dir, filename):
-            '''下载歌词'''
+        def lyric_download(self, dir = str(), filename = str()):
+            '''
+            下载歌词。
+
+            参数：
+
+            dir：存储路径（结尾必须是“/”或“\”）；
+
+            filename：文件名（不含后缀）。
+            '''
             self.downloading_info['state'] = 2
             self.downloading_info['value'] = 0
             lyric_filename = dir + filename + '.lrc'
@@ -124,8 +166,18 @@ class Playlist:
                 ).get_resource()
                 lyric_file.write(response['lrc']['lyric'].replace("\n",'\n'))
             self.downloading_info['value'] = 1
-        def cover_download(self, dir, filename, size = -1):
-            '''封面下载'''
+        def cover_download(self, dir = str(), filename = str(), size = -1):
+            '''
+            封面下载。
+
+            参数：
+
+            dir：存储路径（结尾必须是“/”或“\”）；
+
+            filename：文件名（不含后缀）；
+
+            size：图片分辨率，单位为像素（默认-1，-1表示不修改尺寸）。
+            '''
             self.downloading_info['state'] = 3
             self.downloading_info['value'] = 0
             with open(dir + filename + '.jpg', 'wb+') as cover_file:
@@ -156,8 +208,18 @@ class Playlist:
             cover_file_out.save(dir + filename + '.jpg', cover_file_type)
             self.downloading_info['value'] = 1
             return 0
-        def attribute_write(self, dir, filename, type):
-            '''属性填写'''
+        def attribute_write(self, dir = str(), filename = str(), type = str()):
+            '''
+            属性填写。
+
+            参数：
+
+            dir：存储路径（结尾必须是“/”或“\”）；
+
+            filename：文件名（不含后缀）；
+
+            type：文件类型（flac/mp3）。
+            '''
             self.downloading_info['state'] = 4
             self.downloading_info['value'] = 0
             if type == "flac":
@@ -179,8 +241,22 @@ class Playlist:
             music_file.save()
             self.downloading_info['value'] = 1
             return 0
-        def cover_write(self, dir, filename, type, cover_dir, cover_filename):
-            '''写入专辑封面'''
+        def cover_write(self, dir = str(), filename = str(), type = str(), cover_dir = str(), cover_filename = str()):
+            '''
+            写入专辑封面。
+
+            参数：
+
+            dir：存储路径（结尾必须是“/”或“\”）；
+
+            filename：文件名（不含后缀）；
+
+            type：文件类型（flac/mp3）；
+
+            cover_dir：封面的存储路径（结尾必须是“/”或“\”）；
+
+            cover_filename：封面的文件名（不含后缀）；
+            '''
             self.downloading_info['state'] = 5
             self.downloading_info['value'] = 0
             if type == "flac":
@@ -207,8 +283,22 @@ class Playlist:
             music_file.save()
             self.downloading_info['value'] = 1
             return 0
-        def lyric_write(self, dir, filename, type, lyric_dir, lyric_filename):
-            '''写入歌词'''
+        def lyric_write(self, dir = str(), filename = str(), type = str(), lyric_dir = str(), lyric_filename = str()):
+            '''
+            写入歌词。
+
+            参数：
+
+            dir：存储路径（结尾必须是“/”或“\”）；
+
+            filename：文件名（不含后缀）；
+
+            type：文件类型（flac/mp3）；
+
+            lyric_dir：歌词的存储路径（结尾必须是“/”或“\”）；
+
+            lyric_filename：歌词的文件名（不含后缀）；
+            '''
             self.downloading_info['state'] = 6
             self.downloading_info['value'] = 0
             with open(lyric_dir + lyric_filename + '.lrc', 'r+', encoding = 'utf-8') as lyric_file:
@@ -234,7 +324,28 @@ class Playlist:
             self.downloading_info['value'] = 1
             self.finish = True
             return 0
-        def initialize(self, tc, fnf, lv, d = "download/"):
+        def initialize(self, tc = threading.Semaphore(8), fnf = "$name$ - $artist$", lv = 1, d = "download/"):
+            '''
+            初始化参数。
+
+            参数：
+
+            tc：多线程控制器：threading.Semaphore(int)的形式（必须引入threading库）默认8线程；
+
+            fnf：文件名的格式，以下是文件名格式的规范:
+
+            用"$xxx$"表示一些内容：
+
+            "$id$"是歌曲id；"$name$"是歌曲名称；
+
+            "$artist$"是歌手；"$album$"是专辑；
+
+            输入"$"用"$$"；
+
+            lv: 品质（由低到高1~8）默认1；
+
+            d：存储路径（结尾必须是“/”或“\”）默认创建子文件夹“download/”。
+            '''
             if d != self.d and d != "":
                 self.d = d
             else:
@@ -246,6 +357,7 @@ class Playlist:
             self.fnf = fnf
             self.lv = lv
         def run(self):
+            '''给多线程使用的启动函数'''
             with self.tc:
                 fn = str(self.fnf)
                 fn = fn.replace("$id$", self.info['id'])
@@ -253,10 +365,10 @@ class Playlist:
                 fn = fn.replace("$name$", self.info['name'])
                 fn = fn.replace("$album$", self.info['album'])
                 fn = fn.replace("$$", "$")
-                self.song_download(self.lv, self.d, fn) #歌曲下载。第一个参数是音质，1~8如下。
+                self.song_download(level = self.lv, dir = self.d, filename = fn)
                 tp = self.info['song_type']
-                self.lyric_download(self.d, fn) #歌词下载
-                self.cover_download(self.d, fn) #封面下载
-                self.attribute_write(self.d, fn, tp) #属性填写
+                self.lyric_download(dir = self.d, filename = fn)
+                self.cover_download(dir = self.d, filename = fn) #封面下载
+                self.attribute_write(dir = self.d, filename = fn, type = tp) #属性填写
                 self.cover_write(self.d, fn, tp, self.d, fn) #封面注入到属性
                 self.lyric_write(self.d, fn, tp, self.d, fn) #歌词注入到属性
