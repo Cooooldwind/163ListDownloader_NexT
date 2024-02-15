@@ -5,3 +5,6 @@ dist/
 dl/
 download/
 .gitignore
+cloudmusic_list_downloader.egg-info/
+MANIFEST.in
+setup.py

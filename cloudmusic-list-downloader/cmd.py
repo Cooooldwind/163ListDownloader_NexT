@@ -1,6 +1,6 @@
 '''
-cmd_test.py
-Core.Ver.1.0.0.240213a
+cmd.py
+Core.Ver.1.0.0.240215a
 Author: CooooldWind_
 '''
 import time
@@ -8,11 +8,11 @@ import pprint
 import os
 import multiprocessing
 import threading
-import list_downloader
+import __init__
 
 def func(id, d, fnf, lv, t_sum):
     print("Progress is running at", os.getpid())
-    test_p = list_downloader.Playlist(str(id))
+    test_p = __init__.Playlist(str(id))
     test_p.get_resource()
     print("Info-reading succeed.")
     tc = threading.Semaphore(t_sum)
@@ -33,6 +33,7 @@ def func(id, d, fnf, lv, t_sum):
 
 if __name__ == "__main__":
     while True:
+        print("Warning: It's an Alpha Version.")
         multiprocessing.freeze_support()
         d = str(input("dir: "))
         id = str(input("id/url: "))
