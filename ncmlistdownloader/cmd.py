@@ -1,11 +1,12 @@
 '''
 cmd.py
-Core.Ver.1.0.0.240220a1
+Core.Ver.1.0.0.240220a2
 Author: CooooldWind_
 '''
 import time
 import pprint
 import os
+import sys
 import multiprocessing
 import threading
 import __init__
