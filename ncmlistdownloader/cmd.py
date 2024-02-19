@@ -1,6 +1,6 @@
 '''
 cmd.py
-Core.Ver.1.0.0.240215a
+Core.Ver.1.0.0.240220a1
 Author: CooooldWind_
 '''
 import time
@@ -31,19 +31,21 @@ def func(id, d, fnf, lv, t_sum):
         time.sleep(0.5)
     print("Download succeed.")
 
+def main():
+    print("Warning: It's an Alpha Version.")
+    multiprocessing.freeze_support()
+    d = str(input("dir: "))
+    id = str(input("id/url: "))
+    if id.find("music.163.com") != -1:
+        id = id.split("id=")[1].split("&user")[0]
+    fnf = str(input("filename format: "))
+    lv = int(input("level: "))
+    t_sum = int(input("thread sum: "))
+    p = multiprocessing.Process(target = func, args = (id, d, fnf, lv, t_sum))
+    p.start()
+    print("Start!")
+
 if __name__ == "__main__":
-    while True:
-        print("Warning: It's an Alpha Version.")
-        multiprocessing.freeze_support()
-        d = str(input("dir: "))
-        id = str(input("id/url: "))
-        if id.find("music.163.com") != -1:
-            id = id.split("id=")[1].split("&user")[0]
-        fnf = str(input("filename format: "))
-        lv = int(input("level: "))
-        t_sum = int(input("thread sum: "))
-        p = multiprocessing.Process(target = func, args = (id, d, fnf, lv, t_sum))
-        p.start()
-        print("Start!")
+    main()
     
         
