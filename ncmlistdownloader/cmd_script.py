@@ -1,6 +1,6 @@
 '''
 cmd_script.py
-Core.Ver.1.0.0.240220a10
+Core.Ver.1.0.0.240220a11
 Author: CooooldWind_
 '''
 import time
@@ -17,6 +17,7 @@ def func(id, d, fnf, lv, t_sum):
     for p in test_p.tracks:
         p.get_resource()
         p.initialize(t_sum, fnf, lv, d)
+    for p in test_p.tracks:
         p.start()
     while True:
         back = True
@@ -43,6 +44,7 @@ def main():
     t_sum = int(input("Thread sum: "))
     p = multiprocessing.Process(target = func, args = (id, d, fnf, lv, t_sum))
     p.start()
+    p.join()
     print("Start! The program will shutdown after downloading, please DO NOT TOUCH THE PROGRAM before it.")
 
 if __name__ == "__main__":
