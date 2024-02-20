@@ -14,18 +14,18 @@ def func(id, d, fnf, lv, t_sum):
     test_p = ncmlistdownloader.Playlist(str(id))
     test_p.get_resource()
     print("Info-reading succeed.")
-    for p in test_p.tracks:
-        p.get_resource()
-        p.initialize(t_sum, fnf, lv, d)
+    for ap in test_p.tracks:
+        ap.get_resource()
+        ap.initialize(t_sum, fnf, lv, d)
     print("Initialized.")
-    for p in test_p.tracks:
-        p.start()
+    for ap in test_p.tracks:
+        ap.start()
     print("Pushed.")
     while True:
         back = True
-        for p in test_p.tracks:
-            if p.finish == False:
-                pprint.pprint(p.downloading_info)
+        for ap in test_p.tracks:
+            if ap.finish == False:
+                pprint.pprint(ap.downloading_info)
                 back = False
         if back:
             break
@@ -34,7 +34,7 @@ def func(id, d, fnf, lv, t_sum):
 
 def main():
     print("163ListDownloader CMD Ver.")
-    print("Core.Ver.1.0.0.240220a10 / Made by CooooldWind_")
+    print("Core.Ver.1.0.0.240220a11 / Made by CooooldWind_")
     print("Warning: It's an Alpha Version.")
     multiprocessing.freeze_support()
     d = str(input("Dir: "))
