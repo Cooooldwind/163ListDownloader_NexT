@@ -17,8 +17,10 @@ def func(id, d, fnf, lv, t_sum):
     for p in test_p.tracks:
         p.get_resource()
         p.initialize(t_sum, fnf, lv, d)
+    print("Initialized.")
     for p in test_p.tracks:
         p.start()
+    print("Pushed.")
     while True:
         back = True
         for p in test_p.tracks:
