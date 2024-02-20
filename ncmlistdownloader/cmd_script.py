@@ -1,6 +1,6 @@
 '''
 cmd_script.py
-Core.Ver.1.0.0.240220a3
+Core.Ver.1.0.0.240220a7
 Author: CooooldWind_
 '''
 import time
@@ -9,7 +9,7 @@ import os
 import sys
 import multiprocessing
 import threading
-import __init__
+from . import __init__
 
 def func(id, d, fnf, lv, t_sum):
     print("Progress is running at", os.getpid())
