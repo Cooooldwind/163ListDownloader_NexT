@@ -1,6 +1,6 @@
 '''
 cmd_script.py
-Core.Ver.1.0.0.240220a7
+Core.Ver.1.0.0.240220a9
 Author: CooooldWind_
 '''
 import time
@@ -9,17 +9,16 @@ import os
 import sys
 import multiprocessing
 import threading
-from . import __init__
+import ncmlistdownloader
 
 def func(id, d, fnf, lv, t_sum):
     print("Progress is running at", os.getpid())
-    test_p = __init__.Playlist(str(id))
+    test_p = ncmlistdownloader.Playlist(str(id))
     test_p.get_resource()
     print("Info-reading succeed.")
-    tc = threading.Semaphore(t_sum)
     for p in test_p.tracks:
         p.get_resource()
-        p.initialize(tc, fnf, lv, d)
+        p.initialize(t_sum, fnf, lv, d)
         p.start()
     while True:
         back = True
