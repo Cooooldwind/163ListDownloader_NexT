@@ -1,14 +1,12 @@
 '''
 cmd_script.py
-Core.Ver.1.0.0.240220a9
+Core.Ver.1.0.0.240220a10
 Author: CooooldWind_
 '''
 import time
 import pprint
 import os
-import sys
 import multiprocessing
-import threading
 import ncmlistdownloader
 
 def func(id, d, fnf, lv, t_sum):
@@ -32,18 +30,20 @@ def func(id, d, fnf, lv, t_sum):
     print("Download succeed.")
 
 def main():
+    print("163ListDownloader CMD Ver.")
+    print("Core.Ver.1.0.0.240220a10 / Made by CooooldWind_")
     print("Warning: It's an Alpha Version.")
     multiprocessing.freeze_support()
-    d = str(input("dir: "))
-    id = str(input("id/url: "))
+    d = str(input("Dir: "))
+    id = str(input("ID/Url: "))
     if id.find("music.163.com") != -1:
         id = id.split("id=")[1].split("&user")[0]
-    fnf = str(input("filename format: "))
-    lv = int(input("level: "))
-    t_sum = int(input("thread sum: "))
+    fnf = str(input("Filename format: "))
+    lv = int(input("Level: "))
+    t_sum = int(input("Thread sum: "))
     p = multiprocessing.Process(target = func, args = (id, d, fnf, lv, t_sum))
     p.start()
-    print("Start!")
+    print("Start! The program will shutdown after downloading, please DO NOT TOUCH THE PROGRAM before it.")
 
 if __name__ == "__main__":
     main()

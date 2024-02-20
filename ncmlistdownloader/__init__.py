@@ -1,6 +1,6 @@
 '''
 list_downloader/__init__.py
-Core.Ver.1.0.0.240213a
+Core.Ver.1.0.0.240220a10
 Author: CooooldWind_
 '''
 import threading
@@ -335,9 +335,9 @@ class Playlist:
 
             tc_sum：多线程的线程数：默认8；
 
-            fnf：文件名的格式，以下是文件名格式的规范:
+            fnf: 文件名的格式，以下是文件名格式的规范:
 
-            用"$xxx$"表示一些内容：
+            用"$xxx$"表示一些内容: 
 
             "$id$"是歌曲id；"$name$"是歌曲名称；
 
@@ -347,7 +347,7 @@ class Playlist:
 
             lv: 品质（由低到高1~8）默认1；
 
-            d：存储路径（结尾必须是“/”或“\”）默认创建子文件夹“download/”。
+            d: 存储路径（结尾必须是“/”或“\”）默认创建子文件夹“download/”。
             '''
             if d != self.d and d != "":
                 self.d = d
