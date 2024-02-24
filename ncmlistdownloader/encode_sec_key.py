@@ -11,7 +11,7 @@ import json
 from base64 import b64encode
 import requests
 from Crypto.Cipher import AES
-from global_args import USER_AGENTS, FUNC_F, SEC_KEY
+from .global_args import USER_AGENTS, FUNC_F, SEC_KEY
 
 class NeteaseParams:
     '''WeAPI解码类'''

@@ -12,8 +12,8 @@ from PIL import Image
 from mutagen.flac import FLAC, Picture
 from mutagen.mp3 import EasyMP3
 from mutagen.id3 import ID3, APIC, USLT, Encoding
-import encode_sec_key
-from global_args import PLAYLIST_API, SONG_INFO_API, SONG_FILE_API_2, LEVEL, LYRIC_API
+from . import encode_sec_key
+from .global_args import PLAYLIST_API, SONG_INFO_API, SONG_FILE_API_2, LEVEL, LYRIC_API
 
 def clean(s):
     '''清空有悖于标准的字符的函数。'''
