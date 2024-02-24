@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/__init__.py
-Core.Ver.1.0.0.240224a1
+Core.Ver.1.0.0.240224a7
 Author: CooooldWind_
 '''
 import threading
@@ -161,6 +161,7 @@ class Playlist:
 
             filename：文件名（不含后缀）。
             '''
+            filename = clean(filename)
             self.downloading_info['state'] = 2
             self.downloading_info['value'] = 0
             lyric_filename = dir + filename + '.lrc'
@@ -187,6 +188,7 @@ class Playlist:
 
             size：图片分辨率，单位为像素（默认-1，-1表示不修改尺寸）。
             '''
+            filename = clean(filename)
             self.downloading_info['state'] = 3
             self.downloading_info['value'] = 0
             with open(dir + filename + '.jpg', 'wb+') as cover_file:
@@ -229,6 +231,7 @@ class Playlist:
 
             type：文件类型（flac/mp3）。
             '''
+            filename = clean(filename)
             self.downloading_info['state'] = 4
             self.downloading_info['value'] = 0
             if type == "flac":
@@ -266,6 +269,8 @@ class Playlist:
 
             cover_filename：封面的文件名（不含后缀）；
             '''
+            filename = clean(filename)
+            cover_filename = clean(cover_filename)
             self.downloading_info['state'] = 5
             self.downloading_info['value'] = 0
             if type == "flac":
@@ -308,6 +313,8 @@ class Playlist:
 
             lyric_filename：歌词的文件名（不含后缀）；
             '''
+            filename = clean(filename)
+            lyric_filename = clean(lyric_filename)
             self.downloading_info['state'] = 6
             self.downloading_info['value'] = 0
             with open(lyric_dir + lyric_filename + '.lrc', 'r+', encoding = 'utf-8') as lyric_file:
