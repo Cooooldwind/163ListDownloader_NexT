@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/__init__.py
-Core.Ver.1.0.0.240224a8
+Core.Ver.1.0.0.240224a9
 Author: CooooldWind_
 '''
 import threading
@@ -199,7 +199,9 @@ class Playlist:
                                       allow_redirects = True,
                                       timeout = 20)
                 totalsize = int(source.headers['Content-Length'])
-                if source.json()['Code'] == 'NotAnImage':
+                try: tmp = source.json()
+                except: pass
+                else: 
                     self.no_image = True
                     return -1
                 for data in source.iter_content(chunk_size = 1024):
