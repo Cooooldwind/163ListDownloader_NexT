@@ -1,6 +1,6 @@
 '''
-list_downloader/__init__.py
-Core.Ver.1.0.0.240220a10
+ncmlistdownloader/__init__.py
+Core.Ver.1.0.0.240224a1
 Author: CooooldWind_
 '''
 import threading
@@ -8,13 +8,12 @@ import random
 import time
 import requests
 import os
-import eyed3
 from PIL import Image
 from mutagen.flac import FLAC, Picture
 from mutagen.mp3 import EasyMP3
 from mutagen.id3 import ID3, APIC, USLT, Encoding
-from . import encode_sec_key
-from .global_args import PLAYLIST_API, SONG_INFO_API, SONG_FILE_API_2, LEVEL, LYRIC_API
+import encode_sec_key
+from global_args import PLAYLIST_API, SONG_INFO_API, SONG_FILE_API_2, LEVEL, LYRIC_API
 
 def clean(s):
     '''清空有悖于标准的字符的函数。'''
@@ -31,18 +30,24 @@ class Playlist:
 
     tracks里面都是Song类。
     '''
-    def __init__(self, id):
-        self.id = str(id)
+    def __init__(self):
         self.encode_data = {
             'csrf_token': "",
-            'id': self.id,
+            'id': "",
             'n': "0"
         }
         self.creater = None
-        self.track_id = None
-        self.tracks = None
-    def get_resource(self):
-        '''初步获取数据：歌单内的歌曲都是些什么。'''
+        self.track_id = []
+        self.tracks = []
+    def get_resource(self, id = str()):
+        '''
+        初步获取数据：歌单内的歌曲都是些什么。
+        
+        参数：id：歌曲id或url。
+        '''
+        self.encode_data['id'] = str(id)
+        if self.encode_data['id'].find("music.163.com") != -1:
+            self.encode_data['id'] = self.encode_data['id'].split("id=")[1].split("&user")[0]
         result = encode_sec_key.NeteaseParams(
             encode_data = self.encode_data,
             url = PLAYLIST_API).get_resource()
@@ -50,7 +55,7 @@ class Playlist:
             self.creater = result['playlist']['userId']
         except KeyError:
             return -1
-        self.track_id = result['playlist']['trackIds']
+        self.track_id += result['playlist']['trackIds']
         self.tracks = [self.Song({'id': i['id']}, str(self.creater)) for i in self.track_id]
         return 0
     class Song(threading.Thread):
@@ -64,10 +69,10 @@ class Playlist:
         def __init__(self, id, user_id):
             threading.Thread.__init__(self)
             self.tc = threading.Semaphore(8)
-            self.id = [str(id)]
+            self.id = id
             self.user_id = str(user_id)
             self.encode_data = {
-                'c': self.id,
+                'c': [str(self.id)],
                 'csrf_token': '',
                 'userId': self.user_id
             }
@@ -126,6 +131,7 @@ class Playlist:
             self.downloading_info['value'] = 0
             song_request_url = SONG_FILE_API_2 + "id=" + self.info['id']
             song_request_url = song_request_url + "&level=" + LEVEL[level - 1]
+            time.sleep(random.random() * 5)
             response = requests.get(url = song_request_url, timeout = 20).json()['data'][0]
             self.info.update({'song_url': response['url']})
             self.info.update({'song_type': response['type']})
@@ -375,3 +381,18 @@ class Playlist:
                 self.attribute_write(dir = self.d, filename = fn, type = tp) #属性填写
                 self.cover_write(self.d, fn, tp, self.d, fn) #封面注入到属性
                 self.lyric_write(self.d, fn, tp, self.d, fn) #歌词注入到属性
+        def start_single(self):
+            '''单线程用的启动函数'''
+            fn = str(self.fnf)
+            fn = fn.replace("$id$", self.info['id'])
+            fn = fn.replace("$artist$", self.info['artist_str'])
+            fn = fn.replace("$name$", self.info['name'])
+            fn = fn.replace("$album$", self.info['album'])
+            fn = fn.replace("$$", "$")
+            self.song_download(level = self.lv, dir = self.d, filename = fn)
+            tp = self.info['song_type']
+            self.lyric_download(dir = self.d, filename = fn)
+            self.cover_download(dir = self.d, filename = fn) #封面下载
+            self.attribute_write(dir = self.d, filename = fn, type = tp) #属性填写
+            self.cover_write(self.d, fn, tp, self.d, fn) #封面注入到属性
+            self.lyric_write(self.d, fn, tp, self.d, fn) #歌词注入到属性
