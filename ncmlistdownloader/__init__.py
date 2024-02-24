@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/__init__.py
-Core.Ver.1.0.0.240224a7
+Core.Ver.1.0.0.240224a8
 Author: CooooldWind_
 '''
 import threading
@@ -86,6 +86,7 @@ class Playlist:
             self.finish = False
             self.d = "download/"
             self.fnf = None
+            self.no_image = False
             self.lv = 1
         def get_resource(self):
             '''
@@ -198,6 +199,9 @@ class Playlist:
                                       allow_redirects = True,
                                       timeout = 20)
                 totalsize = int(source.headers['Content-Length'])
+                if source.json()['Code'] == 'NotAnImage':
+                    self.no_image = True
+                    return -1
                 for data in source.iter_content(chunk_size = 1024):
                     cover_file.write(data)
                     rate += len(data)
@@ -269,6 +273,7 @@ class Playlist:
 
             cover_filename：封面的文件名（不含后缀）；
             '''
+            if self.no_image: return -1
             filename = clean(filename)
             cover_filename = clean(cover_filename)
             self.downloading_info['state'] = 5
