@@ -74,4 +74,6 @@ while True:
 
 文本编辑于 Core.Ver.1.0.0.240220a10
 
-2024.2.20 CooooldWind_
+2024.02.20 CooooldWind_
+
+2024.03.02 CooooldWind_(紧急更新)
