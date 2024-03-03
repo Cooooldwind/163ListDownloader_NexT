@@ -7,3 +7,4 @@ download/
 .gitignore
 ncmlistdownloader.egg-info/
 MANIFEST.in
+__pycache__/
