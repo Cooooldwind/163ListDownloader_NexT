@@ -1,12 +1,14 @@
-## 163ListDownloader_NexT
+# 163ListDownloader_NexT
 
 这将会是新的开始：一个更好的库，和一个更好的UI（虽然还是基于Win32的Tkinter）！
 
 所以可以紧跟我们的脚步，看看究竟会发生什么。
 
-### 2024年3月2日 - 临时通知
+## 2024年3月2日 - 临时通知
 
 在昨天（2024年3月1日），我们收到青旨音乐的通知。由于不可控因素，青旨的API服务 **已经停运** 。目前该项目处于不可用状态。我们将采用备用方案尽快修复问题，请耐心等待。
+
+## 安装与使用
 
 ### 安装库
 
@@ -25,9 +27,9 @@ import ncmlistdownloader as NLD
 p = NLD.Playlist("歌单id")
 p.get_resource()
 for i in p.tracks:
-	i.get_resource()
-	i.initialize(fnf = "$name$ - $artist$", lv=3, tc_sum = 4)
-	i.start()
+ i.get_resource()
+ i.initialize(fnf = "$name$ - $artist$", lv=3, tc_sum = 4)
+ i.start()
 ```
 
 ```initialize```的参数：
@@ -36,10 +38,10 @@ for i in p.tracks:
 
 2. ```fnf```: 文件名的格式，以下是文件名格式的规范:
 
-> 1. 用 "$xxx$" 表示一些内容: 
-> 2. "$id$" 是歌曲id；"$name$" 是歌曲名称；
-> 3. "$artist$" 是歌手；"$album$" 是专辑；
-> 4. 输入 "$" 用 "$$"；
+   > 1. 用 "$xxx$" 表示一些内容:
+   > 2. "$id$" 是歌曲id；"$name$" 是歌曲名称；
+   > 3. "$artist$" 是歌手；"$album$" 是专辑；
+   > 4. 输入 "$" 用 "$$"；
 
 3. ```lv```: 品质（由低到高1~8）默认1；
 
@@ -50,8 +52,8 @@ for i in p.tracks:
 ```python
 import pprint
 while True:
-	for i in p.tracks:
-	pprint.pprint(i.downloading_info)
+ for i in p.tracks:
+ pprint.pprint(i.downloading_info)
 ```
 
 其他更加深入的自定义功能请自行探索，我们为大家准备了（应该是）广阔的发挥空间。
@@ -62,9 +64,7 @@ while True:
 
 ### 其他
 
-关于之前的_old版本，欢迎点击下方链接。
-
-[Cooooldwind/163ListDownloader_old: 免费下载网易云歌单里的所有歌 - Get your Netease Cloud Music playlist BY FREE (github.com)](https://github.com/Cooooldwind/163ListDownloader_old)
+关于之前的 _old 版本，欢迎[点击链接](https://github.com/Cooooldwind/163ListDownloader_old)。
 
 ------
 
@@ -72,7 +72,7 @@ while True:
 
 特别鸣谢：[是青旨啊](https://sayqz.com)，[bilibili@半岛的孤城](https://space.bilibili.com/32187583)
 
-文本编辑于 Core.Ver.1.0.0.240220a10
+文本编辑于 Core.Ver.1.0.0.240303a12
 
 2024.02.20 CooooldWind_
 
