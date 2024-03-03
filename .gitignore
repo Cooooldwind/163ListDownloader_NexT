@@ -7,5 +7,3 @@ download/
 .gitignore
 ncmlistdownloader.egg-info/
 MANIFEST.in
-setup.py
-toPypi.bat
