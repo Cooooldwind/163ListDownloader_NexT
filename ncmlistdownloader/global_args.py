@@ -17,7 +17,6 @@ FUNC_F = "00e0b509f6259df8642dbc35662901477df22677ec152b5ff68ace615bb7b725152b3a
 SEC_KEY = "6ea19f618d09893013feb207e6953ab0d04831ccf86095147970745a825a0f3288ad0bfdb802ffd5876394599d179b65785e679b23ae38035d476872f5270c26f7e15f0e2de0da92ac7fdd1de6a965642a67707d3b204d48a3a3c66fe536c9e2056d2032c884d764cf419e8ce7bd245f56bde140deccbaed83995285ee66ccda"
 PLAYLIST_API = "https://music.163.com/weapi/v6/playlist/detail?"
 SONG_INFO_API = "https://music.163.com/weapi/v3/song/detail"
-SONG_FILE_API = "https://music.163.com/weapi/song/enhance/player/url/v1?"
-SONG_FILE_API_2 = "http://api.tunefree.fun/ncm/song/?" #Specially Thanks: @是青旨啊
+SONG_FILE_API = "https://music.163.com/song/media/outer/url?id="
+SONG_FILE_API_2 = "https://music.163.com/weapi/song/enhance/player/url/v1?"
 LYRIC_API = "https://music.163.com/weapi/song/lyric?csrf_token="
-LEVEL = ['standard','higher','exhigh','lossless','hires','jyeffect','jymaster','sky']

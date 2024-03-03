@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/__init__.py
-Core.Ver.1.0.0.240224a9
+Core.Ver.1.0.0.240303a1
 Author: CooooldWind_
 '''
 import threading
@@ -13,7 +13,7 @@ from mutagen.flac import FLAC, Picture
 from mutagen.mp3 import EasyMP3
 from mutagen.id3 import ID3, APIC, USLT, Encoding
 from . import encode_sec_key
-from .global_args import PLAYLIST_API, SONG_INFO_API, SONG_FILE_API_2, LEVEL, LYRIC_API
+from .global_args import PLAYLIST_API, SONG_INFO_API, LYRIC_API, SONG_FILE_API
 
 def clean(s):
     '''清空有悖于标准的字符的函数。'''
@@ -123,20 +123,13 @@ class Playlist:
 
             filename：文件名（不含后缀）；
 
-            level：音质（默认为1，从低到高，不超过8）。
+            level：音质（乱填）。
             '''
-            if level > 8 or level < 1:
-                return -1
             filename = clean(filename)
             self.downloading_info['state'] = 1
             self.downloading_info['value'] = 0
-            song_request_url = SONG_FILE_API_2 + "id=" + self.info['id']
-            song_request_url = song_request_url + "&level=" + LEVEL[level - 1]
-            time.sleep(random.random() * 5)
-            response = requests.get(url = song_request_url, timeout = 20).json()['data'][0]
-            self.info.update({'song_url': response['url']})
-            self.info.update({'song_type': response['type']})
-            music_filename = dir + filename + '.' + response['type']
+            self.info['song_url'] = SONG_FILE_API + self.info['id'] + ".mp3"
+            music_filename = dir + filename
             with open(music_filename, 'wb+') as music_file:
                 rate = int(0)
                 source = requests.get(self.info['song_url'],
