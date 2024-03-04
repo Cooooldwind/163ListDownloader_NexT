@@ -72,7 +72,7 @@ while True:
 
 特别鸣谢：[是青旨啊](https://sayqz.com)，[bilibili@半岛的孤城](https://space.bilibili.com/32187583)
 
-文本编辑于 Core.Ver.1.0.0.240303a12
+文本编辑于 Core.Ver.1.0.0.240303a2
 
 2024.02.20 CooooldWind_
 
