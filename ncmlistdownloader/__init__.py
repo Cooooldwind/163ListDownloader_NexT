@@ -129,7 +129,7 @@ class Playlist:
             self.downloading_info['state'] = 1
             self.downloading_info['value'] = 0
             self.info['song_url'] = SONG_FILE_API + self.info['id'] + ".mp3"
-            music_filename = dir + filename
+            music_filename = dir + filename + ".mp3"
             with open(music_filename, 'wb+') as music_file:
                 rate = int(0)
                 source = requests.get(self.info['song_url'],
@@ -397,9 +397,10 @@ class Playlist:
             fn = fn.replace("$album$", self.info['album'])
             fn = fn.replace("$$", "$")
             self.song_download(level = self.lv, dir = self.d, filename = fn)
-            tp = self.info['song_type']
+            # tp = self.info['song_type']
+            tp = "mp3"
             self.lyric_download(dir = self.d, filename = fn)
-            self.cover_download(dir = self.d, filename = fn) #封面下载
+            self.cover_download(dir = self.d, filename = fn, size = 800) #封面下载
             self.attribute_write(dir = self.d, filename = fn, type = tp) #属性填写
             self.cover_write(self.d, fn, tp, self.d, fn) #封面注入到属性
-            self.lyric_write(self.d, fn, tp, self.d, fn) #歌词注入到属性
+            # self.lyric_write(self.d, fn, tp, self.d, fn) #歌词注入到属性

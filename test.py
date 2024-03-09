@@ -1,8 +1,9 @@
 import ncmlistdownloader as NLD
 import pprint
 import time
-p = NLD.Playlist("9319926180")
-p.get_resource()
+p = NLD.Playlist()
+p.get_resource("2391850012")
+'''
 for i in p.tracks:
 	while True:
 		flag = False
@@ -20,3 +21,8 @@ while True:
 		pprint.pprint(i.downloading_info)
 	time.sleep(0.25)
 	if flag: break
+'''
+k = p.tracks[0]
+k.get_resource()
+k.initialize(lv = 3)
+k.start_single()
