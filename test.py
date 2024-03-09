@@ -2,7 +2,7 @@ import ncmlistdownloader as NLD
 import pprint
 import time
 p = NLD.Playlist()
-p.get_resource("2391850012")
+p.get_resource("https://music.163.com/playlist?id=9399603955&userid=1577080369")
 '''
 for i in p.tracks:
 	while True:
@@ -22,7 +22,7 @@ while True:
 	time.sleep(0.25)
 	if flag: break
 '''
-k = p.tracks[0]
-k.get_resource()
-k.initialize(lv = 3)
-k.start_single()
+for k in p.tracks:
+	k.get_resource()
+	k.initialize()
+	k.start_single()
