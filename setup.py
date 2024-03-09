@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-from version import VERSION as V
 setup(
     classifiers = [
         # 发展时期
@@ -30,7 +29,7 @@ setup(
 		'Programming Language :: Python :: 3.13',
     ],
     name = 'ncmlistdownloader',
-    version = str(V[0]) + '.' + str(V[1]) + '.' + str(V[2]) + '.' + str(V[3]) + str(V[4]) + str(V[5]),
+    version = "1.0.0.240309a1",
     description = '获取网易云音乐歌单数据，下载音乐，主动添加元信息。',
     author = 'CooooldWind_',
     url = 'https://github.com/Cooooldwind/163ListDownloader_NexT',

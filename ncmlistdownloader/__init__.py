@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/__init__.py
-Core.Ver.1.0.0.240303a1
+Core.Ver.1.0.0.240309a1
 Author: CooooldWind_
 '''
 import threading
