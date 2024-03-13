@@ -3,8 +3,8 @@ ncmlistdownloader/Song/__init__.py
 Core.Ver.1.0.0.240310a1
 Author: CooooldWind_
 '''
-from global_args import SONG_INFO_API
-from encode_sec_key import NeteaseParams
+from Common.global_args import SONG_INFO_API
+from Common.encode_sec_key import NeteaseParams
 import Common
 
 class Song():
