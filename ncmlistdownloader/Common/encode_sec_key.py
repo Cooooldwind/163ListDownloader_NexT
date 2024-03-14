@@ -14,7 +14,13 @@ from Crypto.Cipher import AES
 from Common.global_args import USER_AGENTS, FUNC_F, SEC_KEY
 
 class NeteaseParams:
-    '''WeAPI解码类'''
+    '''
+    WeAPI解码类
+    ----------
+    参数：
+    1. encode_data: 传入的参数
+    2. url: API的URL
+    '''
     def __init__(self, encode_data, url):
         self.encode_data = encode_data
         self.url = url

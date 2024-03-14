@@ -30,4 +30,14 @@ def artist_turn_str(info = [],split_word = ', '):
         if i != info[-1]:
             str += split_word
     return str
+
+def get_type(str = ''):
+    '''
+    分析文件的后缀名。
+    ----------
+    参数：
+    1. str: 文件名
+    '''
+    pos = str.rfind(".")
+    return str[pos + 1:]
     
