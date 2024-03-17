@@ -1,10 +1,9 @@
 '''
 ncmlistdownloader/Editer/__init__.py
-Core.Ver.1.0.0.240317a1
+Core.Ver.1.0.0.240317a2
 Author: CooooldWind_
 Updated_Content:
-1. cover_write(filename, cover_filename)
-2. lyric_write(filename, lyric_filename)
+1. Bug fixed
 '''
 from PIL import Image
 from mutagen.flac import FLAC, Picture

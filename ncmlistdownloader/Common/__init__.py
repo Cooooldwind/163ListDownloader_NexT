@@ -1,8 +1,10 @@
 '''
 ncmlistdownloader/Common/__init__.py
 存储常用函数。
-Core.Ver.1.0.0.240310a1
+Core.Ver.1.0.0.240317a2
 Author: CooooldWind_
+Updated_Content:
+1. get_name(str = '')
 '''
 
 def url_split(str = ""):
@@ -33,11 +35,19 @@ def artist_turn_str(info = [],split_word = ', '):
 
 def get_type(str = ''):
     '''
-    分析文件的后缀名。
+    获取文件的后缀名。
     ----------
     参数：
     1. str: 文件名
     '''
-    pos = str.rfind(".")
-    return str[pos + 1:]
+    return str[str.find(".") + 1:]
+
+def get_name(str = ''):
+    '''
+    获取文件的名称。
+    ----------
+    参数：
+    1. str: 文件名
+    '''
+    return str[:str.rfind(".")]
     
