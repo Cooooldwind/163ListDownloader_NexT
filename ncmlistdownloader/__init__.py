@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/__init__.py
-Core.Ver.1.0.0.240309a1
+Core.Ver.1.0.0.240317a3
 Author: CooooldWind_
 '''
 import threading
@@ -25,9 +25,8 @@ def clean(s):
 class Playlist:
     '''
     Playlist类。
-
+    -----------
     用tracks表示每一首歌。
-
     tracks里面都是Song类。
     '''
     def __init__(self):
@@ -42,7 +41,7 @@ class Playlist:
     def get_resource(self, id = str()):
         '''
         初步获取数据：歌单内的歌曲都是些什么。
-        
+        -----------
         参数：id：歌曲id或url。
         '''
         self.encode_data['id'] = str(id)
@@ -60,10 +59,10 @@ class Playlist:
         return 0
     class Song(threading.Thread):
         '''
-        Song子类，存储每个歌曲。
-
+        Song子类
+        -----------
+        存储每个歌曲。
         包括元信息，各种函数。
-
         常用的有info['id'/'name'/'artist'/'album']和downloading_info['id'/'state'/'value']
         '''
         def __init__(self, id, user_id):
@@ -90,9 +89,7 @@ class Playlist:
             self.lv = 1
         def get_resource(self):
             '''
-            获取更加详细的数据。
-
-            （其实就是元信息）
+            获取更加详细的数据（其实就是元信息）
             '''
             pure_response = encode_sec_key.NeteaseParams(
                 encode_data = self.encode_data,
@@ -116,13 +113,10 @@ class Playlist:
         def song_download(self, dir = str(), filename = str(), level = 1):
             '''
             下载音乐。
-
+            -----------
             参数：
-
             dir：存储路径（结尾必须是“/”或“\”）；
-
             filename：文件名（不含后缀）；
-
             level：音质（乱填）。
             '''
             filename = clean(filename)
@@ -148,11 +142,9 @@ class Playlist:
         def lyric_download(self, dir = str(), filename = str()):
             '''
             下载歌词。
-
+            -----------
             参数：
-
             dir：存储路径（结尾必须是“/”或“\”）；
-
             filename：文件名（不含后缀）。
             '''
             filename = clean(filename)
@@ -173,13 +165,10 @@ class Playlist:
         def cover_download(self, dir = str(), filename = str(), size = -1):
             '''
             封面下载。
-
+            -----------
             参数：
-
             dir：存储路径（结尾必须是“/”或“\”）；
-
             filename：文件名（不含后缀）；
-
             size：图片分辨率，单位为像素（默认-1，-1表示不修改尺寸）。
             '''
             filename = clean(filename)
@@ -221,13 +210,10 @@ class Playlist:
         def attribute_write(self, dir = str(), filename = str(), type = str()):
             '''
             属性填写。
-
+            -----------
             参数：
-
             dir：存储路径（结尾必须是“/”或“\”）；
-
             filename：文件名（不含后缀）；
-
             type：文件类型（flac/mp3）。
             '''
             filename = clean(filename)
@@ -255,17 +241,12 @@ class Playlist:
         def cover_write(self, dir = str(), filename = str(), type = str(), cover_dir = str(), cover_filename = str()):
             '''
             写入专辑封面。
-
+            -----------
             参数：
-
             dir：存储路径（结尾必须是“/”或“\”）；
-
             filename：文件名（不含后缀）；
-
             type：文件类型（flac/mp3）；
-
             cover_dir：封面的存储路径（结尾必须是“/”或“\”）；
-
             cover_filename：封面的文件名（不含后缀）；
             '''
             if self.no_image: return -1
@@ -300,17 +281,12 @@ class Playlist:
         def lyric_write(self, dir = str(), filename = str(), type = str(), lyric_dir = str(), lyric_filename = str()):
             '''
             写入歌词。
-
+            -----------
             参数：
-
             dir：存储路径（结尾必须是“/”或“\”）；
-
             filename：文件名（不含后缀）；
-
             type：文件类型（flac/mp3）；
-
             lyric_dir：歌词的存储路径（结尾必须是“/”或“\”）；
-
             lyric_filename：歌词的文件名（不含后缀）；
             '''
             filename = clean(filename)
@@ -343,23 +319,15 @@ class Playlist:
         def initialize(self, tc_sum = int(), fnf = "$name$ - $artist$", lv = 1, d = "download/"):
             '''
             初始化参数。
-
+            -----------
             参数：
-
             tc_sum：多线程的线程数：默认8；
-
             fnf: 文件名的格式，以下是文件名格式的规范:
-
             用"$xxx$"表示一些内容: 
-
             "$id$"是歌曲id；"$name$"是歌曲名称；
-
             "$artist$"是歌手；"$album$"是专辑；
-
             输入"$"用"$$"；
-
             lv: 品质（由低到高1~8）默认1；
-
             d: 存储路径（结尾必须是“/”或“\”）默认创建子文件夹“download/”。
             '''
             if d != self.d and d != "":
