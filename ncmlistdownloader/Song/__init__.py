@@ -1,11 +1,13 @@
 '''
 ncmlistdownloader/Song/__init__.py
-Core.Ver.1.0.0.240310a1
+Core.Ver.1.0.0.240317a1
 Author: CooooldWind_
 '''
-from Common.global_args import SONG_INFO_API
-from Common.encode_sec_key import NeteaseParams
-import Common
+
+from ncmlistdownloader.Common import *
+from ncmlistdownloader.Common.encode_sec_key import *
+from ncmlistdownloader.Common.global_args import *
+from ncmlistdownloader.Editer import *
 
 class Song():
     '''
@@ -19,7 +21,7 @@ class Song():
     def __init__(self, id = ""):
         self.id = id
         if self.id.find("163.com") != -1:
-            self.id = Common.url_split(str = self.id)
+            self.id = url_split(str = self.id)
         self.title = ""
         self.artist = []
         self.album = ""
@@ -31,6 +33,11 @@ class Song():
             }
         self.pure_info = dict()
     def __str__(self):
+        '''
+        返回存有歌曲信息的字符串。
+        ----------
+        无参数。
+        '''
         info = {
             'album': self.album,
             'title': self.title,
@@ -39,6 +46,11 @@ class Song():
         }
         return str(info)
     def dict(self):
+        '''
+        返回存有歌曲信息的字典。
+        ----------
+        无参数。
+        '''
         info = {
             'album': self.album,
             'title': self.title,
@@ -61,4 +73,21 @@ class Song():
         for i in self.pure_info['ar']:
             self.artist.append(i['name'])
         return self.pure_info
+    def attribute_write(self, filename = str()):
+        '''
+        往文件里面写入歌曲信息
+        ----------
+        参数：
+        1. filename: 文件名，字符串，仅mp3/flac格式
+        '''
+        attribute_write(filename = filename, info = self.dict())
+    def cover_write(self, filename = str()):
+        '''
+        专辑封面（下载与（未实现））写入
+        ----------
+        参数：
+        1. filename: 文件名，字符串，仅mp3/flac格式
+        '''
+        cover_write(filename = filename, cover_filename = None)
+
     

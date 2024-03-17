@@ -1,28 +1,11 @@
-import ncmlistdownloader as NLD
+'''
+test.py
+Core.Ver.1.0.0.240317a1
+Author: CooooldWind_
+'''
+from ncmlistdownloader.Song import *
 import pprint
-import time
-p = NLD.Playlist()
-p.get_resource("https://music.163.com/playlist?id=9399603955&userid=1577080369")
-'''
-for i in p.tracks:
-	while True:
-		flag = False
-		try:i.get_resource()
-		except:flag = True
-		if flag == False: break
-	i.initialize(fnf = "$name$ - $artist$", lv = 4, tc_sum = 4, d="C:\\Users\\Administrator\\Desktop\\test\\")
-for i in p.tracks:
-	i.start()
-while True:
-	for i in p.tracks:
-		flag = True
-		if i.finish == False:
-			flag = False
-		pprint.pprint(i.downloading_info)
-	time.sleep(0.25)
-	if flag: break
-'''
-for k in p.tracks:
-	k.get_resource()
-	k.initialize()
-	k.start_single()
+
+s = Song("2040876720")
+pprint.pprint(s.get_info())
+s.attribute_write("test.mp3")

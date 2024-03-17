@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Editer/__init__.py
-Core.Ver.1.0.0.240315a1
+Core.Ver.1.0.0.240317a1
 Author: CooooldWind_
 Updated_Content:
 1. cover_write(filename, cover_filename)
@@ -10,7 +10,7 @@ from PIL import Image
 from mutagen.flac import FLAC, Picture
 from mutagen.mp3 import EasyMP3
 from mutagen.id3 import ID3, APIC, USLT, Encoding
-from Common import get_type, artist_turn_str
+from ncmlistdownloader.Common import get_type, artist_turn_str
 
 expection_word_front = "Opening files with the suffix \"."
 lyric_expection_word_front = "Opening cover files with the suffix \"."
