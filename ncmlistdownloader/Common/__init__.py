@@ -1,10 +1,10 @@
 '''
 ncmlistdownloader/Common/__init__.py
 存储常用函数。
-Core.Ver.1.0.0.240317a2
+Core.Ver.1.0.0.240318a1
 Author: CooooldWind_
 Updated_Content:
-1. get_name(str = '')
+1. clean(str = '')
 '''
 
 def url_split(str = ""):
@@ -50,4 +50,16 @@ def get_name(str = ''):
     1. str: 文件名
     '''
     return str[:str.rfind(".")]
+
+def clean(str = ''):
+    '''
+    清空有悖于标准的字符的函数。
+    ----------
+    参数：
+    1. str: 文件名
+    '''
+    dirty = [":","*","\"","?","|","<",">"]
+    for i in dirty:
+        str = str.replace(i,"")
+    return str
     
