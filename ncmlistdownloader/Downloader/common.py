@@ -1,9 +1,10 @@
 '''
 ncmlistdownloader/Downloader/common.py
 Core.Ver.1.0.0.240319a2
+Core.Ver.1.0.0.240319a1
 Author: CooooldWind_
 Updated_Content:
-1. get(url, data)
+1. fix: get(url, data)
 '''
 
 from ncmlistdownloader.Common import *
@@ -14,9 +15,11 @@ import random
 import time
 
 def download(url = "", filename = "", stream = True, max_retries = 3):
+def download(url = "", filename = "", stream = True, max_retries = 3):
     session = requests.Session()
     session.mount('http://', HTTPAdapter(max_retries = max_retries))
     session.mount('https://', HTTPAdapter(max_retries = max_retries))
+    with open(filename, 'wb') as file:
     with open(filename, 'wb') as file:
         rate = 0
         source = session.get(url = url,
