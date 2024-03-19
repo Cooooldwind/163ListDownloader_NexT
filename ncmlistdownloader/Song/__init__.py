@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Song/__init__.py
-Core.Ver.1.0.0.240319a2
+Core.Ver.1.0.0.240319a4
 Author: CooooldWind_
 Updated_Content: line#68
 '''
@@ -65,7 +65,7 @@ class Song():
         ----------
         无参数。
         '''
-        self.pure_info = info_get(url = SONG_INFO_API, data = self.encode_data)['songs'][0]
+        self.pure_info = response_get(url = SONG_INFO_API, data = self.encode_data)['songs'][0]
         self.title = self.pure_info['name']
         self.album = self.pure_info['al']['name']
         for i in self.pure_info['ar']:

@@ -1,9 +1,9 @@
 '''
 ncmlistdownloader/Downloader/common.py
-Core.Ver.1.0.0.240319a3
+Core.Ver.1.0.0.240319a4
 Author: CooooldWind_
 Updated_Content:
-1. fix: get(url, data)
+1. fix: response_get(url, data)
 '''
 
 from ncmlistdownloader.Common import *
@@ -31,5 +31,5 @@ def download(url = "", filename = "", stream = True, max_retries = 3):
                     time.sleep(0.01)
         else: file.write(source.content)
     
-def info_get(url = "", data = dict()):
+def response_get(url = "", data = dict()):
     return NeteaseParams(url = url, encode_data = data).get_resource()
