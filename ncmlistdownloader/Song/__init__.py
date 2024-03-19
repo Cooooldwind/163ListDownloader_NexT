@@ -1,11 +1,12 @@
 '''
 ncmlistdownloader/Song/__init__.py
-Core.Ver.1.0.0.240317a1
+Core.Ver.1.0.0.240319a2
 Author: CooooldWind_
+Updated_Content: line#68
 '''
 
 from ncmlistdownloader.Common import *
-from ncmlistdownloader.Common.encode_sec_key import *
+from ncmlistdownloader.Downloader.common import *
 from ncmlistdownloader.Common.global_args import *
 from ncmlistdownloader.Editer import *
 
@@ -64,10 +65,7 @@ class Song():
         ----------
         无参数。
         '''
-        self.pure_info = NeteaseParams(
-            encode_data = self.encode_data,
-            url = SONG_INFO_API
-        ).get_resource()['songs'][0]
+        self.pure_info = info_get(url = SONG_INFO_API, data = self.encode_data)['songs'][0]
         self.title = self.pure_info['name']
         self.album = self.pure_info['al']['name']
         for i in self.pure_info['ar']:
