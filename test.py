@@ -1,6 +1,6 @@
 '''
 test.py
-Core.Ver.1.0.0.240320a2
+Core.Ver.1.0.0.240320a4
 Author: CooooldWind_
 '''
 
@@ -47,7 +47,7 @@ from ncmlistdownloader.Downloader import *
 import pprint
 filename = "C:/Users/Administrator/Desktop/git.exe"
 url = "https://mirrors.huaweicloud.com/git-for-windows/v2.43.0.windows.1/Git-2.43.0-64-bit.exe"
-file_origin = Downloader(url = url)
+file_origin = OriginFile(url = url)
 pprint.pprint(file_origin.headers)
 
 '''
