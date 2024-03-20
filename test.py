@@ -1,6 +1,6 @@
 '''
 test.py
-Core.Ver.1.0.0.240319a4
+Core.Ver.1.0.0.240320a2
 Author: CooooldWind_
 '''
 
@@ -40,4 +40,70 @@ data = {
     "type": "1",
 }
 pprint.pprint(response_get(url = url, data = data))
+'''
+
+#1.0.0.240320a2
+from ncmlistdownloader.Downloader import *
+import pprint
+filename = "C:/Users/Administrator/Desktop/git.exe"
+url = "https://mirrors.huaweicloud.com/git-for-windows/v2.43.0.windows.1/Git-2.43.0-64-bit.exe"
+file_origin = Downloader(url = url)
+pprint.pprint(file_origin.headers)
+
+'''
+返回的结果。
+{
+    'Server': 'CloudWAF',
+    'Date': 'Wed, 20 Mar 2024 10:30:11 GMT',
+    # 文件类型：应用，UTF-8编码。
+    'Content-Type': 'application/octet-stream;charset=UTF-8',
+    # 文件大小：60868040（位？）
+    'Content-Length': '60868040',
+    'Connection': 'keep-alive',
+    'Set-Cookie': 'HWWAFSESID=49893bb79fce609919; path=/, HWWAFSESTIME=1710930604973; path=/',
+    'lubanops-gtrace-id': 'v-648620-1710930611731-326844629',
+    'lubanops-nenv-id': '269996',
+    'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers',
+    'X-Checksum-Md5': 'dfd5b1ee7c69a55a61da44e00473f56a',
+    'X-Checksum-Sha1': 'c479dc90ebd3c71a8d24b19a9cdc0222dc4705a0',
+    'X-Checksum-Sha256': 'a6058d7c4c16bfa5bcd6fde051a92de8c68535fd7ebade55fc0ab1c41be3c8d5',
+    'X-Checksum-Sha512': '38155d550d3c29e4c0b9beecb766d8a0d09fb15cd3f72ca5a8ed0a454c23abd0758f8f32cc9d3c54359dd128242d6506ed811c00965f3616017c0ccd3b681ede',
+    'Last-Modified': 'Mon, 20 Nov 2023 11:00:15 GMT',
+    'ETag': 'c479dc90ebd3c71a8d24b19a9cdc0222dc4705a0',
+    'Content-Disposition': 'attachment; filename="Git-2.43.0-64-bit.exe"; filename*=UTF-8\'\'%47%69%74%2D%32%2E%34%33%2E%30%2D%36%34%2D%62%69%74%2E%65%78%65',
+    'Expires': 'Thu, 04 Apr 2024 10:30:11 GMT',
+    'Cache-Control': 'max-age=1296000',
+    'pass-uri': 'git-for-windows-local/v2.43.0.windows.1/Git-2.43.0-64-bit.exe',
+    'Accept-Ranges': 'bytes'
+}
+'''
+
+'''
+
+URL: https://www.runoob.com/http/http-content-type.html
+
+常见的媒体格式类型如下：
+
+    text/html ： HTML格式
+    text/plain ：纯文本格式
+    text/xml ： XML格式
+    image/gif ：gif图片格式
+    image/jpeg ：jpg图片格式
+    image/png：png图片格式
+
+以application开头的媒体格式类型：
+
+    application/xhtml+xml ：XHTML格式
+    application/xml： XML数据格式
+    application/atom+xml ：Atom XML聚合格式
+    application/json： JSON数据格式
+    application/pdf：pdf格式
+    application/msword ： Word文档格式
+    application/octet-stream ： 二进制流数据（如常见的文件下载）
+    application/x-www-form-urlencoded ： <form encType=””>中默认的encType，form表单数据被编码为key/value格式发送到服务器（表单默认的提交数据的格式）
+
+另外一种常见的媒体格式是上传文件之时使用的：
+
+    multipart/form-data ： 需要在表单中进行文件上传时，就需要使用该格式
+
 '''

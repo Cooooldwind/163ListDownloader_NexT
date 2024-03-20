@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Downloader/__init__.py
-Core.Ver.1.0.0.240320a1
+Core.Ver.1.0.0.240320a2
 Author: CooooldWind_
 Updated_Content:
 1. Downloader()
@@ -19,10 +19,11 @@ class Downloader(threading.Thread):
         self.session = requests.Session()
         self.session.mount('http://', HTTPAdapter(max_retries = max_retries))
         self.session.mount('https://', HTTPAdapter(max_retries = max_retries))
-        source = self.session.get(url = url,
+        self.source = self.session.get(url = url,
                                   stream = stream,
                                   allow_redirects = True,
                                   timeout = (5,10))
+        self.headers = self.source.headers
 
 '''
 def download(url = "", filename = "", stream = True, max_retries = 3):
