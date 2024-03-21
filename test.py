@@ -1,6 +1,6 @@
 '''
 test.py
-Core.Ver.1.0.0.240320a4
+Core.Ver.1.0.0.240321a1
 Author: CooooldWind_
 '''
 
@@ -42,6 +42,7 @@ data = {
 pprint.pprint(response_get(url = url, data = data))
 '''
 
+'''
 #1.0.0.240320a2
 from ncmlistdownloader.Downloader import *
 import pprint
@@ -49,6 +50,7 @@ filename = "C:/Users/Administrator/Desktop/git.exe"
 url = "https://mirrors.huaweicloud.com/git-for-windows/v2.43.0.windows.1/Git-2.43.0-64-bit.exe"
 file_origin = OriginFile(url = url)
 pprint.pprint(file_origin.headers)
+'''
 
 '''
 返回的结果。
@@ -107,3 +109,12 @@ URL: https://www.runoob.com/http/http-content-type.html
     multipart/form-data ： 需要在表单中进行文件上传时，就需要使用该格式
 
 '''
+
+#1.0.0.240321a1
+from ncmlistdownloader.Downloader import *
+import pprint
+filename = "C:/Users/Administrator/Desktop/git.exe"
+url = "https://mirrors.huaweicloud.com/git-for-windows/v2.43.0.windows.1/Git-2.43.0-64-bit.exe"
+file_origin = OriginFile(url = url)
+pprint.pprint(file_origin.headers)
+file_origin.start(filename = "C:\\Users\\Administrator\\Downloads\\git.exe")

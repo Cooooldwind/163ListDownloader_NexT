@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Downloader/__init__.py
-Core.Ver.1.0.0.240320a4
+Core.Ver.1.0.0.240321a1
 Author: CooooldWind_
 Updated_Content:
 1. Downloader()
@@ -26,17 +26,30 @@ def calc_divisional_range(total_size, sum):
 
 class OriginFile:
     def __init__(self, url = ""):
-        self.source = requests.get(url = url)
-        self.headers = dict(self.source.headers)
+        headers = {"Range": f"bytes=1-2"}
+        self.headers = dict(requests.head(url = url).headers)
         self.total_size = int(self.headers['Content-Length'])
         self.chunks = calc_divisional_range(self.total_size, 10)
+        self.url = url
+
+    def start(self, stream = True, max_retries = 3, thread_sum = 4, filename = str()):
+        downloader_list = list()
+        for i in self.chunks:
+            downloader_list.append(Downloader(url = self.url,
+                                              chunk = i,
+                                              stream = stream,
+                                              max_retries = max_retries,
+                                              thread_sum = thread_sum,
+                                              filename = filename))
+        for i in downloader_list:
+            i.start()
     
 class Downloader(threading.Thread):
     '''
     每个部分文件的下载
     '''
-    def __init__(self, url = "", chunk = [], stream = True, max_retries = 3, thread_sum = 4, filename = ""):
-        threading.Thread.__init__()
+    def __init__(self, url = "", chunk = [], stream = True, max_retries = 3, thread_sum = 4, filename = str()):
+        threading.Thread.__init__(self)
         self.start_pos = chunk[0]
         self.end_pos = chunk[1]
         self.session = requests.Session()
@@ -58,8 +71,13 @@ class Downloader(threading.Thread):
         with threading.Semaphore(self.thread_sum):
             with open(self.filename, 'wb+') as file:
                 file.seek(self.start_pos)
+                rate = 0
                 for data in self.source.iter_content(chunk_size = 1024):
-                    if data: file.write(data)
+                    file.write(data)
+                    rate += len(data)
+                    if random.randint(0,1000) % 200 == 0:
+                        time.sleep(0.01)
+
 '''
 def download(url = "", filename = "", stream = True, max_retries = 3):
     session = requests.Session()
