@@ -1,6 +1,6 @@
 '''
 test.py
-Core.Ver.1.0.0.240321a1
+Core.Ver.1.0.0.240323a1
 Author: CooooldWind_
 '''
 
@@ -110,6 +110,7 @@ URL: https://www.runoob.com/http/http-content-type.html
 
 '''
 
+'''
 #1.0.0.240321a1
 from ncmlistdownloader.Downloader import *
 import pprint
@@ -118,3 +119,12 @@ url = "https://mirrors.huaweicloud.com/git-for-windows/v2.43.0.windows.1/Git-2.4
 file_origin = OriginFile(url = url)
 pprint.pprint(file_origin.headers)
 file_origin.start(filename = "C:\\Users\\Administrator\\Downloads\\git.exe")
+'''
+
+#1.0.0.240323a1
+from ncmlistdownloader.Common import auto_mkdir
+filename = "C:\\Users\\Administrator\\Desktop\\new_folder\\new\\folder.txt"
+path = ""
+for i in filename.split("\\")[:-1]:
+    path += i + "\\"
+auto_mkdir(path = path)

@@ -1,11 +1,13 @@
 '''
 ncmlistdownloader/Common/__init__.py
 存储常用函数。
-Core.Ver.1.0.0.240318a1
+Core.Ver.1.0.0.240323a1
 Author: CooooldWind_
 Updated_Content:
-1. clean(str = '')
+1. auto_mkdir(path)
 '''
+
+import os
 
 def url_split(str = ""):
     '''
@@ -63,3 +65,28 @@ def clean(str = ''):
         str = str.replace(i,"")
     return str
     
+def auto_mkdir(path = ''):
+    '''
+    创建路径
+    ----------
+    参数：
+    1. path: 路径
+    '''
+    now_path = os.getcwd().replace("\\","/")
+    path = path.replace("\\","/")
+    if path.find(":/") >= 0:
+        path_list = path.split("/")
+        finally_path_list = path_list
+    else:
+        now_path_list = now_path.split("/")
+        path_list = path.split("/")
+        while path_list[0] == "../":
+            path_list = path_list[1:]
+            now_path_list = now_path_list[:-1]
+        finally_path_list = now_path_list + path_list
+    finally_path = ""
+    for i in finally_path_list:
+        finally_path += i + "/"
+        if not os.path.exists(finally_path):
+            os.mkdir(path = finally_path)
+
