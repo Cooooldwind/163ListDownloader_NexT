@@ -1,11 +1,11 @@
 '''
 test.py
-Core.Ver.1.0.0.240323a1
+Core.Ver.1.0.0.240325a1
 Author: CooooldWind_
 '''
 
-# 1.0.0.240317a1
 '''
+# 1.0.0.240317a1
 from ncmlistdownloader.Song import *
 import pprint
 
@@ -121,6 +121,7 @@ pprint.pprint(file_origin.headers)
 file_origin.start(filename = "C:\\Users\\Administrator\\Downloads\\git.exe")
 '''
 
+'''
 #1.0.0.240323a1
 from ncmlistdownloader.Common import auto_mkdir
 filename = "C:\\Users\\Administrator\\Desktop\\new_folder\\new\\folder.txt"
@@ -128,3 +129,31 @@ path = ""
 for i in filename.split("\\")[:-1]:
     path += i + "\\"
 auto_mkdir(path = path)
+'''
+
+#1.0.0.230325a1 获取歌单
+from ncmlistdownloader.Common.encode_sec_key import *
+from ncmlistdownloader.Common.global_args import *
+from ncmlistdownloader.Song import *
+import pprint
+data = {
+    'csrf_token': "",
+    'id': "9362578229",
+    'n': "0"
+}
+res = NeteaseParams(encode_data = data, url = PLAYLIST_API).get_resource()
+k = res['playlist']['trackIds']
+pprint.pprint(k)
+kk = [str(i['id']) for i in k]
+pprint.pprint(kk)
+kkk = [Song(id = j) for j in kk]
+kkk[8].get_info()
+pprint.pprint(kkk[8].raw_info)
+pprint.pprint(kkk[8].url_info)
+pprint.pprint(kkk[8].processed_info)
+'''
+for j in kkk:
+    j.get_info()
+for j in kkk:
+    pprint.pprint(j.processed_info)
+'''

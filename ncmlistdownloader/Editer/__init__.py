@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Editer/__init__.py
-Core.Ver.1.0.0.240317a2
+Core.Ver.1.0.0.240325a1
 Author: CooooldWind_
 Updated_Content:
 1. Bug fixed
@@ -21,8 +21,8 @@ def attribute_write(filename = str(), info = dict()):
     属性写入
     ----------
     参数：
-    1. filename: 文件名，字符串，仅mp3/flac格式
-    2. info: 信息，里面需要"album"，"artist"，"title"
+    1. `filename`: 文件名, 字符串, 仅mp3/flac格式
+    2. `info`: 信息, 里面需要 `'album'` , `'artist'`, `'title'`
     '''
     type = get_type(filename)
     if type == "mp3":
@@ -44,8 +44,8 @@ def cover_write(filename = str(), cover_filename = str()):
     专辑封面写入
     ----------
     参数：
-    1. filename: 文件名，字符串，仅mp3/flac格式
-    2. cover_filename: 封面的文件名，字符串，仅jpg格式
+    1. `filename`: 文件名, 字符串, 仅mp3/flac格式
+    2. `cover_filename`: 封面的文件名, 字符串, 仅jpg格式
     '''
     type = get_type(filename)
     if type == "mp3":
@@ -80,8 +80,8 @@ def lyric_write(filename = str(), lyric_filename = str()):
     专辑封面写入
     ----------
     参数：
-    1. filename: 文件名，字符串，仅mp3/flac格式
-    2. lyric_filename: 封面的文件名，字符串，仅lrc格式
+    1. `filename`: 文件名, 字符串, 仅mp3/flac格式
+    2. `lyric_filename`: 封面的文件名, 字符串, 仅lrc格式
     '''
     type = get_type(filename)
     if type == "mp3":
