@@ -11,7 +11,7 @@ import json
 from base64 import b64encode
 import requests
 from Crypto.Cipher import AES
-from ncmlistdownloader.Common.global_args import USER_AGENTS, FUNC_F, SEC_KEY
+from ncmlistdownloader.common.global_args import USER_AGENTS, FUNC_F, SEC_KEY
 
 class NeteaseParams:
     '''

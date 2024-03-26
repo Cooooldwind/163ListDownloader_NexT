@@ -7,12 +7,12 @@ Updated_Content:
 2. markdown!
 '''
 
-from ncmlistdownloader.Common import *
-from ncmlistdownloader.Common.encode_sec_key import *
-from ncmlistdownloader.Downloader import *
-from ncmlistdownloader.Common.global_args import *
-from ncmlistdownloader.Common.encode_sec_key import *
-from ncmlistdownloader.Editer import *
+from ncmlistdownloader.common import *
+from ncmlistdownloader.common.encode_sec_key import *
+from ncmlistdownloader.downloader import *
+from ncmlistdownloader.common.global_args import *
+from ncmlistdownloader.common.encode_sec_key import *
+from ncmlistdownloader.editer import *
 
 class Song():
     '''

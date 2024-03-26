@@ -9,7 +9,7 @@ from PIL import Image
 from mutagen.flac import FLAC, Picture
 from mutagen.mp3 import EasyMP3
 from mutagen.id3 import ID3, APIC, USLT, Encoding
-from ncmlistdownloader.Common import get_type, artist_turn_str
+from ncmlistdownloader.common import get_type, artist_turn_str
 
 expection_word_front = "Opening files with the suffix \"."
 lyric_expection_word_front = "Opening cover files with the suffix \"."

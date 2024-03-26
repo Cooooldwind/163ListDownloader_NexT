@@ -132,9 +132,9 @@ auto_mkdir(path = path)
 '''
 
 #1.0.0.230325a1 获取歌单
-from ncmlistdownloader.Common.encode_sec_key import *
-from ncmlistdownloader.Common.global_args import *
-from ncmlistdownloader.Song import *
+from ncmlistdownloader.common.encode_sec_key import *
+from ncmlistdownloader.common.global_args import *
+from ncmlistdownloader.song import *
 import pprint
 data = {
     'csrf_token': "",

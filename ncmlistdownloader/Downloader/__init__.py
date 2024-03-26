@@ -6,8 +6,8 @@ Updated_Content:
 1. Downloader()
 '''
 
-from ncmlistdownloader.Common import *
-from ncmlistdownloader.Common.encode_sec_key import *
+from ncmlistdownloader.common import *
+from ncmlistdownloader.common.encode_sec_key import *
 import requests
 from requests.adapters import HTTPAdapter
 import random
@@ -48,7 +48,13 @@ class Downloader(threading.Thread):
     '''
     每个部分文件的下载
     '''
-    def __init__(self, url = "", chunk = [], stream = True, max_retries = 3, thread_sum = 4, filename = str()):
+    def __init__(self,
+                 url = "",
+                 chunk = [],
+                 stream = True,
+                 max_retries = 3,
+                 thread_sum = 4,
+                 filename = str()):
         threading.Thread.__init__(self)
         self.start_pos = chunk[0]
         self.end_pos = chunk[1]

@@ -64,7 +64,7 @@ def clean(str = ''):
     for i in dirty:
         str = str.replace(i,"")
     return str
-    
+
 def auto_mkdir(path = ''):
     '''
     创建路径
@@ -89,4 +89,3 @@ def auto_mkdir(path = ''):
         finally_path += i + "/"
         if not os.path.exists(finally_path):
             os.mkdir(path = finally_path)
-
