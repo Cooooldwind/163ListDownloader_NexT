@@ -1,24 +1,23 @@
 '''
 ncmlistdownloader/Common/__init__.py
 存储常用函数。
-Core.Ver.1.0.0.240325a1
+Core.Ver.1.0.0.240327a1
 Author: CooooldWind_
-Updated_Content:
-1. markdown!
+Update_Content:
+1. 改了参数名字
 '''
 
 import os
 
-def url_split(str = ""):
+def url_split(url = str()):
     '''
     把id从url里面提取出来
     ----------
     参数:
-    1. `str`(必填): 需要转换的url
+    1. `url`(必填): 需要转换的url
     '''
-    str = str.split("song?id=")[-1]
-    str = str.split("&")[0]
-    return str
+    id = url.split("song?id=")[-1].split("&")[0]
+    return id
 
 def artist_turn_str(info = [],split_word = ', '):
     '''
@@ -35,37 +34,37 @@ def artist_turn_str(info = [],split_word = ', '):
             str += split_word
     return str
 
-def get_type(str = ''):
+def get_type(filename = str()):
     '''
     获取文件的后缀名。
     ----------
     参数：
-    1. `str`: 文件名
+    1. `filename`: 文件名
     '''
-    return str[str.find(".") + 1:]
+    return filename[filename.find(".") + 1:]
 
-def get_name(str = ''):
+def get_name(filename = str()):
     '''
     获取文件的名称。
     ----------
     参数：
-    1. `str`: 文件名
+    1. `filename`: 文件名
     '''
-    return str[:str.rfind(".")]
+    return filename[:filename.rfind(".")]
 
-def clean(str = ''):
+def clean(filename = str()):
     '''
     清空有悖于标准的字符的函数。
     ----------
     参数：
-    1. `str`: 文件名
+    1. `filename`: 文件名
     '''
-    dirty = [":","*","\"","?","|","<",">"]
+    dirty = [":","*","\"","?","|","<",">","/","\\"]
     for i in dirty:
-        str = str.replace(i,"")
-    return str
+        filename = filename.replace(i,"")
+    return filename
 
-def auto_mkdir(path = ''):
+def auto_mkdir(path = str()):
     '''
     创建路径
     ----------

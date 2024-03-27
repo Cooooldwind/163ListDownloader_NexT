@@ -1,4 +1,4 @@
 del dist /Q /F
-python setup.py sdist
+python -m build
 twine upload dist/*
 pause
