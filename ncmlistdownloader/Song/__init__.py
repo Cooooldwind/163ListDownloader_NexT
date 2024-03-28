@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Song/__init__.py
-Core.Ver.1.0.0.240325a1
+Core.Ver.1.0.0.240328a1
 Author: CooooldWind_
 Updated_Content: 
 1. fix: didn't import ncmlistdownloader.Common.encode_sec_key
@@ -19,10 +19,12 @@ class Song():
     Song类
     ----------
     存储歌曲信息，以及各种函数。
-    常用的有如下：
+    常用的有如下: 
     1. `name` / `album` / `artist`
     2. `downloading_state` / `downloading_value`
     3. `raw_info` / `processed_info` / `url_info`
+    参数: 
+    1. `id`: 歌曲id (其实传入url也行)
     '''
 
     def __init__(self, id = ""):
@@ -39,9 +41,9 @@ class Song():
                 'c': str([{'id':str(self.id)}]),
                 'csrf_token': '',
             }
-        self.raw_info = dict()
-        self.processed_info = dict()
-        self.url_info = dict()
+        self.raw_info = {}
+        self.processed_info = {}
+        self.url_info = {}
 
     def __str__(self):
         '''
@@ -82,7 +84,7 @@ class Song():
         '''
         往文件里面写入歌曲信息
         ----------
-        参数：
+        参数: 
         1. filename: 文件名，字符串，仅mp3/flac格式
         '''
         attribute_write(filename = filename, info = self.processed_info)
@@ -91,7 +93,7 @@ class Song():
         '''
         专辑封面（下载与（未实现））写入
         ----------
-        参数：
+        参数: 
         1. filename: 文件名，字符串，仅mp3/flac格式
         '''
         cover_write(filename = filename, cover_filename = None)

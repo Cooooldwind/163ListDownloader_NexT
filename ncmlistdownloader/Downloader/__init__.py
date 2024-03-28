@@ -1,21 +1,22 @@
 '''
 ncmlistdownloader/Downloader/__init__.py
-Core.Ver.1.0.0.240321a1
+Core.Ver.1.0.0.240328a1
 Author: CooooldWind_
-Updated_Content:
-1. Downloader()
 '''
 
-from ncmlistdownloader.common import *
-from ncmlistdownloader.common.encode_sec_key import *
-import requests
-from requests.adapters import HTTPAdapter
 import random
 import time
 import threading
+import requests
+from requests.adapters import HTTPAdapter
+from ncmlistdownloader.common import *
+from ncmlistdownloader.common.encode_sec_key import *
 
-def calc_divisional_range(total_size, sum):
-    step = total_size // sum
+def calc_divisional_range(total_size, chunk_sum):
+    '''
+    calc_divisional_range
+    '''
+    step = total_size // chunk_sum
     arr = list(range(0, total_size, step))
     result = []
     for i in range(len(arr) - 1):
@@ -25,15 +26,20 @@ def calc_divisional_range(total_size, sum):
     return result
 
 class OriginFile:
+    '''
+    OriginFile
+    '''
     def __init__(self, url = ""):
-        headers = {"Range": f"bytes=1-2"}
         self.headers = dict(requests.head(url = url).headers)
         self.total_size = int(self.headers['Content-Length'])
         self.chunks = calc_divisional_range(self.total_size, 10)
         self.url = url
 
     def start(self, stream = True, max_retries = 3, thread_sum = 4, filename = str()):
-        downloader_list = list()
+        '''
+        start
+        '''
+        downloader_list = []
         for i in self.chunks:
             downloader_list.append(Downloader(url = self.url,
                                               chunk = i,
@@ -43,18 +49,20 @@ class OriginFile:
                                               filename = filename))
         for i in downloader_list:
             i.start()
-    
+
 class Downloader(threading.Thread):
     '''
     每个部分文件的下载
     '''
     def __init__(self,
                  url = "",
-                 chunk = [],
+                 chunk = None,
                  stream = True,
                  max_retries = 3,
                  thread_sum = 4,
                  filename = str()):
+        if not chunk:
+            raise ValueError("\"chunk\" must be a list.")
         threading.Thread.__init__(self)
         self.start_pos = chunk[0]
         self.end_pos = chunk[1]
@@ -72,8 +80,11 @@ class Downloader(threading.Thread):
         self.total_size = int(self.headers['Content-Length'])
         self.thread_sum = thread_sum
         self.filename = filename
-        
+
     def run(self):
+        '''
+        run
+        s'''
         with threading.Semaphore(self.thread_sum):
             with open(self.filename, 'wb+') as file:
                 file.seek(self.start_pos)

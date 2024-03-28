@@ -1,9 +1,7 @@
 '''
 ncmlistdownloader/Editer/__init__.py
-Core.Ver.1.0.0.240325a1
+Core.Ver.1.0.0.240328a1
 Author: CooooldWind_
-Updated_Content:
-1. Bug fixed
 '''
 from PIL import Image
 from mutagen.flac import FLAC, Picture
@@ -16,7 +14,7 @@ lyric_expection_word_front = "Opening cover files with the suffix \"."
 cover_expection_word_front = "Opening cover files with the suffix \"."
 expection_word_end = "\" is not supported."
 
-def attribute_write(filename = str(), info = dict()):
+def attribute_write(filename = str(), info = None):
     '''
     属性写入
     ----------
@@ -29,8 +27,10 @@ def attribute_write(filename = str(), info = dict()):
         file = EasyMP3(filename)
     elif type == "flac":
         file = FLAC(filename)
-    else: 
+    else:
         raise Exception(expection_word_front + type + expection_word_end)
+    if not info:
+        raise ValueError("\"info\" must be a dict(). See the comment for detail infomatiom.")
     file['title'] = info['title']
     file['album'] = info['album']
     file['artist'] = artist_turn_str(
@@ -52,7 +52,7 @@ def cover_write(filename = str(), cover_filename = str()):
         file = ID3(filename)
     elif type == "flac":
         file = FLAC(filename)
-    else: 
+    else:
         raise Exception(expection_word_front + type + expection_word_end)
     cover_type = get_type(cover_filename)
     if cover_type != "jpg" and cover_type != "jpeg":
@@ -88,7 +88,7 @@ def lyric_write(filename = str(), lyric_filename = str()):
         file = ID3(filename)
     elif type == "flac":
         file = FLAC(filename)
-    else: 
+    else:
         raise Exception(expection_word_front + type + expection_word_end)
     lyric_type = get_type(lyric_filename)
     if lyric_type != "lrc":
