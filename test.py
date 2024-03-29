@@ -131,6 +131,7 @@ for i in filename.split("\\")[:-1]:
 auto_mkdir(path = path)
 '''
 
+'''
 #1.0.0.230325a1 获取歌单
 from ncmlistdownloader.common.encode_sec_key import *
 from ncmlistdownloader.common.global_args import *
@@ -151,9 +152,16 @@ kkk[8].get_info()
 pprint.pprint(kkk[8].raw_info)
 pprint.pprint(kkk[8].url_info)
 pprint.pprint(kkk[8].processed_info)
-'''
 for j in kkk:
     j.get_info()
 for j in kkk:
     pprint.pprint(j.processed_info)
 '''
+
+#1.0.0.240330a1
+from ncmlistdownloader.playlist import *
+import pprint
+c = Playlist("2391850012")
+k = open("result.txt", "w+", encoding="utf-8")
+k.write(str(c.get_info()))
+k.close()

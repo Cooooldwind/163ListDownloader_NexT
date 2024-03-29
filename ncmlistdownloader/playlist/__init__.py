@@ -1,16 +1,28 @@
 '''
 ncmlistdownloader/Playlist/__init__.py
-Core.Ver.1.0.0.240328a1
+Core.Ver.1.0.0.240330a1
 Author: CooooldWind_
 '''
 from ncmlistdownloader.common import *
 from ncmlistdownloader.common.encode_sec_key import *
+from ncmlistdownloader.common.global_args import *
 from ncmlistdownloader.song import *
 
 class Playlist():
     def __init__(self, id = ""):
         self.id = id
-        self.tracks: list[Song] = []
-        self.creater = ""
+        self.track: list[Song] = []
+        self.creator_id = ""
+        self.raw_info = {}
+        self.track_count = int(0)
+        self.creator = ""
     def get_info(self):
-        pass
+        self.raw_info = NeteaseParams(url = PLAYLIST_API,
+                                      encode_data = {
+                                          'csrf_token': '',
+                                          'id': self.id,
+                                      }).get_resource()['playlist']
+        self.creator_id = self.raw_info['userId']
+        self.track_count = self.raw_info['trackCount']
+        self.creator = self.raw_info['creator']['nickname']
+        return self.raw_info
