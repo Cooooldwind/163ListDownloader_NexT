@@ -158,6 +158,7 @@ for j in kkk:
     pprint.pprint(j.processed_info)
 '''
 
+'''
 #1.0.0.240330a1
 from ncmlistdownloader.playlist import *
 import pprint
@@ -165,3 +166,31 @@ c = Playlist("2391850012")
 k = open("result.txt", "w+", encoding="utf-8")
 k.write(str(c.get_info()))
 k.close()
+'''
+
+#1.0.0.240401a3
+from ncmlistdownloader.playlist import *
+from ncmlistdownloader.downloader import *
+import pprint
+c = Playlist('9091949976')
+c.get_info()
+c.track[0].get_info()
+orf = OriginFile(c.track[0].url_info['song_file'])
+pprint.pprint(orf.headers)
+pprint.pprint(orf.chunks)
+print(orf.url[orf.url.rfind("/") + 1:])
+orf.auto_start()
+'''
+orf = OriginFile(c.track[0].url_info['album_pic'])
+pprint.pprint(orf.headers)
+pprint.pprint(orf.chunks)
+print(orf.url[orf.url.rfind("/") + 1:])
+'''
+
+'''
+连续请求了三次，重定向的Location:
+http://m701.music.126.net/20240401230050/e5a72ac2987914839b46c11906e5a43f/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8367965002/5755/9777/e9a2/7b692217610db9b03d683dcb9de285fa.mp3
+http://m801.music.126.net/20240401230148/4077d3b1586ad41d0e1c63adce972e5a/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8367965002/5755/9777/e9a2/7b692217610db9b03d683dcb9de285fa.mp3
+http://m701.music.126.net/20240401230234/9300c80a3e289616d2cc0100a369d656/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8367965002/5755/9777/e9a2/7b692217610db9b03d683dcb9de285fa.mp3
+从jdymusic开始就一模一样了，music.126.net后面俩应该是与cookie有关的。
+'''

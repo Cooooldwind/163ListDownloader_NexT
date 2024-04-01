@@ -1,7 +1,6 @@
 '''
 ncmlistdownloader/Downloader/__init__.py
-Core.Ver.1.0.0.240401a2
-*Didn't test the new function.
+Core.Ver.1.0.0.240401a3
 Author: CooooldWind_
 '''
 
@@ -17,6 +16,8 @@ def calc_divisional_range(total_size, chunk_sum):
     '''
     calc_divisional_range
     '''
+    if chunk_sum == 1:
+        return [[0, total_size - 1]]
     step = total_size // chunk_sum
     arr = list(range(0, total_size, step))
     result = []
@@ -31,16 +32,18 @@ class OriginFile:
     OriginFile
     '''
     def __init__(self, url = ""):
-        self.headers = dict(requests.head(url = url).headers)
+        self.url = requests.head(url = url, allow_redirects = True).url
+        self.headers = dict(requests.head(url = self.url, allow_redirects = True).headers)
         self.total_size = int(self.headers['Content-Length'])
-        self.chunks = calc_divisional_range(self.total_size, self.total_size // 1048576)
-        self.url = url
+        self.chunks = calc_divisional_range(self.total_size, (self.total_size // 1048576) + 1)
 
-    def auto_start(self, filename = str()):
+    def auto_start(self, filename = ''):
         '''
         自动寻找合适的方式下载。
         默认<=1MB使用单线程，其他多线程。
         '''
+        if filename == '':
+            filename = self.url[self.url.rfind('/') + 1:]
         if self.total_size <= 1048576 * 1:
             self.single_thread_start(filename = filename)
         else:
