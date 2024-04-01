@@ -1,10 +1,7 @@
 '''
 ncmlistdownloader/Song/__init__.py
-Core.Ver.1.0.0.240328a1
+Core.Ver.1.0.0.240401a1
 Author: CooooldWind_
-Updated_Content: 
-1. fix: didn't import ncmlistdownloader.Common.encode_sec_key
-2. markdown!
 '''
 
 from ncmlistdownloader.common import *
@@ -80,6 +77,11 @@ class Song():
         })
         return self.raw_info
     
+    def song_download(self):
+        filename = self.title + " - " + self.artist_str + ".mp3"
+        file_origin = OriginFile(self.url_info['song_file'])
+        file_origin.auto_start(filename = filename)
+
     def attribute_write(self, filename = str()):
         '''
         往文件里面写入歌曲信息

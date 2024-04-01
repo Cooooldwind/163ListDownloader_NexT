@@ -1,9 +1,7 @@
 '''
 ncmlistdownloader/Playlist/__init__.py
-Core.Ver.1.0.0.240330a2
+Core.Ver.1.0.0.240401a1
 Author: CooooldWind_
-Update_Context:
-1. Playlist.get_info()
 '''
 from ncmlistdownloader.common import *
 from ncmlistdownloader.common.encode_sec_key import *
@@ -30,4 +28,6 @@ class Playlist():
         self.creator = self.raw_info['creator']['nickname']
         for i in self.raw_info['playlist']['trackIds']:
             self.track_id.append(str(i['id']))
+        for truck_id in self.track_id:
+            self.track.append(Song(id = truck_id))
         return self.raw_info
