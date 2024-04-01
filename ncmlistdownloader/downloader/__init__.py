@@ -1,6 +1,7 @@
 '''
 ncmlistdownloader/Downloader/__init__.py
-Core.Ver.1.0.0.240401a1
+Core.Ver.1.0.0.240401a2
+*Didn't test the new function.
 Author: CooooldWind_
 '''
 
