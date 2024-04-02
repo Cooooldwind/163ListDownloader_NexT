@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Song/__init__.py
-Core.Ver.1.0.0.240401a1
+Core.Ver.1.0.0.240402a1
 Author: CooooldWind_
 '''
 
@@ -77,6 +77,15 @@ class Song():
         })
         return self.raw_info
     
+    def multi_get_info(self):
+        '''
+        获取歌曲信息（多线程用）
+        ----------
+        无参数。
+        '''
+        with threading.Semaphore(64):
+            self.get_info()
+
     def song_download(self):
         filename = self.title + " - " + self.artist_str + ".mp3"
         file_origin = OriginFile(self.url_info['song_file'])

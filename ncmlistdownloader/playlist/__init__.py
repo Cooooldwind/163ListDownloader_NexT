@@ -1,12 +1,13 @@
 '''
 ncmlistdownloader/Playlist/__init__.py
-Core.Ver.1.0.0.240401a3
+Core.Ver.1.0.0.240402a1
 Author: CooooldWind_
 '''
 from ncmlistdownloader.common import *
 from ncmlistdownloader.common.encode_sec_key import *
 from ncmlistdownloader.common.global_args import *
 from ncmlistdownloader.song import *
+import threading
 
 class Playlist():
     def __init__(self, id = ""):
@@ -32,3 +33,8 @@ class Playlist():
         for truck_id in self.track_id:
             self.track.append(Song(id = truck_id))
         return self.raw_info
+    
+    def get_detail_info(self):
+        for i in self.track:
+            thread = threading.Thread(target = i.multi_get_info)
+            thread.start()

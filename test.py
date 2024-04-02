@@ -1,6 +1,5 @@
 '''
 test.py
-Core.Ver.1.0.0.240325a1
 Author: CooooldWind_
 '''
 
@@ -168,6 +167,7 @@ k.write(str(c.get_info()))
 k.close()
 '''
 
+'''
 #1.0.0.240401a3
 from ncmlistdownloader.playlist import *
 from ncmlistdownloader.downloader import *
@@ -180,6 +180,8 @@ pprint.pprint(orf.headers)
 pprint.pprint(orf.chunks)
 print(orf.url[orf.url.rfind("/") + 1:])
 orf.auto_start()
+'''
+
 '''
 orf = OriginFile(c.track[0].url_info['album_pic'])
 pprint.pprint(orf.headers)
@@ -194,3 +196,11 @@ http://m801.music.126.net/20240401230148/4077d3b1586ad41d0e1c63adce972e5a/jdymus
 http://m701.music.126.net/20240401230234/9300c80a3e289616d2cc0100a369d656/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8367965002/5755/9777/e9a2/7b692217610db9b03d683dcb9de285fa.mp3
 从jdymusic开始就一模一样了，music.126.net后面俩应该是与cookie有关的。
 '''
+
+#1.0.0.240402a1
+from ncmlistdownloader.playlist import *
+import pprint
+playlist = Playlist("2391850012")
+playlist.get_info()
+playlist.get_detail_info()
+pprint.pprint(playlist.track[66].raw_info)
