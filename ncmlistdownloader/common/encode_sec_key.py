@@ -1,6 +1,6 @@
 '''
 网易云WeAPI解码
-Core.Ver.1.0.0.231218a
+Core.Ver.1.0.0.240325a1
 Author: CooooldWind_, 半岛的孤城
 References: 
 1. 网易云解参数（获取网易云歌词，获取评论同理）[https://www.bilibili.com/read/cv12754897/]
@@ -11,10 +11,16 @@ import json
 from base64 import b64encode
 import requests
 from Crypto.Cipher import AES
-from .global_args import USER_AGENTS, FUNC_F, SEC_KEY
+from ncmlistdownloader.common.global_args import USER_AGENTS, FUNC_F, SEC_KEY
 
 class NeteaseParams:
-    '''WeAPI解码类'''
+    '''
+    WeAPI解码类
+    ----------
+    参数：
+    1. `encode_data`: 传入的参数
+    2. `url`: API的URL
+    '''
     def __init__(self, encode_data, url):
         self.encode_data = encode_data
         self.url = url
