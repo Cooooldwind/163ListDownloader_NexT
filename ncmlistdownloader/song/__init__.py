@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Song/__init__.py
-Core.Ver.1.0.0.240402a1
+Core.Ver.1.0.0.240402a2
 Author: CooooldWind_
 '''
 
@@ -86,8 +86,13 @@ class Song():
         with threading.Semaphore(64):
             self.get_info()
 
-    def song_download(self):
-        filename = self.title + " - " + self.artist_str + ".mp3"
+    def song_download(self, filename_format):
+        format_info = self.processed_info
+        format_info.update({'filename': filename_format})
+        format_info.update({'artist': self.artist_str})
+        filename = format(**format_info)
+        filename = filename[:filename.rfind('/')] + clean(filename[filename.rfind('/') + 1:])
+        print(filename)
         file_origin = OriginFile(self.url_info['song_file'])
         file_origin.auto_start(filename = filename)
 
