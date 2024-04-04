@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Downloader/__init__.py
-Core.Ver.1.0.0.240401a3
+Core.Ver.1.0.0.240404a2
 Author: CooooldWind_
 '''
 
@@ -34,8 +34,10 @@ class OriginFile:
     def __init__(self, url = ""):
         self.url = requests.head(url = url, allow_redirects = True).url
         self.headers = dict(requests.head(url = self.url, allow_redirects = True).headers)
-        self.total_size = int(self.headers['Content-Length'])
-        self.chunks = calc_divisional_range(self.total_size, (self.total_size // 1048576) + 1)
+        try: self.total_size = int(self.headers['Content-Length'])
+        except: self.total_size = -1
+        if self.total_size != -1:
+            self.chunks = calc_divisional_range(self.total_size, (self.total_size // 1048576) + 1)
 
     def auto_start(self, filename = ''):
         '''

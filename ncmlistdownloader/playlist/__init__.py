@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Playlist/__init__.py
-Core.Ver.1.0.0.240404a1
+Core.Ver.1.0.0.240404a2
 Author: CooooldWind_
 '''
 from ncmlistdownloader.common import *
@@ -13,7 +13,7 @@ class Playlist():
     def __init__(self, id = ""):
         self.id = id
         if self.id.find("163.com") != -1:
-            self.id = url_split(str = self.id)
+            self.id = url_split(url = self.id)
         self.track: list[Song] = []
         self.creator_id = ""
         self.raw_info = {}

@@ -42,7 +42,7 @@ pprint.pprint(response_get(url = url, data = data))
 '''
 
 '''
-#1.0.0.240320a2
+# 1.0.0.240320a2
 from ncmlistdownloader.Downloader import *
 import pprint
 filename = "C:/Users/Administrator/Desktop/git.exe"
@@ -110,7 +110,7 @@ URL: https://www.runoob.com/http/http-content-type.html
 '''
 
 '''
-#1.0.0.240321a1
+# 1.0.0.240321a1
 from ncmlistdownloader.Downloader import *
 import pprint
 filename = "C:/Users/Administrator/Desktop/git.exe"
@@ -121,7 +121,7 @@ file_origin.start(filename = "C:\\Users\\Administrator\\Downloads\\git.exe")
 '''
 
 '''
-#1.0.0.240323a1
+# 1.0.0.240323a1
 from ncmlistdownloader.Common import auto_mkdir
 filename = "C:\\Users\\Administrator\\Desktop\\new_folder\\new\\folder.txt"
 path = ""
@@ -131,7 +131,7 @@ auto_mkdir(path = path)
 '''
 
 '''
-#1.0.0.230325a1 获取歌单
+# 1.0.0.230325a1 获取歌单
 from ncmlistdownloader.common.encode_sec_key import *
 from ncmlistdownloader.common.global_args import *
 from ncmlistdownloader.song import *
@@ -158,7 +158,7 @@ for j in kkk:
 '''
 
 '''
-#1.0.0.240330a1
+# 1.0.0.240330a1
 from ncmlistdownloader.playlist import *
 import pprint
 c = Playlist("2391850012")
@@ -168,7 +168,7 @@ k.close()
 '''
 
 '''
-#1.0.0.240401a3
+# 1.0.0.240401a3
 from ncmlistdownloader.playlist import *
 from ncmlistdownloader.downloader import *
 import pprint
@@ -197,10 +197,35 @@ http://m701.music.126.net/20240401230234/9300c80a3e289616d2cc0100a369d656/jdymus
 从jdymusic开始就一模一样了，music.126.net后面俩应该是与cookie有关的。
 '''
 
-#1.0.0.240402a1
+'''
+# 1.0.0.240402a1
 from ncmlistdownloader.playlist import *
 import pprint
 playlist = Playlist("2391850012")
 playlist.get_info()
 playlist.get_detail_info()
 pprint.pprint(playlist.track[66].raw_info)
+'''
+
+'''
+# 1.0.0.240404a2
+from ncmlistdownloader.common.thread_test import *
+k = 0
+for i in range(10):
+    j = best_thread()
+    print(j)
+    k += j
+num_threads = [1, 2, 4, 8, 16, 32, 64]
+k /= 10
+for i in num_threads:
+    if i > k:
+        print(i // 2)
+        break
+'''
+
+# 1.0.0.240404a2
+# https://music.163.com/#/song?id=2083182016
+from ncmlistdownloader.song import Song
+m = Song("https://music.163.com/#/song?id=2083182016")
+m.get_info()
+m.song_download()

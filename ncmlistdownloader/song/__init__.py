@@ -6,6 +6,7 @@ Author: CooooldWind_
 
 from ncmlistdownloader.common import *
 from ncmlistdownloader.common.encode_sec_key import *
+from ncmlistdownloader.common.thread_test import best_thread
 from ncmlistdownloader.downloader import *
 from ncmlistdownloader.common.global_args import *
 from ncmlistdownloader.common.encode_sec_key import *
@@ -27,7 +28,7 @@ class Song():
     def __init__(self, id = ""):
         self.id = id
         if self.id.find("163.com") != -1:
-            self.id = url_split(str = self.id)
+            self.id = url_split(url = self.id)
         self.title = ""
         self.artist = []
         self.artist_str = ""
@@ -83,17 +84,26 @@ class Song():
         ----------
         无参数。
         '''
-        with threading.Semaphore(64):
+        with threading.Semaphore(8):
             self.get_info()
 
-    def song_download(self, filename_format):
+    def song_download(self, filename_format = '$title$ - $artist$'):
         format_info = self.processed_info
-        format_info.update({'filename': filename_format})
-        format_info.update({'artist': self.artist_str})
+        format_info.update({
+            'filename': filename_format,
+            'artist': self.artist_str,
+            'album': self.album,
+            'id': self.id,
+            'title': self.title,
+            })
         filename = format(**format_info)
-        filename = filename[:filename.rfind('/')] + clean(filename[filename.rfind('/') + 1:])
-        print(filename)
+        if filename.rfind('/') != -1:
+            filename = filename[:filename.rfind('/')] + clean(filename[filename.rfind('/') + 1:])
+        else:
+            filename = clean(filename)
         file_origin = OriginFile(self.url_info['song_file'])
+        if file_origin.total_size == -1:
+            return -1
         file_origin.auto_start(filename = filename)
 
     def attribute_write(self, filename = str()):
