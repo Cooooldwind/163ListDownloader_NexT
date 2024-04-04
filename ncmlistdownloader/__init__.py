@@ -7,7 +7,7 @@ from ncmlistdownloader.playlist import *
 
 def main():
     print("163ListDownloader CMD Ver.")
-    print("Core.Ver.1.0.0.240404a3 / Made by CooooldWind_")
+    print("Core.Ver.1.0.0.240404b4 / Made by CooooldWind_")
     print("Warning: It's an Alpha Version. It may has a lot of bugs.")
     print("If you met them, click the links below:")
     print("Gitee: https://gitee.com/CooooldWind/163ListDownloader_NexT/issues")
