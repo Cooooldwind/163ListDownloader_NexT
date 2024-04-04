@@ -1,7 +1,7 @@
 '''
 ncmlistdownloader/Common/__init__.py
 存储常用函数。
-Core.Ver.1.0.0.240402a1
+Core.Ver.1.0.0.240404a1
 Author: CooooldWind_
 '''
 
@@ -14,7 +14,7 @@ def url_split(url = str()) -> str:
     参数:
     1. `url`(必填): 需要转换的url
     '''
-    id_return = url.split("song?id=")[-1].split("&")[0]
+    id_return = url.split("?id=")[-1].split("&")[0]
     return id_return
 
 def artist_turn_str(info = None,split_word = ', ') -> str:
