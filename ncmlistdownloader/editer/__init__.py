@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Editer/__init__.py
-Core.Ver.1.0.0.240328a1
+Core.Ver.1.0.0.240404a3
 Author: CooooldWind_
 '''
 from PIL import Image
@@ -77,11 +77,11 @@ def cover_write(filename = str(), cover_filename = str()):
 
 def lyric_write(filename = str(), lyric_filename = str()):
     '''
-    专辑封面写入
+    专辑歌词写入
     ----------
     参数：
     1. `filename`: 文件名, 字符串, 仅mp3/flac格式
-    2. `lyric_filename`: 封面的文件名, 字符串, 仅lrc格式
+    2. `lyric_filename`: 歌词的文件名, 字符串, 仅lrc格式
     '''
     type = get_type(filename)
     if type == "mp3":
@@ -106,3 +106,10 @@ def lyric_write(filename = str(), lyric_filename = str()):
             file['lyrics'] = lyric
     file.save()
     return 0
+
+def cover_compress(edge_len = 800, filename = str()):
+    cover_file = Image.open(filename)
+    cover_file = cover_file.convert("RGB")
+    cover_file_type = cover_file.format
+    cover_file_out = cover_file.resize((edge_len, edge_len), Image.NEAREST)
+    cover_file_out.save(filename, cover_file_type)
