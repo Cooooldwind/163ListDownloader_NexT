@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Song/__init__.py
-Core.Ver.1.0.0.240404a3
+Core.Ver.1.0.0.240404b4
 Author: CooooldWind_
 '''
 
@@ -94,7 +94,7 @@ class Song():
         with threading.Semaphore(8):
             self.get_info()
 
-    def song_download(self):
+    def get_formated_filename(self, suffix):
         format_info = self.processed_info
         format_info.update({
             'filename': self.filename_format,
@@ -103,7 +103,15 @@ class Song():
             'id': self.id,
             'title': self.title,
             })
-        filename = format(**format_info)
+        formated = format(**format_info) + '.' + suffix
+        if formated.rfind('/') != -1:
+            formated = formated[:formated.rfind('/')] + clean(formated[formated.rfind('/') + 1:])
+        else:
+            formated = clean(formated)
+        return formated
+
+    def song_download(self):
+        filename = self.get_formated_filename('mp3')
         if filename.rfind('/') != -1:
             filename = filename[:filename.rfind('/')] + clean(filename[filename.rfind('/') + 1:])
         else:
@@ -114,19 +122,7 @@ class Song():
         file_origin.auto_start(filename = filename)
 
     def cover_download(self):
-        format_info = self.processed_info
-        format_info.update({
-            'filename': self.filename_format,
-            'artist': self.artist_str,
-            'album': self.album,
-            'id': self.id,
-            'title': self.title,
-            })
-        filename = format(**format_info)
-        if filename.rfind('/') != -1:
-            filename = filename[:filename.rfind('/')] + clean(filename[filename.rfind('/') + 1:])
-        else:
-            filename = clean(filename)
+        filename = self.get_formated_filename('jpg')
         file_origin = OriginFile(self.url_info['album_pic'])
         if file_origin.total_size == -1:
             return -1
@@ -137,33 +133,23 @@ class Song():
             url = LYRIC_API,
             encode_data = self.lyric_encode_data
         ).get_resource()['lrc']['lyric'].replace("\n", '\n')
-        format_info = self.processed_info
-        format_info.update({
-            'filename': self.filename_format,
-            'artist': self.artist_str,
-            'album': self.album,
-            'id': self.id,
-            'title': self.title,
-            })
-        filename = format(**format_info)
-        if filename.rfind('/') != -1:
-            filename = filename[:filename.rfind('/')] + clean(filename[filename.rfind('/') + 1:])
-        else:
-            filename = clean(filename)
+        filename = self.get_formated_filename('lrc')
         with open(file = filename, mode = 'w+', encoding = 'UTF-8') as file:
             file.write(self.lyric)
 
-
-    def attribute_write(self, filename = str()):
+    def attribute_write(self, filename = 'No filename'):
         '''
         往文件里面写入歌曲信息
         ----------
         参数: 
         1. `filename`: 文件名，字符串，仅mp3/flac格式
         '''
+        filename_ready = self.get_formated_filename('mp3')
+        if filename == 'No filename':
+            filename = filename_ready
         attribute_write(filename = filename, info = self.processed_info)
 
-    def cover_write(self, filename = str(), cover_filename = str()):
+    def cover_write(self, filename = 'No filename', cover_filename = 'No filename'):
         '''
         专辑封面写入
         ----------
@@ -171,10 +157,23 @@ class Song():
         1. `filename`: 文件名，字符串，仅mp3/flac格式
         2. `cover_filename`: 封面的文件名, 字符串, 仅jpg格式
         '''
+
+        filename_ready = self.get_formated_filename('mp3')
+        if filename == 'No filename':
+            filename = filename_ready
+
+        cover_filename_ready = self.get_formated_filename('jpg')
+        if cover_filename == 'No cover_filename':
+            cover_filename = cover_filename_ready
         cover_write(filename = filename, cover_filename = cover_filename)
 
-    def lyric_write(self, filename = str(), lyric_filename = str()):
+    def lyric_write(self, filename = 'No filename', lyric_filename = 'No filename'):
+        filename_ready = self.get_formated_filename('mp3')
+        if filename == 'No filename':
+            filename = filename_ready
+        lyric_filename_ready = self.get_formated_filename('lrc')
+        if lyric_filename == 'No lyric_filename':
+            lyric_filename = lyric_filename_ready
         lyric_write(filename = filename, lyric_filename = lyric_filename)
-    
 
     

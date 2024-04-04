@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 setup(
     classifiers = [
         # 发展时期
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         # 开发的目标用户
         'Intended Audience :: Customer Service',
         'Intended Audience :: Developers',
@@ -29,11 +29,11 @@ setup(
 		'Programming Language :: Python:: 3.13',
     ],
     name = 'ncmlistdownloader',
-    version = "1.0.0.240327a2",
+    version = "1.0.0.240404b4",
     description = '获取网易云音乐歌单数据，下载音乐，主动添加元信息。',
     author = 'CooooldWind_',
-    url = 'https://github.com/Cooooldwind/163ListDownloader_NexT',
+    url = 'https://gitee.com/Cooooldwind/163ListDownloader_NexT',
     packages = find_packages(),
     install_requires = ['pycryptodome','pillow','mutagen','requests',],
-    # entry_points = {'console_scripts': ['163ListDownloader = ncmlistdownloader.cmd_script:main']},
+    entry_points = {'console_scripts': ['ncmlistdownloader = ncmlistdownloader.__init__:main']},
 )

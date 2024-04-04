@@ -1,13 +1,13 @@
 '''
 ncmlistdownloader/__init__.py
-Core.Ver.1.0.0.240402a2
+Core.Ver.1.0.0.240404b4
 Author: CooooldWind_
 '''
 from ncmlistdownloader.playlist import *
 
 def main():
     print("163ListDownloader CMD Ver.")
-    print("Core.Ver.1.0.0.240309a1 / Made by CooooldWind_")
+    print("Core.Ver.1.0.0.240404a3 / Made by CooooldWind_")
     print("Warning: It's an Alpha Version. It may has a lot of bugs.")
     print("If you met them, click the links below:")
     print("Gitee: https://gitee.com/CooooldWind/163ListDownloader_NexT/issues")
@@ -23,7 +23,13 @@ def main():
         d += '/'
     d = d.replace('\\', '/')
     for i in p.track:
-        i.song_download(d + fnf)
+        i.filename_format = d + fnf
+        i.song_download()
+        i.cover_download()
+        i.lyric_get()
+        i.attribute_write()
+        i.cover_write()
+        i.lyric_write()
     print('Succeed.')
 
 # https://music.163.com/playlist?id=9460014179&userid=1577080369

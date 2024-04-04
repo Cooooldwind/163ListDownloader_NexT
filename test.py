@@ -223,9 +223,15 @@ for i in num_threads:
         break
 '''
 
+'''
 # 1.0.0.240404a2
 # https://music.163.com/#/song?id=2083182016
 from ncmlistdownloader.song import Song
 m = Song("https://music.163.com/#/song?id=2083182016")
 m.get_info()
 m.song_download()
+'''
+
+# 1.0.0.240404b4
+from ncmlistdownloader import main
+main()
