@@ -62,7 +62,7 @@ while True:
 
 #### 命令行
 
-在命令行利用```pip install ncmlistdownloader```安装完库以后，可以在命令行输入```163ListDownloader```命令直接下载。这是目前最方便快捷的方式。
+在命令行利用```pip install ncmlistdownloader```安装完库以后，可以在命令行输入```ncmlistdownloader```命令直接下载。这是目前最方便快捷的方式。
 
 ### 其他
 
