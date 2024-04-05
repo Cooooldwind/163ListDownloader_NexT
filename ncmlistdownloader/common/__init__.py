@@ -1,7 +1,7 @@
 '''
 ncmlistdownloader/Common/__init__.py
 存储常用函数。
-Core.Ver.1.0.0.240404b4-2
+Core.Ver.1.0.0.240405a1
 Author: CooooldWind_
 '''
 
@@ -41,7 +41,7 @@ def get_type(filename = str()) -> str:
     参数：
     1. `filename`: 文件名
     '''
-    return filename[filename.find(".") + 1:]
+    return filename[filename.rfind(".") + 1:]
 
 def get_name(filename = str()) -> str:
     '''
