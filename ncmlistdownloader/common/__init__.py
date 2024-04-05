@@ -1,7 +1,7 @@
 '''
 ncmlistdownloader/Common/__init__.py
 存储常用函数。
-Core.Ver.1.0.0.240404a2
+Core.Ver.1.0.0.240404b4-2
 Author: CooooldWind_
 '''
 
@@ -90,7 +90,7 @@ def auto_mkdir(path = str()):
         if not os.path.exists(finally_path):
             os.mkdir(path = finally_path)
 
-def format(filename = '', title = '', artist = '', album = '', id = ''):
+def format(filename = '', title = '', artist = '', album = '', id = '') -> str:
     filename_formated = filename
     filename_formated = filename_formated.replace('$title$', title)
     filename_formated = filename_formated.replace('$artist$', artist)

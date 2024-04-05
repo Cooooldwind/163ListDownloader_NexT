@@ -232,6 +232,9 @@ m.get_info()
 m.song_download()
 '''
 
-# 1.0.0.240404b4
+# 1.0.0.240404b4-2
 from ncmlistdownloader import main
 main()
+
+# https://music.163.com/playlist?id=9319926180&userid=1577080369
+# D:\ncmlistdownloader_test

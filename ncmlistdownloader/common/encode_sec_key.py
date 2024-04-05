@@ -1,6 +1,6 @@
 '''
 网易云WeAPI解码
-Core.Ver.1.0.0.240325a1
+Core.Ver.1.0.0.240404b4-2
 Author: CooooldWind_, 半岛的孤城
 References: 
 1. 网易云解参数（获取网易云歌词，获取评论同理）[https://www.bilibili.com/read/cv12754897/]
@@ -58,7 +58,8 @@ class NeteaseParams:
         get_headers = {
             'User-Agent': random.choice(USER_AGENTS)
         }
-        return requests.post(self.url,
+        response = requests.post(self.url,
                              data = get_data,
                              headers = get_headers,
-                             timeout = 10).json()
+                             timeout = 10)
+        return response.json()

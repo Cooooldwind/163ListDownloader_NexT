@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Downloader/__init__.py
-Core.Ver.1.0.0.240404a2
+Core.Ver.1.0.0.240404b4-2
 Author: CooooldWind_
 '''
 
@@ -65,7 +65,7 @@ class OriginFile:
                 'filename': filename
             }
         downloader = Downloader(**arg_dict)
-        downloader.start()
+        downloader.single_run()
 
     def multi_thread_start(self, stream = True, max_retries = 3, thread_sum = 4, filename = str()):
         '''
@@ -82,8 +82,13 @@ class OriginFile:
                 'filename': filename
             }
             downloader_list.append(Downloader(**arg_dict))
+        k: list[threading.Thread] = []
         for i in downloader_list:
             i.start()
+            k.append(i)
+        for i in k:
+            i.join()
+            
 
 class Downloader(threading.Thread):
     '''

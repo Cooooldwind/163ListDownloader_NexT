@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Song/__init__.py
-Core.Ver.1.0.0.240404b4
+Core.Ver.1.0.0.240404b4-2
 Author: CooooldWind_
 '''
 
@@ -41,7 +41,7 @@ class Song():
             }
         self.lyric_encode_data = {
             'csrf_token': '',
-            'id': str([{'id':str(self.id)}]),
+            'id': str(str(self.id)),
             'lv': -1,
             'tv': -1,
         }
@@ -105,21 +105,17 @@ class Song():
             })
         formated = format(**format_info) + '.' + suffix
         if formated.rfind('/') != -1:
-            formated = formated[:formated.rfind('/')] + clean(formated[formated.rfind('/') + 1:])
+            formated = formated[:formated.rfind('/') + 1] + clean(formated[formated.rfind('/') + 1:])
         else:
             formated = clean(formated)
         return formated
 
     def song_download(self):
         filename = self.get_formated_filename('mp3')
-        if filename.rfind('/') != -1:
-            filename = filename[:filename.rfind('/')] + clean(filename[filename.rfind('/') + 1:])
-        else:
-            filename = clean(filename)
         file_origin = OriginFile(self.url_info['song_file'])
-        if file_origin.total_size == -1:
+        if file_origin.total_size <= 0:
             return -1
-        file_origin.auto_start(filename = filename)
+        file_origin.single_thread_start(filename = filename)
 
     def cover_download(self):
         filename = self.get_formated_filename('jpg')
