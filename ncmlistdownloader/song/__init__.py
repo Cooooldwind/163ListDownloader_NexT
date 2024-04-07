@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/Song/__init__.py
-Core.Ver.1.0.0.240404b4-2
+Core.Ver.1.0.0.240407b1
 Author: CooooldWind_
 '''
 
@@ -116,6 +116,7 @@ class Song():
         if file_origin.total_size <= 0:
             return -1
         file_origin.single_thread_start(filename = filename)
+        return filename
 
     def cover_download(self):
         filename = self.get_formated_filename('jpg')
@@ -123,6 +124,7 @@ class Song():
         if file_origin.total_size == -1:
             return -1
         file_origin.auto_start(filename = filename)
+        return filename
 
     def lyric_get(self):
         self.lyric = NeteaseParams(
@@ -132,6 +134,7 @@ class Song():
         filename = self.get_formated_filename('lrc')
         with open(file = filename, mode = 'w+', encoding = 'UTF-8') as file:
             file.write(self.lyric)
+        return filename
 
     def attribute_write(self, filename = 'No filename'):
         '''

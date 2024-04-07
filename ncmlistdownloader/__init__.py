@@ -1,13 +1,14 @@
 '''
 ncmlistdownloader/__init__.py
-Core.Ver.1.0.0.240404b4-2
+Core.Ver.1.0.0.240407b1
 Author: CooooldWind_
 '''
 from ncmlistdownloader.playlist import *
+from ncmlistdownloader.common import *
 
 def main():
     print("163ListDownloader CMD Ver.")
-    print("Core.Ver.1.0.0.240404b4 / Made by CooooldWind_")
+    print("Core.Ver.1.0.0.240407b1 / Made by CooooldWind_")
     print("Warning: It's an Beta Version. It may has a lot of bugs.")
     print("If you met them, click the links below:")
     print("Gitee: https://gitee.com/CooooldWind/163ListDownloader_NexT/issues")
@@ -26,15 +27,17 @@ def main():
     if d[-1] != '/' and d[-1] != '\\':
         d += '/'
     d = d.replace('\\', '/')
+    auto_mkdir(d)
     for i in p.track:
         i.filename_format = d + fnf
-        j = i.song_download()
-        if j == -1:
+        music_filename = i.song_download()
+        if music_filename == -1:
             print(i.title + 'cannot download.')
             continue
-        i.cover_download()
-        i.lyric_get()
-        i.attribute_write()
-        i.cover_write()
-        i.lyric_write()
+        cover_filename = i.cover_download()
+        lyric_filename = i.lyric_get()
+        i.attribute_write(music_filename)
+        i.cover_write(music_filename, cover_filename)
+        i.lyric_write(music_filename, lyric_filename)
+        print(i.title + 'Succeed.')
     print('Succeed.')

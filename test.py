@@ -232,7 +232,7 @@ m.get_info()
 m.song_download()
 '''
 
-# 1.0.0.240404b4-2
+# 1.0.0.240407b1
 from ncmlistdownloader import main
 main()
 
