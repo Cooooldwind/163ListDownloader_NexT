@@ -1,18 +1,17 @@
 '''
 ncmlistdownloader/__init__.py
-Core.Ver.1.0.0.240407b1
+Core.Ver.1.0.0.240408a1
 Author: CooooldWind_
 '''
+from pathlib import Path
 from ncmlistdownloader.playlist import *
 from ncmlistdownloader.common import *
+from ncmlistdownloader.common.global_args import *
 
 def main():
-    print("163ListDownloader CMD Ver.")
-    print("Core.Ver.1.0.0.240407b1 / Made by CooooldWind_")
-    print("Warning: It's an Beta Version. It may has a lot of bugs.")
-    print("If you met them, click the links below:")
-    print("Gitee: https://gitee.com/CooooldWind/163ListDownloader_NexT/issues")
-    print("GitHub: https://github.com/CooooldWind/163ListDownloader_NexT/issues")
+    for i in CMD_START_WORDS:
+        print(i)
+    print('Core.Ver.1.0.0.240408a1')
     id = str(input("ID: "))
     p = Playlist(id)
     p.get_info()
@@ -20,7 +19,7 @@ def main():
     print("Playlist info-reading succeed.")
     d = str(input("Dir: "))
     if d == '':
-        d = '%USERPROFILE%/Downloads/ncmlistdownloader/'
+        d = str(Path.home()) + '/Downloads/ncmld_downloads/'
     fnf = str(input("Filename format: "))
     if fnf == '':
         fnf = '$title$ - $artist$'
@@ -30,14 +29,16 @@ def main():
     auto_mkdir(d)
     for i in p.track:
         i.filename_format = d + fnf
+    p.get_detail_info()
+    for i in p.track:
         music_filename = i.song_download()
         if music_filename == -1:
-            print(i.title + 'cannot download.')
+            print(i.title + ' cannot download.')
             continue
-        cover_filename = i.cover_download()
-        lyric_filename = i.lyric_get()
-        i.attribute_write(music_filename)
-        i.cover_write(music_filename, cover_filename)
-        i.lyric_write(music_filename, lyric_filename)
-        print(i.title + 'Succeed.')
-    print('Succeed.')
+        i.cover_download()
+        i.lyric_get()
+        i.attribute_write()
+        i.cover_write()
+        i.lyric_write()
+        print(i.title + ' succeed.')
+    print('Succeed. Files at:', d)

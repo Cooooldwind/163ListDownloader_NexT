@@ -1,6 +1,6 @@
 '''
 list_downloader/global_args.py
-Core.Ver.1.0.0.240328a1
+Core.Ver.1.0.0.240408a1
 Author: CooooldWind_, 是青旨啊
 '''
 FUNC_F_PART = [
@@ -40,3 +40,11 @@ SONG_INFO_API = json_file['SONG_INFO_API']
 SONG_FILE_API = json_file['SONG_FILE_API']
 SONG_FILE_API_2 = json_file['SONG_FILE_API_2']
 LYRIC_API = json_file['LYRIC_API']
+CMD_START_WORDS = [
+    "163ListDownloader CMD Ver.",
+    "Made by CooooldWind_",
+    "Warning: It's an Alpha Version. It may has a lot of bugs.",
+    "If you met them, click the links below:",
+    "Gitee: https://gitee.com/CooooldWind/163ListDownloader_NexT/issues",
+    "GitHub: https://github.com/CooooldWind/163ListDownloader_NexT/issues",
+]
