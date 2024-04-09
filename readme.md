@@ -1,20 +1,18 @@
 # 163ListDownloader_NexT
 
-这将会是新的开始：一个更好的库，和一个更好的UI（虽然还是基于Win32的Tkinter）！
+这将会是新的开始：一个更好的库，和一个更好的UI（虽然目前来看可能还是基于Win32的Tkinter）！
 
 所以可以紧跟我们的脚步，看看究竟会发生什么。
 
-冷知识：第一个Beta版本```1.0.0.240404b4```实际上到第二天才调试好。
-
-## 2024年3月10日 - 关于TuneFree终止服务的通知
-
-在二月，我们基于TuneFree的API进行了项目制作。很遗憾的是，由于不可控因素，该API在3月1日被迫关停。我们在近日更新了接口，目前暂不支持VIP歌曲下载。特此通知。
+冷知识：第一个Beta版本```1.0.0.240404b4```实际上到第二天 (2024/04/05) 才调试好并发布。但是那个版本其实还是有bug（笑
 
 ## 安装与使用
 
 ### 安装库
 
 目前已经将库部署至 Pypi，使用```pip install ncmlistdownloader```下载。
+
+镜像库会有延迟。
 
 ### 使用库
 
@@ -25,40 +23,16 @@
 以下是一个能正常运行并实现部分功能的最简代码。
 
 ```python
-import ncmlistdownloader as NLD
-p = NLD.Playlist("歌单id")
-p.get_resource()
-for i in p.tracks:
- i.get_resource()
- i.initialize(fnf = "$name$ - $artist$", lv=3, tc_sum = 4)
- i.start()
+from ncmlistdownloader.playlist import *
+p = Playlist('一个id或者url')
+p.auto_get_info()
+for i in p.track:
+   i.song_download()
 ```
 
-```initialize```的参数：
+可以打开每个文件都看看注释。
 
-1. ```tc_sum```：多线程的线程数：默认 8 ；
-
-2. ```fnf```: 文件名的格式，以下是文件名格式的规范:
-
-   > 1. 用 ```"$xxx$"``` 表示一些内容:
-   > 2. ```"$id$"``` 是歌曲id；```"$name$"``` 是歌曲名称；
-   > 3. ```"$artist$"``` 是歌手；```"$album$"``` 是专辑；
-   > 4. 输入 ```"$"``` 用 ```"$$"``` ；
-
-3. ```lv```: 品质（由低到高1~8）默认1；
-
-4. ```d```: 存储路径（结尾必须是 “/” 或 “\” ）默认创建子文件夹 “download/” 。
-
-如果想添加查看进度的功能，把以下代码放在上方代码块的底部。
-
-```python
-import pprint
-while True:
- for i in p.tracks:
- pprint.pprint(i.downloading_info)
-```
-
-其他更加深入的自定义功能请自行探索，我们为大家准备了（应该是）广阔的发挥空间。
+其他更加深入的自定义功能请自行探索。
 
 #### 命令行
 
@@ -74,8 +48,10 @@ while True:
 
 特别鸣谢：[是青旨啊](https://sayqz.com)，[bilibili@半岛的孤城](https://space.bilibili.com/32187583)
 
-文本编辑于 Core.Ver.1.0.0.240303a2
+文本编辑于 Core.Ver.1.0.0.240409a1
 
 2024.02.20 CooooldWind_
 
-2024.03.02 CooooldWind_(紧急更新)
+update: 2024.03.02 CooooldWind_(紧急更新)
+
+update: 2024.04.09 CooooldWind_
