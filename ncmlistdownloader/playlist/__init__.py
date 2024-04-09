@@ -1,6 +1,6 @@
 '''
-ncmlistdownloader/Playlist/__init__.py
-Core.Ver.1.0.0.240404b4-2
+ncmlistdownloader/playlist/__init__.py
+Core.Ver.1.0.0.240409a1
 Author: CooooldWind_
 '''
 from ncmlistdownloader.common import *
@@ -10,7 +10,7 @@ from ncmlistdownloader.song import *
 import threading
 
 class Playlist():
-    def __init__(self, id = ""):
+    def __init__(self, id: str):
         self.id = id
         if self.id.find("163.com") != -1:
             self.id = url_split(url = self.id)
@@ -44,3 +44,7 @@ class Playlist():
             threads.append(thread)
         for i in threads:
             i.join()
+
+    def auto_get_info(self):
+        self.get_info()
+        self.get_detail_info()

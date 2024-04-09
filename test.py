@@ -232,9 +232,22 @@ m.get_info()
 m.song_download()
 '''
 
+'''
 # 1.0.0.240407b1
 from ncmlistdownloader import main
 main()
 
 # https://music.163.com/playlist?id=9319926180&userid=1577080369
 # D:\ncmlistdownloader_test
+'''
+
+#1.0.0.240409a1
+from pprint import pprint
+from ncmlistdownloader.playlist import *
+from ncmlistdownloader.song import *
+
+# p = Playlist('https://music.163.com/playlist?id=9319926180&userid=1577080369')
+# p.auto_get_info()
+p = Song('https://music.163.com/song?id=446732031&userid=1577080369')
+p.get_info()
+pprint(p.song_download_enhanced(level = 'lossless'))

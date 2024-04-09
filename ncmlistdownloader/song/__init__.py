@@ -1,6 +1,6 @@
 '''
-ncmlistdownloader/Song/__init__.py
-Core.Ver.1.0.0.240408a1
+ncmlistdownloader/song/__init__.py
+Core.Ver.1.0.0.240409a1
 Author: CooooldWind_
 '''
 
@@ -25,7 +25,7 @@ class Song():
     1. `id`: 歌曲id (其实传入url也行)
     '''
 
-    def __init__(self, id = ""):
+    def __init__(self, id: str):
         self.id = id
         if self.id.find("163.com") != -1:
             self.id = url_split(url = self.id)
@@ -115,6 +115,47 @@ class Song():
         '''
         with threading.Semaphore(8):
             self.get_info()
+
+    def song_download_enhanced(self, level: str):
+        flag = True
+        level_key = [
+            'standard',
+            'higher',
+            'exhigh',
+            'lossless'
+        ]
+        for i in level_key:
+            if i == level:
+                flag = False
+        if flag:
+            raise Exception('Error at inputing \'level\'.')
+        '''
+        data的数据格式：
+        {
+            “ids”:str([id]),
+            “level”:“standard”,
+            “encodeType”:“aac”,
+            “csrf_token”: “”
+        }
+        其中id表示歌曲的id号，
+        level是音乐品质，
+        标准为standard，
+        较高音质为higher，
+        极高音质exhigh，
+        无损音质关键词为lossless。
+        '''
+        enhance_encode_data = {
+            'ids': str([self.id]),
+            'level': level,
+            'encodeType': 'mp3',
+            'csrf_token': '',
+        }
+        if level == 'lossless': enhance_encode_data['encodeType'] = 'aac'
+        enhanced_info = NeteaseParams(
+            encode_data = enhance_encode_data,
+            url = SONG_FILE_API_2
+        ).get_resource()
+        return enhanced_info
 
     def song_download(self):
         filename = self.get_formated_filename('mp3')
