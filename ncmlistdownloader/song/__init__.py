@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/song/__init__.py
-Core.Ver.1.0.0.240409a1
+Core.Ver.1.0.0.240410a1
 Author: CooooldWind_
 '''
 
@@ -116,7 +116,7 @@ class Song():
         with threading.Semaphore(8):
             self.get_info()
 
-    def song_download_enhanced(self, level: str):
+    def song_download_enhanced(self, level: str, cookies = None):
         flag = True
         level_key = [
             'standard',
@@ -154,7 +154,7 @@ class Song():
         enhanced_info = NeteaseParams(
             encode_data = enhance_encode_data,
             url = SONG_FILE_API_2
-        ).get_resource()
+        ).get_resource(cookies = cookies)
         return enhanced_info
 
     def song_download(self):

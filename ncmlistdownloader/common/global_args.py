@@ -1,6 +1,6 @@
 '''
 list_downloader/global_args.py
-Core.Ver.1.0.0.240408a1
+Core.Ver.1.0.0.240410a1
 Author: CooooldWind_, 是青旨啊
 '''
 FUNC_F_PART = [
@@ -39,6 +39,7 @@ PLAYLIST_API = json_file['PLAYLIST_API']
 SONG_INFO_API = json_file['SONG_INFO_API']
 SONG_FILE_API = json_file['SONG_FILE_API']
 SONG_FILE_API_2 = json_file['SONG_FILE_API_2']
+SEARCH_API = "https://music.163.com/weapi/cloudsearch/get/web?csrf_token="
 LYRIC_API = json_file['LYRIC_API']
 CMD_START_WORDS = [
     "163ListDownloader CMD Ver.",

@@ -1,0 +1,158 @@
+{
+    "result": {
+        "searchQcReminder": "None",
+        "songs": [
+            {
+                "name": "富士山下",
+                "id": 65766,
+                "pst": 0,
+                "t": 0,
+                "ar": [
+                    {
+                        "id": 2116,
+                        "name": "陈奕迅",
+                        "tns": [],
+                        "alias": [
+                            "Eason Chan"
+                        ],
+                        "alia": [
+                            "Eason Chan"
+                        ]
+                    }
+                ],
+                "alia": [],
+                "pop": 100.0,
+                "st": 0,
+                "rt": "600902000001108413",
+                "fee": 1,
+                "v": 171,
+                "crbt": "None",
+                "cf": "",
+                "al": {
+                    "id": 6451,
+                    "name": "What's Going On…?",
+                    "picUrl": "http://p1.music.126.net/jzNxBp5DCER2_aKGsXeRww==/109951167435823724.jpg",
+                    "tns": [],
+                    "pic_str": "109951167435823724",
+                    "pic": 109951167435823724
+                },
+                "dt": 258902,
+                "h": {
+                    "br": 320000,
+                    "fid": 0,
+                    "size": 10359162,
+                    "vd": -32859.0,
+                    "sr": 44100
+                },
+                "m": {
+                    "br": 192000,
+                    "fid": 0,
+                    "size": 6215515,
+                    "vd": -30259.0,
+                    "sr": 44100
+                },
+                "l": {
+                    "br": 128000,
+                    "fid": 0,
+                    "size": 4143691,
+                    "vd": -28666.0,
+                    "sr": 44100
+                },
+                "sq": {
+                    "br": 1567785,
+                    "fid": 0,
+                    "size": 50737963,
+                    "vd": -32910.0,
+                    "sr": 44100
+                },
+                "hr": "None",
+                "a": "None",
+                "cd": "01",
+                "no": 5,
+                "rtUrl": "None",
+                "ftype": 0,
+                "rtUrls": [],
+                "djId": 0,
+                "copyright": 1,
+                "s_id": 0,
+                "mark": 17179877376,
+                "originCoverType": 1,
+                "originSongSimpleData": "None",
+                "tagPicList": "None",
+                "resourceState": "True",
+                "version": 171,
+                "songJumpInfo": "None",
+                "entertainmentTags": "None",
+                "single": 0,
+                "noCopyrightRcmd": "None",
+                "rtype": 0,
+                "rurl": "None",
+                "mst": 9,
+                "cp": 7003,
+                "mv": 303140,
+                "publishTime": 1164211200000,
+                "privilege": {
+                    "id": 65766,
+                    "fee": 1,
+                    "payed": 0,
+                    "st": 0,
+                    "pl": 0,
+                    "dl": 0,
+                    "sp": 0,
+                    "cp": 0,
+                    "subp": 1,
+                    "cs": "False",
+                    "maxbr": 999000,
+                    "fl": 0,
+                    "toast": "False",
+                    "flag": 260,
+                    "preSell": "False",
+                    "playMaxbr": 999000,
+                    "downloadMaxbr": 999000,
+                    "maxBrLevel": "lossless",
+                    "playMaxBrLevel": "lossless",
+                    "downloadMaxBrLevel": "lossless",
+                    "plLevel": "none",
+                    "dlLevel": "none",
+                    "flLevel": "none",
+                    "rscl": "None",
+                    "freeTrialPrivilege": {
+                        "resConsumable": "True",
+                        "userConsumable": "False",
+                        "listenType": 0,
+                        "cannotListenReason": 0
+                    },
+                    "rightSource": 0,
+                    "chargeInfoList": [
+                        {
+                            "rate": 128000,
+                            "chargeUrl": "None",
+                            "chargeMessage": "None",
+                            "chargeType": 1
+                        },
+                        {
+                            "rate": 192000,
+                            "chargeUrl": "None",
+                            "chargeMessage": "None",
+                            "chargeType": 1
+                        },
+                        {
+                            "rate": 320000,
+                            "chargeUrl": "None",
+                            "chargeMessage": "None",
+                            "chargeType": 1
+                        },
+                        {
+                            "rate": 999000,
+                            "chargeUrl": "None",
+                            "chargeMessage": "None",
+                            "chargeType": 1
+                        }
+                    ]
+                }
+            }
+        ],
+        "songCount": 275
+    },
+    "code": 200
+}

@@ -241,6 +241,7 @@ main()
 # D:\ncmlistdownloader_test
 '''
 
+'''
 #1.0.0.240409a1
 from pprint import pprint
 from ncmlistdownloader.playlist import *
@@ -251,3 +252,36 @@ from ncmlistdownloader.song import *
 p = Song('https://music.163.com/song?id=446732031&userid=1577080369')
 p.get_info()
 pprint(p.song_download_enhanced(level = 'lossless'))
+'''
+
+#1.0.0.240410a1
+from pprint import pprint
+from ncmlistdownloader.common.encode_sec_key import *
+from ncmlistdownloader.common.global_args import SEARCH_API
+d = {
+    # "hlpretag": "<span class=\"s-fc7\">",
+    # "hlposttag": "</span>",
+    # "#/discover": "",
+    "s": '陈奕迅',
+    "type": "1",
+    # "offset": str(0),
+    # "total": "true",
+    "limit": "1",
+    "csrf_token": ""
+}
+r = NeteaseParams(url = SEARCH_API, encode_data = d)
+c = {
+    'MUSIC_U': ""
+}
+c['MUSIC_U'] = str(input('your cookies\' MUSIC_U:'))
+rd = r.get_resource(cookies = c)
+with open('result_1.json', 'w+', encoding = 'UTF-8') as f:
+    f.write(str(rd))
+
+from ncmlistdownloader.song import *
+s = Song(id = str(input('an url/id of a song(must VIP-only):')))
+s.get_info()
+input('if you have VIP, press Enter.')
+ee = s.song_download_enhanced(level = 'lossless', cookies = c)
+with open('result_2.json', 'w+', encoding = 'UTF-8') as f:
+    f.write(str(ee))

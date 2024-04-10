@@ -1,6 +1,6 @@
 '''
 网易云WeAPI解码
-Core.Ver.1.0.0.240404b4-2
+Core.Ver.1.0.0.240410a1
 Author: CooooldWind_, 半岛的孤城
 References: 
 1. 网易云解参数（获取网易云歌词，获取评论同理）[https://www.bilibili.com/read/cv12754897/]
@@ -29,30 +29,30 @@ class NeteaseParams:
         self.func_g = "0CoJUm6Qyw8W8jud"
         self.func_i = "vlgPRPyGhwA6F4Sq"
         self.encode_sec_key = SEC_KEY
-    def to_hex(self, encode_data):
+    def __to_hex(self, encode_data):
         '''16进制解码'''
         temp = 16 - len(encode_data) % 16
         return encode_data + chr(temp) * temp
-    def encode_params(self, encode_data, encode_key):
+    def __encode_params(self, encode_data, encode_key):
         '''解码的关键函数(1)'''
         func_iv = "0102030405060708"
-        encode_data = self.to_hex(encode_data)
+        encode_data = self.__to_hex(encode_data)
         encode_aes = AES.new(key = encode_key.encode("utf-8"),
                             IV = func_iv.encode("utf-8"),
                             mode = AES.MODE_CBC)
         base64_sec_key = encode_aes.encrypt(encode_data.encode("utf-8"))
         return str(b64encode(base64_sec_key), "utf-8")
-    def get_params(self, encode_data):
+    def __get_params(self, encode_data):
         '''解码的关键函数(2)'''
-        return self.encode_params(
-            self.encode_params(
+        return self.__encode_params(
+            self.__encode_params(
                 encode_data, self.func_g
             ), self.func_i
         )
-    def get_resource(self):
+    def get_resource(self, cookies = None):
         '''获取资源'''
         get_data = {
-            'params': self.get_params(json.dumps(self.encode_data)),
+            'params': self.__get_params(json.dumps(self.encode_data)),
             'encSecKey': self.encode_sec_key
         }
         get_headers = {
@@ -61,5 +61,6 @@ class NeteaseParams:
         response = requests.post(self.url,
                              data = get_data,
                              headers = get_headers,
+                             cookies = cookies,
                              timeout = 10)
         return response.json()
