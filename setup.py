@@ -29,11 +29,11 @@ setup(
 		'Programming Language :: Python :: 3.12',
     ],
     name = 'ncmlistdownloader',
-    version = "1.0.0.240409a1",
+    version = "1.0.0.240411a1",
     description = '获取网易云音乐歌单数据，下载音乐，主动添加元信息。',
     author = 'CooooldWind_',
     url = 'https://gitee.com/Cooooldwind/163ListDownloader_NexT',
     packages = find_packages(),
-    install_requires = ['pycryptodome','pillow','mutagen','requests',],
+    install_requires = ['pycryptodome','pillow','mutagen','requests','keyboard',],
     entry_points = {'console_scripts': ['ncmlistdownloader = ncmlistdownloader.__init__:main']},
 )

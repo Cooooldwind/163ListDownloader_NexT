@@ -254,6 +254,7 @@ p.get_info()
 pprint(p.song_download_enhanced(level = 'lossless'))
 '''
 
+'''
 #1.0.0.240410a1
 from pprint import pprint
 from ncmlistdownloader.common.encode_sec_key import *
@@ -266,7 +267,7 @@ d = {
     "type": "1",
     # "offset": str(0),
     # "total": "true",
-    "limit": "1",
+    "limit": "20",
     "csrf_token": ""
 }
 r = NeteaseParams(url = SEARCH_API, encode_data = d)
@@ -276,7 +277,7 @@ c = {
 c['MUSIC_U'] = str(input('your cookies\' MUSIC_U:'))
 rd = r.get_resource(cookies = c)
 with open('result_1.json', 'w+', encoding = 'UTF-8') as f:
-    f.write(str(rd))
+    json.dump(rd, f, ensure_ascii = False, indent = 2)
 
 from ncmlistdownloader.song import *
 s = Song(id = str(input('an url/id of a song(must VIP-only):')))
@@ -285,3 +286,21 @@ input('if you have VIP, press Enter.')
 ee = s.song_download_enhanced(level = 'lossless', cookies = c)
 with open('result_2.json', 'w+', encoding = 'UTF-8') as f:
     f.write(str(ee))
+'''
+
+'''
+from ncmlistdownloader.cmd import *
+d = Page()
+d.renderer()
+'''
+
+from ncmlistdownloader.cmd import *
+main()
+
+'''
+from ncmlistdownloader.playlist import *
+from pprint import pprint
+p = Playlist('9091949976')
+p.auto_get_info()
+pprint(p.raw_info)
+'''
