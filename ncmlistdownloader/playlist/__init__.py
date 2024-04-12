@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/playlist/__init__.py
-Core.Ver.1.0.0.240411a1
+Core.Ver.1.0.0.240412a2
 Author: CooooldWind_
 '''
 from ncmlistdownloader.common import *
@@ -44,9 +44,14 @@ class Playlist():
             thread = threading.Thread(target = i.multi_get_info)
             thread.start()
             threads.append(thread)
-        for i in threads:
-            i.join()
 
     def auto_get_info(self):
         self.get_info()
         self.get_detail_info()
+
+    def done_sum(self):
+        count = 0
+        for i in self.track:
+            if i.is_get == True:
+                count += 1
+        return count

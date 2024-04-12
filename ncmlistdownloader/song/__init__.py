@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/song/__init__.py
-Core.Ver.1.0.0.240410a1
+Core.Ver.1.0.0.240412a2
 Author: CooooldWind_
 '''
 
@@ -50,6 +50,7 @@ class Song():
         self.url_info = {}
         self.filename_info = {}
         self.filename_format = '$title$ - $artist$'
+        self.is_get = False
 
     def __str__(self):
         '''
@@ -105,6 +106,7 @@ class Song():
             'pic': self.get_formated_filename('jpg'),
             'lyric': self.get_formated_filename('lrc'),
         })
+        self.is_get = True
         return self.raw_info
     
     def multi_get_info(self):

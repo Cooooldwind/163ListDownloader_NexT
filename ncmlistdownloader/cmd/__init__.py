@@ -1,12 +1,17 @@
 '''
 ncmlistdownloader/cmd/__init__.py
-Core.Ver.1.0.0.240412a1
+Core.Ver.1.0.0.240412a2
 Author: CooooldWind_
 P.S.: 实现几个页面，可以来回切换，对应运行函数。
 '''
 
 from ncmlistdownloader.cmd.module import *
 from ncmlistdownloader.playlist import *
+import multiprocessing
+import time
+
+def pl_run(pl: Playlist):
+    pl.get_detail_info()
 
 def main():
     def exit_c():
@@ -16,7 +21,10 @@ def main():
     def get_detail():
 
         #get_detail_waiting
+        
+        
         def get_detail_waiting(id_input):
+            multiprocessing.freeze_support()
             pl = Playlist(id_input)
             p = Page()
             p.script = []
@@ -29,7 +37,25 @@ def main():
             for i in info:
                 p.script.append(Script(info = i, justify = "center"))
             p.renderer()
-            pl.auto_get_info()
+            pl.get_info()
+            mp = multiprocessing.Process(target = pl_run, args = (pl,))
+            print(mp.is_alive())
+            mp.start()
+            print(mp.is_alive())
+            time.sleep(1)
+            print(mp.is_alive())
+            time.sleep(1)
+            while mp.is_alive() == True and pl.done_sum() != pl.track_count:
+                info = [
+                    f"Getting the detail infomation from id: {id_input} ...",
+                    f"Done: {pl.done_sum()} / {pl.track_count}",
+                    "",
+                ]
+                p.script = []
+                for i in info:
+                    p.script.append(Script(info = i, justify = "center"))
+                p.renderer()
+                d = pl.done_sum()
             get_detail_succeed(pl)
             
         # get_detail_succeed
