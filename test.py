@@ -295,7 +295,6 @@ d.renderer()
 '''
 
 from ncmlistdownloader.cmd import *
-main()
 
 '''
 from ncmlistdownloader.playlist import *
