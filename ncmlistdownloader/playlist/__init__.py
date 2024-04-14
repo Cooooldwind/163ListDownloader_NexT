@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/playlist/__init__.py
-Core.Ver.1.0.0.240412a2
+Core.Ver.1.0.0.240414
 Author: CooooldWind_
 '''
 from ncmlistdownloader.common import *
