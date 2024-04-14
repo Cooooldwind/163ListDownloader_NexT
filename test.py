@@ -292,14 +292,34 @@ with open('result_2.json', 'w+', encoding = 'UTF-8') as f:
 from ncmlistdownloader.cmd import *
 d = Page()
 d.renderer()
-'''
+
 
 from ncmlistdownloader.cmd import *
 
-'''
+
 from ncmlistdownloader.playlist import *
 from pprint import pprint
 p = Playlist('9091949976')
 p.auto_get_info()
+pprint(p.raw_info)
+'''
+
+'''
+# 免费VIP下载测试，看起来不行喔TAT，羊毛薅不到了；但是私密歌单倒可以。
+from ncmlistdownloader.song import *
+from pathlib import Path
+s = Song(id = "https://music.163.com/song?id=1305364097&userid=1577080369")
+s.get_info()
+d = str(Path.home()) + '/Downloads/ncmld_downloads/'
+s.filename_format = d + "$title$ - $artist$"
+c = {'MUSIC_U':"0You Can't GET My Cookies!!!E"}
+k = s.song_download_enhanced(level = 'lossless', cookies = c)
+print(k)
+
+from pprint import pprint
+from ncmlistdownloader.playlist import *
+c = {'MUSIC_U':"0You Can't GET My Cookies!!!E"}
+p = Playlist("https://music.163.com/playlist?id=9269203337")
+p.get_info(cookies=c)
 pprint(p.raw_info)
 '''

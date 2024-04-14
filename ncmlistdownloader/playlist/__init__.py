@@ -22,12 +22,12 @@ class Playlist():
         self.track_id = []
         self.title = ""
 
-    def get_info(self):
+    def get_info(self, cookies = None):
         self.raw_info = NeteaseParams(url = PLAYLIST_API,
                                       encode_data = {
                                           'csrf_token': '',
                                           'id': self.id,
-                                      }).get_resource()['playlist']
+                                      }).get_resource(cookies = cookies)['playlist']
         self.creator_id = self.raw_info['userId']
         self.track_count = self.raw_info['trackCount']
         self.creator = self.raw_info['creator']['nickname']
