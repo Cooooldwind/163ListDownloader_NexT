@@ -323,3 +323,6 @@ p = Playlist("https://music.163.com/playlist?id=9269203337")
 p.get_info(cookies=c)
 pprint(p.raw_info)
 '''
+
+from ncmlistdownloader.cmd import *
+main()
