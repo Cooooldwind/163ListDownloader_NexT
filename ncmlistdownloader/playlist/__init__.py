@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/playlist/__init__.py
-Core.Ver.1.0.0.240414
+Core.Ver.1.0.0.240416a1
 Author: CooooldWind_
 '''
 from ncmlistdownloader.common import *
@@ -27,12 +27,14 @@ class Playlist():
                                       encode_data = {
                                           'csrf_token': '',
                                           'id': self.id,
-                                      }).get_resource(cookies = cookies)['playlist']
-        self.creator_id = self.raw_info['userId']
-        self.track_count = self.raw_info['trackCount']
-        self.creator = self.raw_info['creator']['nickname']
-        self.title = self.raw_info['name']
-        for i in self.raw_info['trackIds']:
+                                      }).get_resource(cookies = cookies)
+        if self.raw_info['code'] != 200:
+            return -1
+        self.creator_id = self.raw_info['playlist']['userId']
+        self.track_count = self.raw_info['playlist']['trackCount']
+        self.creator = self.raw_info['playlist']['creator']['nickname']
+        self.title = self.raw_info['playlist']['name']
+        for i in self.raw_info['playlist']['trackIds']:
             self.track_id.append(str(i['id']))
         for truck_id in self.track_id:
             self.track.append(Song(id = truck_id))
@@ -45,9 +47,10 @@ class Playlist():
             thread.start()
             threads.append(thread)
 
-    def auto_get_info(self):
-        self.get_info()
-        self.get_detail_info()
+    def auto_get_info(self, cookies = dict()):
+        if self.get_info(cookies = cookies) != -1:
+            self.get_detail_info()
+        else: return -1
 
     def done_sum(self):
         count = 0
