@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/playlist/__init__.py
-Core.Ver.1.0.0.240416a1
+Core.Ver.1.0.1.240419a1
 Author: CooooldWind_
 '''
 from ncmlistdownloader.common import *
@@ -46,6 +46,8 @@ class Playlist():
             thread = threading.Thread(target = i.multi_get_info)
             thread.start()
             threads.append(thread)
+        for i in threads:
+            i.join()
 
     def auto_get_info(self, cookies = dict()):
         if self.get_info(cookies = cookies) != -1:
@@ -58,3 +60,7 @@ class Playlist():
             if i.is_get == True:
                 count += 1
         return count
+    
+    def multiprocessing_get_detail(self):
+        p = threading.Thread(target = self.get_detail_info)
+        p.start()

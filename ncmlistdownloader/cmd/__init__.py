@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/cmd/__init__.py
-Core.Ver.1.0.0.240416a1
+Core.Ver.1.0.1.240419a1
 Author: CooooldWind_
 '''
 import time
@@ -41,8 +41,20 @@ def find_from_id():
         now.get_info()
     elif choice == 2:
         now = Playlist(id)
-        if now.auto_get_info(cookies = cookies) == -1:
+        if now.get_info(cookies = cookies) == -1:
             print(format_output("You don't have the currect cookies to get the info of this Playlist.", type = "Error"))
+        now.multiprocessing_get_detail()
+        while now.done_sum() != now.track_count:
+            count = 0
+            for i in now.track:
+                if i.is_get == True:
+                    count += 1
+            print(format_output(f"Done: {count}/{now.track_count}", type = "Info"))
+            time.sleep(1)
+        for i in range(0, len(now.track)):
+            j = now.track[i]
+            print(format_output(f"Song #{i + 1}: {j.title} - {j.artist_str}", type = "Info"))
+        
         
 
 
