@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/cmd/__init__.py
-Core.Ver.1.0.1.240419a1
+Core.Ver.1.0.1.240421a1
 Author: CooooldWind_
 '''
 import time
@@ -9,6 +9,15 @@ from ncmlistdownloader.playlist import *
 from ncmlistdownloader.common.global_args import *
 
 cookies = None
+
+GLOBAL_CONFIG_MODEL = {
+    'song_download': True,
+    'cover_download': True,
+    'lyric_download': True,
+    'attribute_write': True,
+    'cover_write': True,
+    'lyric_write': True,
+}
 
 def format_output(raw: str, type: str) -> str:
     time_now_formated = time.strftime('%H:%M:%S', time.localtime())
@@ -19,6 +28,31 @@ def format_output(raw: str, type: str) -> str:
 
 def input_func(notice: str):
     return input(format_output(raw = notice, type = "Input"))
+
+def json_save_list(pl: Playlist):
+    path = str(input_func(notice = "Input the file's page"))
+    d = {
+        'type': 'downloading_list',
+        'global_config': GLOBAL_CONFIG_MODEL,
+        'track': [],
+    }
+    t = []
+    for i in pl.track:
+        t.append({
+            'type': 'song',
+            'info': {
+                'title': i.title,
+                'artist': i.artist,
+                'album': i.album,
+                'id': i.id,
+            },
+            'global': True,
+            'downloading_config': GLOBAL_CONFIG_MODEL,
+        })
+    d['track'] = t
+    with open(path, 'w+', encoding = 'utf-8') as file:
+        json.dump(d, file, ensure_ascii = False, sort_keys = True)
+    print(format_output("Saved!", type = "Info"))
 
 def find_from_id():
     global cookies
@@ -39,6 +73,7 @@ def find_from_id():
     if choice == 1:
         now = Song(id)
         now.get_info()
+        print(format_output(f"Song: {now.title} - {now.artist_str}", type = "Info"))
     elif choice == 2:
         now = Playlist(id)
         if now.get_info(cookies = cookies) == -1:
@@ -56,6 +91,24 @@ def find_from_id():
         for i in range(0, len(now.track)):
             j = now.track[i]
             print(format_output(f"Song #{i + 1}: {j.title} - {j.artist_str}", type = "Info"))
+    while True:
+        FUNC_CHOICE = [
+            "Save to a json file",
+            "Search something else",
+            "Exit to the main page",
+        ]
+        for i in range(0, len(FUNC_CHOICE)):
+            print(format_output(f"[{i + 1}] -> {FUNC_CHOICE[i]}", type = "Info"))
+        while True:    
+            choice = int(input_func("Press the number of the function "))
+            if choice >= 1 and choice <= len(FUNC_CHOICE):
+                break
+        if choice == 1:
+            json_save_list(pl = now)
+        if choice == 2:
+            find_from_id()
+        if choice == 3:
+            break
 
 def main():
     global cookies
@@ -79,11 +132,13 @@ def main():
             choice = int(input_func("Press the number of the function "))
             if choice >= 1 and choice <= len(FUNC_CHOICE):
                 break
+            else:
+                print(format_output("Value Error!", type = "Error"))
         if choice == 1:
             find_from_id()
         if choice == 4:
+            print(format_output(raw = "Byebye~", type = "Info"))
             break
-        print(format_output(raw = "Byebye~", type = "Info"))
 
 if __name__ == "__main__":
     main()
