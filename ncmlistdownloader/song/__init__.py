@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/song/__init__.py
-Core.Ver.1.0.0.240412a2
+Core.Ver.1.0.0.240424a1
 Author: CooooldWind_
 '''
 
@@ -194,7 +194,9 @@ class Song():
         '''
         filename_ready = self.get_formated_filename('mp3')
         if filename == 'No filename':
-            filename = self.filename_info['song']
+            if self.filename_info.get('song') == None:
+                filename = filename_ready
+            else: filename = self.filename_info['song']
         attribute_write(filename = filename, info = self.processed_info)
 
     def cover_write(self, filename = 'No filename', cover_filename = 'No cover_filename'):
@@ -218,4 +220,19 @@ class Song():
             lyric_filename = self.filename_info['lyric']
         lyric_write(filename = filename, lyric_filename = lyric_filename)
 
-    
+    def auto_run(self, d = None):
+        if d['song_download'] == True:
+            self.song_download()
+        if d['cover_download'] == True:
+            self.cover_download()
+        if d['lyric_download'] == True:
+            self.lyric_get()
+        if d['attribute_write'] == True:
+            self.attribute_write()
+        if d['cover_write'] == True:
+            self.cover_write()
+        if d['lyric_write'] == True:
+            self.lyric_write()
+
+    def multi_run(self, d = None):
+        threading.Thread(target = self.auto_run, args = (d,)).start()

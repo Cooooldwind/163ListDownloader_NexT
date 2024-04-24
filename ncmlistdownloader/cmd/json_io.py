@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/cmd/json_io.py
-Core.Ver.1.0.1.240422a1
+Core.Ver.1.0.1.240424a1
 Author: CooooldWind_
 '''
 
@@ -11,7 +11,7 @@ from ncmlistdownloader.cmd.common import *
 def json_save_list(pl: Playlist):
     path = str(input_func(notice = "Input the file's page"))
     d = {
-        'type': 'downloading_list',
+        'type': 'downloading_list_ncmld',
         'global_config': GLOBAL_CONFIG_MODEL,
         'track': [],
     }
@@ -24,6 +24,7 @@ def json_save_list(pl: Playlist):
                 'artist': i.artist,
                 'album': i.album,
                 'id': i.id,
+                'pic_url': i.url_info['album_pic']
             },
             'global': True,
             'downloading_config': GLOBAL_CONFIG_MODEL,
