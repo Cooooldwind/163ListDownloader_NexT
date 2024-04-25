@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/cmd/__init__.py
-Core.Ver.1.0.1.240422a1
+Core.Ver.1.0.1.240425a1
 Author: CooooldWind_
 '''
 from ncmlistdownloader.song import *
@@ -41,6 +41,8 @@ def main():
         if choice == 4:
             print(format_output(raw = "Byebye~", type = "Info"))
             break
+        if choice == 2:
+            json_load(str(input_func(notice = "Input the file's save location")))
 
 if __name__ == "__main__":
     main()

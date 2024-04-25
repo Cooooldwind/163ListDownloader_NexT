@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/cmd/common.py
-Core.Ver.1.0.1.240422a1
+Core.Ver.1.0.1.240425a1
 Author: CooooldWind_
 '''
 
@@ -15,7 +15,7 @@ GLOBAL_CONFIG_MODEL = {
     'lyric_write': True,
 }
 
-def format_output(raw: str, type: str) -> str:
+def format_output(raw: str, type = 'Info') -> str:
     time_now_formated = time.strftime('%H:%M:%S', time.localtime())
     return_str = f"[{type}][{time_now_formated}] {raw}"
     if type == "Input":

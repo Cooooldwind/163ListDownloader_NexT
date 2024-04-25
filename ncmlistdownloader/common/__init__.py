@@ -1,7 +1,7 @@
 '''
 ncmlistdownloader/Common/__init__.py
 存储常用函数。
-Core.Ver.1.0.0.240405a1
+Core.Ver.1.0.0.240425a1
 Author: CooooldWind_
 '''
 
@@ -17,7 +17,7 @@ def url_split(url = str()) -> str:
     id_return = url.split("?id=")[-1].split("&")[0]
     return id_return
 
-def artist_turn_str(info = None,split_word = ', ') -> str:
+def artist_turn_str(info = [],split_word = ', ') -> str:
     '''
     把歌手列表转换为字符串。
     ----------
@@ -62,7 +62,7 @@ def clean(filename = str()) -> str:
     filename_return = filename
     dirty = [":","*","\"","?","|","<",">","/","\\"]
     for i in dirty:
-        filename_return = filename.replace(i,"")
+        filename_return = filename_return.replace(i, "_")
     return filename_return
 
 def auto_mkdir(path = str()):

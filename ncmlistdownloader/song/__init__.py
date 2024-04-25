@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/song/__init__.py
-Core.Ver.1.0.0.240424a1
+Core.Ver.1.0.0.240425a1
 Author: CooooldWind_
 '''
 
@@ -51,6 +51,7 @@ class Song():
         self.filename_info = {}
         self.filename_format = '$title$ - $artist$'
         self.is_get = False
+        self.is_dl = False
 
     def __str__(self):
         '''
@@ -70,11 +71,12 @@ class Song():
             'id': self.id,
             'title': self.title,
             })
-        formated = format(**format_info) + '.' + suffix
+        formated = format(**format_info)
         if formated.rfind('/') != -1:
             formated = formated[:formated.rfind('/') + 1] + clean(formated[formated.rfind('/') + 1:])
         else:
             formated = clean(formated)
+        formated += ('.' + suffix)
         return formated
 
     def get_info(self):
@@ -221,8 +223,12 @@ class Song():
         lyric_write(filename = filename, lyric_filename = lyric_filename)
 
     def auto_run(self, d = None):
+        self.get_info()
         if d['song_download'] == True:
-            self.song_download()
+            c = self.song_download()
+            if c == -1:
+                self.is_dl = True
+                return -1
         if d['cover_download'] == True:
             self.cover_download()
         if d['lyric_download'] == True:
@@ -233,6 +239,7 @@ class Song():
             self.cover_write()
         if d['lyric_write'] == True:
             self.lyric_write()
+        self.is_dl = True
 
     def multi_run(self, d = None):
         threading.Thread(target = self.auto_run, args = (d,)).start()
