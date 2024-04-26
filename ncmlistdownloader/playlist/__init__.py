@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/playlist/__init__.py
-Core.Ver.1.0.1.240419a1
+Core.Ver.1.0.3.240426
 Author: CooooldWind_
 '''
 from ncmlistdownloader.common import *
@@ -21,6 +21,7 @@ class Playlist():
         self.creator = ""
         self.track_id = []
         self.title = ""
+        self.mp_succeed = False
 
     def get_info(self, cookies = None):
         self.raw_info = NeteaseParams(url = PLAYLIST_API,
@@ -48,6 +49,7 @@ class Playlist():
             threads.append(thread)
         for i in threads:
             i.join()
+        self.mp_succeed = True
 
     def auto_get_info(self, cookies = dict()):
         if self.get_info(cookies = cookies) != -1:

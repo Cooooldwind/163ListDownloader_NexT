@@ -1,9 +1,10 @@
 '''
 ncmlistdownloader/__init__.py
-Core.Ver.1.0.2.240426
+Core.Ver.1.0.3.240426
 Author: CooooldWind_
 '''
 from pathlib import Path
+import time
 from ncmlistdownloader.playlist import *
 from ncmlistdownloader.common import *
 from ncmlistdownloader.common.global_args import *
@@ -28,7 +29,9 @@ def main():
     auto_mkdir(d)
     for i in p.track:
         i.filename_format = d + fnf
-    p.get_detail_info()
+    p.multiprocessing_get_detail()
+    while p.mp_succeed == False:
+        time.sleep(1)
     for i in p.track:
         music_filename = i.song_download()
         if music_filename == -1:
