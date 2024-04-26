@@ -41,8 +41,10 @@ SONG_FILE_API = json_file['SONG_FILE_API']
 SONG_FILE_API_2 = json_file['SONG_FILE_API_2']
 SEARCH_API = "https://music.163.com/weapi/cloudsearch/get/web?csrf_token="
 LYRIC_API = json_file['LYRIC_API']
+CMD_VERSION = 'Ver.1.0.2.24042601'
+CORE_VERSION = 'Core.Ver.1.0.2.240426'
 CMD_START_WORDS = [
-    "163ListDownloader CMD Ver - Ver.1.0.0.240414",
+    f"163ListDownloader CMD Ver - {CMD_VERSION}",
     "Made by CooooldWind_",
     "Here's the Gitee/GitHub Page, click a star if you like it~",
     "Gitee: https://gitee.com/CooooldWind/163ListDownloader_NexT/issues",

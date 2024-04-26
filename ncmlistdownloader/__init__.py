@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/__init__.py
-Core.Ver.1.0.0.240414
+Core.Ver.1.0.2.240426
 Author: CooooldWind_
 '''
 from pathlib import Path
@@ -11,11 +11,10 @@ from ncmlistdownloader.common.global_args import *
 def main():
     for i in CMD_START_WORDS:
         print(i)
-    print('[*]Core.Ver.1.0.0.240414')
+    print(f'[*]{CORE_VERSION}')
     id = str(input("ID: "))
     p = Playlist(id)
     p.get_info()
-    p.get_detail_info()
     print("Playlist info-reading succeed.")
     d = str(input("Dir: "))
     if d == '':

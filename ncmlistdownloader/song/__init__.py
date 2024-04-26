@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/song/__init__.py
-Core.Ver.1.0.0.240425a1
+Core.Ver.1.0.0.240426
 Author: CooooldWind_
 '''
 
@@ -63,15 +63,11 @@ class Song():
         return str(self.processed_info)
     
     def get_formated_filename(self, suffix):
-        format_info = self.processed_info
-        format_info.update({
-            'filename': self.filename_format,
-            'artist': self.artist_str,
-            'album': self.album,
-            'id': self.id,
-            'title': self.title,
-            })
-        formated = format(**format_info)
+        formated = format(filename = self.filename_format,
+                          artist = self.artist_str,
+                          album = self.album,
+                          id = self.id,
+                          title = self.title)
         if formated.rfind('/') != -1:
             formated = formated[:formated.rfind('/') + 1] + clean(formated[formated.rfind('/') + 1:])
         else:
@@ -103,11 +99,11 @@ class Song():
             'album_pic': self.raw_info['al']['picUrl'],
             'song_file': SONG_FILE_API + self.id,
         })
-        self.filename_info.update({
+        self.filename_info = {
             'song': self.get_formated_filename('mp3'),
             'pic': self.get_formated_filename('jpg'),
             'lyric': self.get_formated_filename('lrc'),
-        })
+        }
         self.is_get = True
         return self.raw_info
     
@@ -162,7 +158,8 @@ class Song():
         return enhanced_info
 
     def song_download(self):
-        filename = self.get_formated_filename('mp3')
+        # filename = self.get_formated_filename('mp3')
+        filename = self.filename_info['song']
         file_origin = OriginFile(self.url_info['song_file'])
         if file_origin.total_size <= 0:
             return -1
@@ -170,7 +167,8 @@ class Song():
         return filename
 
     def cover_download(self):
-        filename = self.get_formated_filename('jpg')
+        filename = self.filename_info['pic']
+        # filename = self.get_formated_filename('jpg')
         file_origin = OriginFile(self.url_info['album_pic'])
         if file_origin.total_size == -1:
             return -1
@@ -182,7 +180,8 @@ class Song():
             url = LYRIC_API,
             encode_data = self.lyric_encode_data
         ).get_resource()['lrc']['lyric'].replace("\n", '\n')
-        filename = self.get_formated_filename('lrc')
+        # filename = self.get_formated_filename('lrc')
+        filename = self.filename_info['lyric']
         with open(file = filename, mode = 'w+', encoding = 'UTF-8') as file:
             file.write(self.lyric)
         return filename
