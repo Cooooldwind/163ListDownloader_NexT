@@ -1,12 +1,12 @@
 '''
 ncmlistdownloader/Editer/__init__.py
-Core.Ver.1.0.0.240404a3
+Core.Ver.1.0.4.240427
 Author: CooooldWind_
 '''
 from PIL import Image
 from mutagen.flac import FLAC, Picture
-from mutagen.mp3 import EasyMP3
 from mutagen.id3 import ID3, APIC, USLT, Encoding
+from mutagen.easyid3 import EasyID3
 from ncmlistdownloader.common import get_type, artist_turn_str
 
 expection_word_front = "Opening files with the suffix \"."
@@ -24,7 +24,7 @@ def attribute_write(filename = str(), info = None):
     '''
     type = get_type(filename)
     if type == "mp3":
-        file = EasyMP3(filename)
+        file = EasyID3(filename)
     elif type == "flac":
         file = FLAC(filename)
     else:
@@ -57,22 +57,25 @@ def cover_write(filename = str(), cover_filename = str()):
     cover_type = get_type(cover_filename)
     if cover_type != "jpg" and cover_type != "jpeg":
         raise Exception(cover_expection_word_front + cover_type + expection_word_end)
-    with open(cover_filename, 'rb+') as cover_file:
+    with open(cover_filename, 'rb') as cover_file:
+        print(cover_filename)
+        print(filename)
         if type == "mp3":
-            file.add(APIC(
+            file['APIC'] = APIC(
                 encoding = 3,
-                mime = "image/jpeg",
+                mime = 'image/jpeg',
                 type = 3,
-                desc = u"Cover",
+                desc = u'Cover',
                 data = cover_file.read()
-            ))
+            )
+            file.save(v2_version = 3, v1 = 2)
         elif type == "flac":
             file.clear_pictures()
             cover = Picture()
             cover.data = cover_file.read()
             cover.mime = "image/jpeg"
             file.add_picture(cover)
-    file.save()
+            file.save()
     return 0
 
 def lyric_write(filename = str(), lyric_filename = str()):

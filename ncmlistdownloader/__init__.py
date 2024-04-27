@@ -1,6 +1,6 @@
 '''
 ncmlistdownloader/__init__.py
-Core.Ver.1.0.3.240426
+Core.Ver.1.0.4.240427
 Author: CooooldWind_
 '''
 from pathlib import Path
@@ -37,10 +37,10 @@ def main():
         if music_filename == -1:
             print(i.title + ' cannot download.')
             continue
-        i.cover_download()
-        i.lyric_get()
-        i.attribute_write()
-        i.cover_write()
-        i.lyric_write()
+        cover_filename = i.cover_download()
+        lyric_filename = i.lyric_get()
+        i.attribute_write(music_filename)
+        i.cover_write(music_filename, cover_filename)
+        i.lyric_write(music_filename, lyric_filename)
         print(i.title + ' succeed.')
     print('Succeed. Files at:', d)
