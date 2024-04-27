@@ -1,5 +1,4 @@
 ncmlistdownloader/__pycache__/
-test.spec
 build/
 dist/
 dl/
@@ -8,3 +7,4 @@ download/
 ncmlistdownloader.egg-info/
 MANIFEST.in
 __pycache__/
+exe_installer.spec

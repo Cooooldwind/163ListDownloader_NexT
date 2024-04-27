@@ -1,20 +1,32 @@
-# 163ListDownloader_NexT - 更新正式版 1.0.0.240414 
+# 163ListDownloader_NexT
 
 这将会是新的开始：一个更好的库，和一个更好的UI（虽然目前来看可能还是基于Win32的Tkinter）！
 
 所以可以紧跟我们的脚步，看看究竟会发生什么。
 
+**目前最新版本是: `Core.Ver.1.0.4.240427`**
+
 ## 安装与使用
+
+### 可执行文件 (.exe)
+
+在 [“发行版”](https://gitee.com/CooooldWind/163ListDownloader_NexT/releases) 界面下载最新 release 版本的可执行文件 (.exe)，然后双击运行。
 
 ### 安装库
 
 目前已经将库部署至 Pypi，使用 ```pip install ncmlistdownloader``` 下载。
 
-镜像库会有延迟。
+镜像库会有延迟，一般在 5~10 分钟。
 
 ### 使用库
 
 本文会向您展示使用这个库的方法。
+
+#### 命令行
+
+如果是普通用户，更加推荐使用命令行，除非有特殊需求。
+
+在命令行安装完库以后，可以在命令行输入 ```ncmlistdownloader``` 命令直接下载。这是目前最方便快捷的方式。
 
 #### 手写代码并运行
 
@@ -31,10 +43,6 @@ for i in p.track:
 可以打开每个文件都看看注释。
 
 其他更加深入的自定义功能请自行探索。
-
-#### 命令行
-
-在命令行利用 ```pip install ncmlistdownloader``` 安装完库以后，可以在命令行输入 ```ncmlistdownloader``` 命令直接下载。这是目前最方便快捷的方式。
 
 ### 其他
 
@@ -60,7 +68,7 @@ for i in p.track:
 
 特别鸣谢：[是青旨啊](https://sayqz.com)，[bilibili@半岛的孤城](https://space.bilibili.com/32187583)
 
-文本编辑于 Core.Ver.1.0.0.240414
+文本编辑于 Core.Ver.1.0.4.240427
 
 2024.02.20 CooooldWind_
 
@@ -69,3 +77,5 @@ update: 2024.03.02 CooooldWind_(紧急更新)
 update: 2024.04.09 CooooldWind_
 
 update: 2024.04.14 CooooldWind_
+
+update: 2024.04.27 CooooldWind_
