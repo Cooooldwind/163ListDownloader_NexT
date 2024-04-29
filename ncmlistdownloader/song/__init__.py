@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/song/__init__.py
-Core.Ver.1.0.5.240429
+Core.Ver.1.0.6.240429
 Author: CooooldWind_
 """
 
@@ -17,7 +17,7 @@ class Song:
     """
     Song类
     ----------
-    存储歌曲信息，以及各种函数。
+    存储歌曲信息, 以及各种函数。
     常用的有如下:
     1. `name` / `album` / `artist`
     2. `downloading_state` / `downloading_value`
@@ -37,7 +37,9 @@ class Song:
         self.downloading_state = 0
         self.downloading_value = 0.00
         self.encode_data = {
-            "c": str([{"id": str(self.id)}]),
+            "c": str([{
+                "id": str(self.id)
+            }]),
             "csrf_token": "",
         }
         self.lyric_encode_data = {
@@ -72,9 +74,8 @@ class Song:
             title=self.title,
         )
         if formated.rfind("/") != -1:
-            formated = formated[: formated.rfind("/") + 1] + clean(
-                formated[formated.rfind("/") + 1 :]
-            )
+            formated = formated[:formated.rfind("/") + 1] + clean(
+                formated[formated.rfind("/") + 1:])
         else:
             formated = clean(formated)
         formated += "." + suffix
@@ -87,8 +88,8 @@ class Song:
         无参数。
         """
         self.raw_info = NeteaseParams(
-            url=SONG_INFO_API, encode_data=self.encode_data
-        ).get_resource()["songs"][0]
+            url=SONG_INFO_API,
+            encode_data=self.encode_data).get_resource()["songs"][0]
         self.title = self.raw_info["name"]
         self.album = self.raw_info["al"]["name"]
         for i in self.raw_info["ar"]:
@@ -100,12 +101,10 @@ class Song:
             "artist": self.artist,
             "id": self.id,
         }
-        self.url_info.update(
-            {
-                "album_pic": self.raw_info["al"]["picUrl"],
-                "song_file": SONG_FILE_API + self.id,
-            }
-        )
+        self.url_info.update({
+            "album_pic": self.raw_info["al"]["picUrl"],
+            "song_file": SONG_FILE_API + self.id,
+        })
         self.filename_info = {
             "song": self.get_formated_filename("mp3"),
             "pic": self.get_formated_filename("jpg"),
@@ -124,6 +123,9 @@ class Song:
             self.get_info()
 
     def song_download_enhanced(self, level: str, cookies=None):
+        """
+        用另外一个API的下载函数, 需要导入 `cookies` 发挥最大功效。
+        """
         flag = True
         level_key = ["standard", "higher", "exhigh", "lossless"]
         for i in level_key:
@@ -132,18 +134,18 @@ class Song:
         if flag:
             raise Exception("Error at inputing 'level'.")
         """
-        data的数据格式：
+        data的数据格式: 
         {
             “ids”:str([id]),
             “level”:“standard”,
             “encodeType”:“aac”,
             “csrf_token”: “”
         }
-        其中id表示歌曲的id号，
-        level是音乐品质，
-        标准为standard，
-        较高音质为higher，
-        极高音质exhigh，
+        其中id表示歌曲的id号, 
+        level是音乐品质, 
+        标准为standard, 
+        较高音质为higher, 
+        极高音质exhigh, 
         无损音质关键词为lossless。
         """
         enhance_encode_data = {
@@ -155,8 +157,8 @@ class Song:
         if level == "lossless":
             enhance_encode_data["encodeType"] = "aac"
         enhanced_info = NeteaseParams(
-            encode_data=enhance_encode_data, url=SONG_FILE_API_2
-        ).get_resource(cookies=cookies)
+            encode_data=enhance_encode_data,
+            url=SONG_FILE_API_2).get_resource(cookies=cookies)
         return enhanced_info
 
     def song_download(self):
@@ -178,11 +180,9 @@ class Song:
         return filename
 
     def lyric_get(self):
-        self.lyric = (
-            NeteaseParams(url=LYRIC_API, encode_data=self.lyric_encode_data)
-            .get_resource()["lrc"]["lyric"]
-            .replace("\n", "\n")
-        )
+        self.lyric = (NeteaseParams(
+            url=LYRIC_API, encode_data=self.lyric_encode_data).get_resource()
+            ["lrc"]["lyric"].replace("\n", "\n"))
         # filename = self.get_formated_filename('lrc')
         filename = self.filename_info["lyric"]
         with open(file=filename, mode="w+", encoding="UTF-8") as file:
@@ -194,7 +194,7 @@ class Song:
         往文件里面写入歌曲信息
         ----------
         参数:
-        1. `filename`: 文件名，字符串，仅mp3/flac格式
+        1. `filename`: 文件名, 字符串, 仅 `mp3/flac` 格式
         """
         filename_ready = self.get_formated_filename("mp3")
         if filename == "No filename":
@@ -204,13 +204,15 @@ class Song:
                 filename = self.filename_info["song"]
         attribute_write(filename=filename, info=self.processed_info)
 
-    def cover_write(self, filename="No filename", cover_filename="No cover_filename"):
+    def cover_write(self,
+                    filename="No filename",
+                    cover_filename="No cover_filename"):
         """
         专辑封面写入
         ----------
         参数:
-        1. `filename`: 文件名，字符串，仅mp3/flac格式
-        2. `cover_filename`: 封面的文件名, 字符串, 仅jpg格式
+        1. `filename`: 文件名, 字符串, 仅 `mp3/flac` 格式
+        2. `cover_filename`: 封面的文件名, 字符串, 仅 `jpg` 格式
         """
         if filename == "No filename":
             filename = self.filename_info["song"]
@@ -218,7 +220,17 @@ class Song:
             cover_filename = self.filename_info["pic"]
         cover_write(filename=filename, cover_filename=cover_filename)
 
-    def lyric_write(self, filename="No filename", lyric_filename="No lyric_filename"):
+    def lyric_write(self,
+                    filename="No filename",
+                    lyric_filename="No lyric_filename"):
+        """
+        歌词写入
+        ----------
+        参数:
+        1. `filename`: 文件名, 字符串, 仅 `mp3/flac` 格式
+        2. `lyric_filename`: 封面的文件名, 字符串, 仅jpg格式
+        提示: 如果留空不会怎么样的, 用 `filename_info` 的数据代替
+        """
         if filename == "No filename":
             filename = self.filename_info["song"]
         if lyric_filename == "No lyric_filename":
@@ -226,7 +238,14 @@ class Song:
         lyric_write(filename=filename, lyric_filename=lyric_filename)
 
     def auto_run(self, d=None):
-        self.get_info()
+        """
+        自动获取信息&下载。
+        ----------
+        参数: 
+        1. `d`: 包含6个键: `song_download`, `cover_download`, `lyric_download`, `attribute_write`, `cover_write`, `lyric_write` 的字典。这几个键的值都是 `bool` 类型的。
+        """
+        if self.is_get == False:
+            self.get_info()
         if d["song_download"] == True:
             c = self.song_download()
             if c == -1:
@@ -245,4 +264,10 @@ class Song:
         self.is_dl = True
 
     def multi_run(self, d=None):
-        threading.Thread(target=self.auto_run, args=(d,)).start()
+        """
+        多开线程的时候用的函数。
+        ----------
+        参数: 
+        1. `d`: 同 `auto_run` 的定义。
+        """
+        threading.Thread(target=self.auto_run, args=(d, )).start()
