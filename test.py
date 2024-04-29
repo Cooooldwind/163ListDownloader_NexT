@@ -324,5 +324,31 @@ p.get_info(cookies=c)
 pprint(p.raw_info)
 '''
 
+import pprint
+from ncmlistdownloader.common.encode_sec_key import *
+from ncmlistdownloader.common.global_args import *
+u = 'http://interface.music.163.com/eapi/batch/api/cloudsearch/pc'
+d = {
+    # "hlpretag": "<span class=\"s-fc7\">",
+    # "hlposttag": "</span>",
+    # "#/discover": "",
+    "s": '陈奕迅',
+    "type": "1000",
+    # "offset": str(0),
+    # "total": "true",
+    "limit": "20",
+    "csrf_token": ""
+}
+p = NeteaseParams(url = u, encode_data = d)
+pprint.pprint(p.get_resource())
+
+'''
+'http://interface.music.163.com/eapi/batch'
+'/api/cloudsearch/pc'
+1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户, 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频
+'''
+
+'''
 from ncmlistdownloader.cmd import *
 main()
+'''
