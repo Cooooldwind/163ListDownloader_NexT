@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/Downloader/__init__.py
-Core.Ver.1.0.6.240429
+Core.Ver.1.1.0.240430a1
 Author: CooooldWind_
 """
 
@@ -39,3 +39,5 @@ class DownloadList:
                 return -1
             for i in raw_dict['track']:
                 self.track.append(Song(id=i['info']['id']))
+            for i in self.track:
+                i.multi_get_info()
