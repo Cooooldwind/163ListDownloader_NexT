@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/song/__init__.py
-Core.Ver.1.0.6.240429
+Core.Ver.1.0.8.240501
 Author: CooooldWind_
 """
 
@@ -90,10 +90,10 @@ class Song:
         self.raw_info = NeteaseParams(
             url=SONG_INFO_API,
             encode_data=self.encode_data).get_resource()["songs"][0]
-        self.title = self.raw_info["name"]
-        self.album = self.raw_info["al"]["name"]
+        self.title = clean(self.raw_info["name"])
+        self.album = clean(self.raw_info["al"]["name"])
         for i in self.raw_info["ar"]:
-            self.artist.append(i["name"])
+            self.artist.append(clean(i["name"]))
         self.artist_str = artist_turn_str(self.artist)
         self.processed_info = {
             "album": self.album,

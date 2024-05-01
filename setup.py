@@ -32,7 +32,7 @@ setup(
         "Programming Language :: Python :: 3.12",
     ],
     name="ncmlistdownloader",
-    version="1.0.7.240501",
+    version="1.0.8.240501",
     description="获取网易云音乐歌单数据，下载音乐，主动添加元信息。",
     author="CooooldWind_",
     url="https://gitee.com/Cooooldwind/163ListDownloader_NexT",

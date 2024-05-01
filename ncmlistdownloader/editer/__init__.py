@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/Editer/__init__.py
-Core.Ver.1.0.7.240501
+Core.Ver.1.0.8.240501
 Author: CooooldWind_
 """
 
@@ -8,6 +8,7 @@ from PIL import Image
 from mutagen.flac import FLAC, Picture
 from mutagen.id3 import ID3, APIC, USLT, Encoding
 from mutagen.easyid3 import EasyID3
+from mutagen.mp3 import MP3
 from ncmlistdownloader.common import get_type, artist_turn_str
 
 expection_word_front = 'Opening files with the suffix ".'
