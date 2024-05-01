@@ -324,6 +324,7 @@ p.get_info(cookies=c)
 pprint(p.raw_info)
 '''
 
+'''
 import pprint
 from ncmlistdownloader.common.encode_sec_key import *
 from ncmlistdownloader.common.global_args import *
@@ -341,6 +342,7 @@ d = {
 }
 p = NeteaseParams(url = u, encode_data = d)
 pprint.pprint(p.get_resource())
+'''
 
 '''
 'http://interface.music.163.com/eapi/batch'
@@ -352,3 +354,6 @@ pprint.pprint(p.get_resource())
 from ncmlistdownloader.cmd import *
 main()
 '''
+
+
+

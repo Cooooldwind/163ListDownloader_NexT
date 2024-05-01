@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/Editer/__init__.py
-Core.Ver.1.0.5.240429
+Core.Ver.1.0.7.240501
 Author: CooooldWind_
 """
 
@@ -28,7 +28,8 @@ def attribute_write(filename=str(), info=None):
     if type == "mp3":
         file = EasyID3(filename)
     elif type == "flac":
-        file = FLAC(filename)
+        try: file = FLAC(filename)
+        except: return -1
     else:
         raise Exception(expection_word_front + type + expection_word_end)
     if not info:
@@ -54,15 +55,14 @@ def cover_write(filename=str(), cover_filename=str()):
     if type == "mp3":
         file = ID3(filename)
     elif type == "flac":
-        file = FLAC(filename)
+        try: file = FLAC(filename)
+        except: return -1
     else:
         raise Exception(expection_word_front + type + expection_word_end)
     cover_type = get_type(cover_filename)
     if cover_type != "jpg" and cover_type != "jpeg":
         raise Exception(cover_expection_word_front + cover_type + expection_word_end)
     with open(cover_filename, "rb") as cover_file:
-        print(cover_filename)
-        print(filename)
         if type == "mp3":
             file["APIC"] = APIC(
                 encoding=3,
@@ -94,7 +94,8 @@ def lyric_write(filename=str(), lyric_filename=str()):
     if type == "mp3":
         file = ID3(filename)
     elif type == "flac":
-        file = FLAC(filename)
+        try: file = FLAC(filename)
+        except: return -1
     else:
         raise Exception(expection_word_front + type + expection_word_end)
     lyric_type = get_type(lyric_filename)
