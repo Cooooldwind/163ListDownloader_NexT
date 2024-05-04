@@ -354,6 +354,3 @@ pprint.pprint(p.get_resource())
 from ncmlistdownloader.cmd import *
 main()
 '''
-
-
-

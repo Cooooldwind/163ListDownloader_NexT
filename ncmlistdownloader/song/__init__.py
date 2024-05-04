@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/song/__init__.py
-Core.Ver.1.0.8.240501
+Core.Ver.1.0.9.240504
 Author: CooooldWind_
 """
 
@@ -68,17 +68,17 @@ class Song:
     def get_formated_filename(self, suffix):
         formated = format(
             filename=self.filename_format,
-            artist=self.artist_str,
-            album=self.album,
-            id=self.id,
-            title=self.title,
-        )
-        if formated.rfind("/") != -1:
+            artist=clean(self.artist_str),
+            album=clean(self.album),
+            id=clean(self.id),
+            title=clean(self.title),
+        ) + '.' + suffix
+        """if formated.rfind("/") != -1:
             formated = formated[:formated.rfind("/") + 1] + clean(
                 formated[formated.rfind("/") + 1:])
         else:
             formated = clean(formated)
-        formated += "." + suffix
+        formated += "." + suffix"""
         return formated
 
     def get_info(self):
@@ -90,10 +90,10 @@ class Song:
         self.raw_info = NeteaseParams(
             url=SONG_INFO_API,
             encode_data=self.encode_data).get_resource()["songs"][0]
-        self.title = clean(self.raw_info["name"])
-        self.album = clean(self.raw_info["al"]["name"])
+        self.title = self.raw_info["name"]
+        self.album = self.raw_info["al"]["name"]
         for i in self.raw_info["ar"]:
-            self.artist.append(clean(i["name"]))
+            self.artist.append(i["name"])
         self.artist_str = artist_turn_str(self.artist)
         self.processed_info = {
             "album": self.album,
@@ -159,7 +159,11 @@ class Song:
         enhanced_info = NeteaseParams(
             encode_data=enhance_encode_data,
             url=SONG_FILE_API_2).get_resource(cookies=cookies)
-        return enhanced_info
+        enhanced_url = str(enhanced_info['data'][0]['url'])
+        if enhanced_url.rfind("?auth") != -1:
+            enhanced_url = enhanced_url[:enhanced_url.rfind("?auth")]
+        self.url_info["song_file"] = enhanced_url
+        return enhanced_url
 
     def song_download(self):
         # filename = self.get_formated_filename('mp3')
