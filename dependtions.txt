@@ -1,5 +1,0 @@
-pip install pycryptodome
-pip install eyed3
-pip install pillow
-pip install mutagen
-pip install requests
