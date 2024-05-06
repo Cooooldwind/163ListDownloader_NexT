@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/__init__.py
-Core.Ver.1.0.5.240429
+Core.Ver.1.1.0.240506
 Author: CooooldWind_
 """
 
@@ -15,9 +15,13 @@ def main():
     for i in CMD_START_WORDS:
         print(i)
     print(f"[*]{CORE_VERSION}")
+    c = {"MUSIC_U": str(input("Cookies(Press Enter if you have not): "))}
     id = str(input("ID: "))
     p = Playlist(id)
-    p.get_info()
+    if c['MUSIC_U'] == "":
+        p.get_info()
+    else:
+        p.get_info(cookies=c)
     print("Playlist info-reading succeed.")
     d = str(input("Dir: "))
     if d == "":
@@ -34,7 +38,13 @@ def main():
     p.multiprocessing_get_detail()
     while p.mp_succeed == False:
         time.sleep(1)
+    l_finally = ""
+    if c['MUSIC_U'] != "":
+        l_str = ['standard', 'higher', 'exhigh', 'lossless']
+        l = int(input("You have Cookies. Input the level(1~4): "))
+        l_finally = l_str[l - 1]
     for i in p.track:
+        i.song_download_enhanced(level = l_finally, cookies = c)
         music_filename = i.song_download()
         if music_filename == -1:
             print(i.title + " cannot download.")

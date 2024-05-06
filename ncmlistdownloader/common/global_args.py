@@ -44,8 +44,8 @@ SONG_FILE_API = json_file["SONG_FILE_API"]
 SONG_FILE_API_2 = json_file["SONG_FILE_API_2"]
 SEARCH_API = "https://music.163.com/weapi/cloudsearch/get/web?csrf_token="
 LYRIC_API = json_file["LYRIC_API"]
-CMD_VERSION = "Ver.1.0.4.240427"
-CORE_VERSION_SETUP = "1.0.9.240504"
+CMD_VERSION = "Ver.1.1.0.240506"
+CORE_VERSION_SETUP = "1.1.0.240506"
 CORE_VERSION = "Core.Ver." + CORE_VERSION_SETUP
 CMD_START_WORDS = [
     f"163ListDownloader CMD Ver - {CMD_VERSION}",
