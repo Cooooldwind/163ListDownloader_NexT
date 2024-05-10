@@ -353,6 +353,64 @@ pprint.pprint(p.get_resource())
 '''
 from ncmlistdownloader.cmd import *
 main()
-'''
+
+from ncmlistdownloader.song import *
+from pprint import pprint
+s = Song("")
+s.get_info()
+pprint(s.raw_info)
+
+{'a': None,
+ 'al': {'id': 78210207,
+        'name': 'Handwritten',
+        'pic': 109951163952150936,
+        'picUrl': 'https://p2.music.126.net/zK6vCNYRhfEcEAILmSOUaA==/109951163952150936.jpg',      
+        'pic_str': '109951163952150936',
+        'tns': []},
+ 'alia': [],
+ 'ar': [{'alias': [], 'id': 956238, 'name': 'Shawn Mendes', 'tns': []}],
+ 'awardTags': None,
+ 'cd': '01',
+ 'cf': '',
+ 'copyright': 1,
+ 'cp': 7003,
+ 'crbt': None,
+ 'djId': 0,
+ 'dt': 230440,
+ 'entertainmentTags': None,
+ 'fee': 8,
+ 'ftype': 0,
+ 'h': {'br': 320000, 'fid': 0, 'size': 9220223, 'sr': 44100, 'vd': -44257.0},
+ 'hr': None,
+ 'id': 1354365835,
+ 'l': {'br': 128000, 'fid': 0, 'size': 3688115, 'sr': 44100, 'vd': -39889.0},
+ 'm': {'br': 192000, 'fid': 0, 'size': 5532151, 'sr': 44100, 'vd': -41626.0},
+ 'mark': 17180139520,
+ 'mst': 9,
+ 'mv': 0,
+ 'name': 'This Is What It Takes',
+ 'no': 12, -> Number of Album
+ 'noCopyrightRcmd': None,
+ 'originCoverType': 0,
+ 'originSongSimpleData': None,
+ 'pop': 10.0,
+ 'pst': 0,
+ 'publishTime': 1455206400000, -> Publish Time
+ 'resourceState': True,
+ 'rt': '',
+ 'rtUrl': None,
+ 'rtUrls': [],
+ 'rtype': 0,
+ 'rurl': None,
+ 's_id': 0,
+ 'single': 0,
+ 'songJumpInfo': None,
+ 'sq': {'br': 819376, 'fid': 0, 'size': 23602144, 'sr': 44100, 'vd': -44256.0},
+ 'st': 0,
+ 't': 0,
+ 'tagPicList': None,
+ 'v': 5,
+ 'version': 5}
+ '''
 from ncmlistdownloader import *
 main()

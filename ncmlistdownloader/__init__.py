@@ -1,11 +1,12 @@
 """
 ncmlistdownloader/__init__.py
-Core.Ver.1.1.0.240506
+Core.Ver.1.1.1.240510
 Author: CooooldWind_
 """
 
 from pathlib import Path
 import time
+import getpass
 from ncmlistdownloader.playlist import *
 from ncmlistdownloader.common import *
 from ncmlistdownloader.common.global_args import *
@@ -15,7 +16,7 @@ def main():
     for i in CMD_START_WORDS:
         print(i)
     print(f"[*]{CORE_VERSION}")
-    c = {"MUSIC_U": str(input("Cookies(Press Enter if you have not): "))}
+    c = {"MUSIC_U": str(getpass.getpass("Cookies(Press Enter if you have not): ", ))}
     id = str(input("ID: "))
     p = Playlist(id)
     if c['MUSIC_U'] == "":

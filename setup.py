@@ -22,8 +22,6 @@ setup(
         # 许可证信息
         "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
         # 目标 Python 版本
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
@@ -32,7 +30,7 @@ setup(
         "Programming Language :: Python :: 3.12",
     ],
     name="ncmlistdownloader",
-    version="1.1.0.240506",
+    version="1.1.1.240510",
     description="获取网易云音乐歌单数据，下载音乐，主动添加元信息。",
     author="CooooldWind_",
     url="https://gitee.com/Cooooldwind/163ListDownloader_NexT",
