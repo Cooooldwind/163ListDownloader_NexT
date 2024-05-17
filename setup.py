@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 setup(
     classifiers=[
         # 发展时期
-        'Development Status :: 3 - Alpha',
+        "Development Status :: 3 - Alpha",
         # 'Development Status :: 4 - Beta',
         # "Development Status :: 5 - Production/Stable",
         # 开发的目标用户
@@ -30,7 +30,7 @@ setup(
         "Programming Language :: Python :: 3.12",
     ],
     name="ncmlistdownloader",
-    version="2.0.0.240516a1",
+    version="2.0.0.240517a1",
     description="获取网易云音乐歌单数据，下载音乐，主动添加元信息。",
     author="CooooldWind_",
     url="https://gitee.com/Cooooldwind/163ListDownloader_NexT",
