@@ -1,12 +1,6 @@
-import ncmlistdownloader.encode
-
-d = ncmlistdownloader.encode.NeteaseParams(
-    url="https://music.163.com/weapi/v3/song/detail",
-    encode_data={
-        "c": str([{"id": str(407007703)}]),
-        "csrf_token": "",
-    },
-)
+import ncmlistdownloader.music as nld_music
+m = nld_music.Music("https://music.163.com/song?id=1897685644&userid=1577080369", auto_info_get=False)
 import pprint
-
-pprint.pprint(d.get_resource())
+pprint.pprint(m.raw_info)
+m.get_info()
+pprint.pprint(m.raw_info)
