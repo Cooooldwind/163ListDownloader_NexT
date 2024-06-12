@@ -9,7 +9,7 @@ _CORE_VERSION_TUPLE = (
     "2",
     "0",
     "0",
-    "240607",
+    "240612",
     "3",
     "1",
 )
@@ -28,7 +28,7 @@ USER_AGENTS = [
     "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.2pre) Gecko/20070215 K-Ninja/2.1.1",
     "Mozilla/5.0 (X11; Linux i686; U;) Gecko/20070322 Kazehakase/0.4.5",
 ]
-LEVEL = ["","standard","higher","exhigh","lossless"]
+LEVEL = ["", "standard", "higher", "exhigh", "lossless"]
 """
 Major,
 Minor,
