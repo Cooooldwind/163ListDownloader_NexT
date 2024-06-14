@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/__init__.py
-Core.Ver.1.1.1.240517
+Ver.1.1.2.240614
 Author: CooooldWind_
 """
 
@@ -24,7 +24,9 @@ def main():
     c = {"MUSIC_U": c_str}
     if c_str != "":
         print("Got cookies! ")
-    id = str(input("ID: "))
+    else:
+        print("No cookies! ")
+    id = str(input("ID/URL: "))
     p = Playlist(id)
     if c["MUSIC_U"] == "":
         p.get_info()
@@ -51,8 +53,10 @@ def main():
         l_str = ["standard", "higher", "exhigh", "lossless"]
         l = int(input("You have Cookies. Input the level(1~4): "))
         l_finally = l_str[l - 1]
+    n = 0
     for i in p.track:
-        i.song_download_enhanced(level=l_finally, cookies=c)
+        if c_str != "":
+            i.song_download_enhanced(level=l_finally, cookies=c)
         music_filename = i.song_download()
         if music_filename == -1:
             print(i.title + " cannot download.")
@@ -62,5 +66,6 @@ def main():
         i.attribute_write(music_filename)
         i.cover_write(music_filename, cover_filename)
         i.lyric_write(music_filename, lyric_filename)
-        print(i.title + " succeed.")
+        n += 1
+        print(f"{n}/{p.track_count}: {i.title} Succeed.")
     print("Succeed. Files at:", d)
