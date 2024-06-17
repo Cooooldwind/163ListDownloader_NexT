@@ -1,13 +1,28 @@
-import ncmlistdownloader.music as nld_music
-from pprint import pprint
+import requests
+import json
+import hashlib
+import base64
+import pprint
+from Crypto.Cipher import AES
+from ncmlistdownloader.encode import NeteaseParams
+from ncmlistdownloader.global_args import *
 
-"""m = nld_music.Music("https://music.163.com/song?id=2146779694&userid=1577080369")
-result = m.get_info(
-    MUSIC_U="",
-    level=4,
-)
-with open("C:\\Users\\Administrator\\Desktop\\11.txt", "w+") as f:
-    f.write(m.lyric)"""
-m = nld_music.Music("https://music.163.com/song?id=2146779694&userid=1577080369")
-r = m.get_info()
-pprint(r)
+# 设置请求体
+phone = str(input("phone:"))
+password = str(input("password:"))
+
+d = {
+    'phone': phone,
+    'password': password,
+    "rememberLogin":"true",
+    "checkToken":"",
+    "csrf_token": ""
+}
+p = NeteaseParams(url = "", encode_data=d)
+dd = p.get_data()
+
+# 构造登录请求并保持Session状态
+session = requests.Session()
+session.post('http://music.163.com/weapi/login/cellphone', data=dd)
+
+pprint.pprint(session.cookies)
