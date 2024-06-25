@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+"""# -*- coding: utf-8 -*-
 import base64
 import codecs
 import pickle
@@ -123,3 +123,7 @@ def wyylogin():
     
 if __name__ == '__main__':
     wyylogin()
+"""
+
+from ncmlistdownloader.music import *
+print(Music("https://music.163.com/song?id=3956911&userid=1577080369").get_info())

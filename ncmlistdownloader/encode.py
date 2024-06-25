@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/encode.py
-Core.Ver.2.0.0.240517a1
+Core.Ver.2.0.0.240625a1
 Copyright @CooooldWind_
 Following GNU_AGPLV3+ License
 """
@@ -32,6 +32,7 @@ class NeteaseParams:
         self._func_g = "0CoJUm6Qyw8W8jud"
         self._func_i = "vlgPRPyGhwA6F4Sq"
         self._encode_sec_key = global_args.SEC_KEY
+        self._session = requests.session()
 
     def _to_hex(self, encode_data):
         """16进制解码"""
@@ -63,7 +64,7 @@ class NeteaseParams:
             "encSecKey": self._encode_sec_key,
         }
         get_headers = {"User-Agent": random.choice(global_args.USER_AGENTS)}
-        response = requests.post(
+        response = self._session.post(
             self.url, data=get_data, headers=get_headers, cookies=cookies, timeout=10
         )
         return response.json()
