@@ -1,12 +1,11 @@
 """
 ncmlistdownloader/__init__.py
-Ver.1.1.2.240614
+Ver.1.1.3.240614
 Author: CooooldWind_
 """
 
 from pathlib import Path
 import time
-import getpass
 from ncmlistdownloader.playlist import *
 from ncmlistdownloader.common import *
 from ncmlistdownloader.common.global_args import *
@@ -16,11 +15,7 @@ def main():
     for i in CMD_START_WORDS:
         print(i)
     print(f"[*]{CORE_VERSION}")
-    c_str = str(
-        getpass.getpass(
-            "Cookies(Press Enter if you have not): ",
-        )
-    )
+    c_str = str(input("Cookies(Press Enter if you have not): "))
     c = {"MUSIC_U": c_str}
     if c_str != "":
         print("Got cookies! ")
@@ -56,7 +51,12 @@ def main():
     n = 0
     for i in p.track:
         if c_str != "":
-            i.song_download_enhanced(level=l_finally, cookies=c)
+            ude = i.song_download_enhanced(level=l_finally, cookies=c)
+            if ude == None:
+                ude = i.song_download_enhanced(level="standard", cookies=c)
+                if ude == None:
+                    print(i.title + " cannot download.")
+                    continue
         music_filename = i.song_download()
         if music_filename == -1:
             print(i.title + " cannot download.")

@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/song/__init__.py
-Core.Ver.1.1.2.240614
+Core.Ver.1.1.3.240630
 Author: CooooldWind_
 """
 
@@ -189,7 +189,7 @@ class Song:
         file_origin.auto_start(filename=filename)
         return filename
 
-    def lyric_get(self):
+    def lyric_get(self, encoding='gb18030'):
         self.lyric = (
             NeteaseParams(url=LYRIC_API, encode_data=self.lyric_encode_data)
             .get_resource()["lrc"]["lyric"]
@@ -197,7 +197,7 @@ class Song:
         )
         # filename = self.get_formated_filename('lrc')
         filename = self.filename_info["lyric"]
-        with open(file=filename, mode="w+", encoding="UTF-8") as file:
+        with open(file=filename, mode="w+", encoding=encoding) as file:
             file.write(self.lyric)
         return filename
 
