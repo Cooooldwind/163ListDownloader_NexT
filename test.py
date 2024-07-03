@@ -1,4 +1,4 @@
-"""# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import base64
 import codecs
 import pickle
@@ -16,6 +16,8 @@ from pprint import pprint
 requests.packages.urllib3.disable_warnings()
 headers = {'User-Agent': agent.get_user_agents(),'Referer':'https://music.163.com/'}
 
+
+from ncmlistdownloader.encode import NeteaseParams
 
 class showpng(Thread):
     def __init__(self, data):
@@ -123,7 +125,5 @@ def wyylogin():
     
 if __name__ == '__main__':
     wyylogin()
-"""
 
-from ncmlistdownloader.music import *
-print(Music("https://music.163.com/song?id=3956911&userid=1577080369").get_info())
+

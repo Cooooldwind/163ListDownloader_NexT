@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/encode.py
-Core.Ver.2.0.0.240625a1
+Core.Ver.2.0.0.240703a2
 Copyright @CooooldWind_
 Following GNU_AGPLV3+ License
 """
@@ -24,15 +24,13 @@ class NeteaseParams:
     2. `url`: API的URL
     """
 
-    def __init__(self, encode_data, url):
-        self.encode_data = encode_data
-        self.url = url
+    def __init__(self):
         self._func_e = "010001"
         self._func_f = global_args.FUNC_F
         self._func_g = "0CoJUm6Qyw8W8jud"
         self._func_i = "vlgPRPyGhwA6F4Sq"
         self._encode_sec_key = global_args.SEC_KEY
-        self._session = requests.session()
+        self.session = requests.session()
 
     def _to_hex(self, encode_data):
         """16进制解码"""
@@ -57,14 +55,14 @@ class NeteaseParams:
             self._encode_params(encode_data, self._func_g), self._func_i
         )
 
-    def get_resource(self, cookies=None):
+    def get_resource(self, cookies=None, encode_data = None, url = ""):
         """获取资源"""
         get_data = {
-            "params": self._get_params(json.dumps(self.encode_data)),
+            "params": self._get_params(json.dumps(encode_data)),
             "encSecKey": self._encode_sec_key,
         }
         get_headers = {"User-Agent": random.choice(global_args.USER_AGENTS)}
-        response = self._session.post(
-            self.url, data=get_data, headers=get_headers, cookies=cookies, timeout=10
+        response = self.session.post(
+            url, data=get_data, headers=get_headers, cookies=cookies, timeout=10
         )
         return response.json()
