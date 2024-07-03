@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/music/__init__.py
-Core.Ver.2.0.0.240612a1
+Core.Ver.2.0.0.240703a1
 Copyright @CooooldWind_
 Following GNU_AGPLV3+ License
 """
@@ -9,6 +9,7 @@ import requests
 import ncmlistdownloader.encode as encode
 import ncmlistdownloader.tool as tool
 import ncmlistdownloader.global_args as global_args
+import ncmlistdownloader.api as api
 
 
 class Music:
@@ -60,7 +61,7 @@ class Music:
     def get_info(self, MUSIC_U: str = "", level: int = 1):
         # 基本信息
         self.raw_info = encode.NeteaseParams(
-            url=global_args.SONG_INFO_API, encode_data=self._encode_data
+            url=api.SONG_INFO_API, encode_data=self._encode_data
         ).get_resource()["songs"][0]
         self.title = self.raw_info["name"]
         self.artist: list[str] = [i["name"] for i in self.raw_info["ar"]]
@@ -76,18 +77,18 @@ class Music:
             if level == 4:
                 self._enhanced_encode_data["encodeType"] = "aac"
             self.enhanced_raw_info = encode.NeteaseParams(
-                url=global_args.SONG_FILE_API_ENHANCED,
+                url=api.SONG_FILE_API_ENHANCED,
                 encode_data=self._enhanced_encode_data,
             ).get_resource(cookies=cookies)["data"][0]
             url = self.enhanced_raw_info["url"]
             url = url[: url.rfind("?")]
         else:
-            url = global_args.SONG_FILE_API + self.id
+            url = api.SONG_FILE_API + self.id
             url = requests.head(url=url, allow_redirects=True).url
         self.music_url = url
         # 歌词
         lyric_raw_info = encode.NeteaseParams(
-            url=global_args.LYRIC_API, encode_data=self._lyric_encode_data
+            url=api.LYRIC_API, encode_data=self._lyric_encode_data
         ).get_resource()
         self.lyric = str(lyric_raw_info["lrc"]["lyric"])
         result = {
