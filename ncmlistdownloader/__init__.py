@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/__init__.py
-Ver.1.1.3.240614
+Ver.1.1.4.240703
 Author: CooooldWind_
 """
 
@@ -52,9 +52,9 @@ def main():
     for i in p.track:
         if c_str != "":
             ude = i.song_download_enhanced(level=l_finally, cookies=c)
-            if ude == None:
+            if ude == "None":
                 ude = i.song_download_enhanced(level="standard", cookies=c)
-                if ude == None:
+                if ude == "None":
                     print(i.title + " cannot download.")
                     continue
         music_filename = i.song_download()
