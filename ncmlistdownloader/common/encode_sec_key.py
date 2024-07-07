@@ -1,6 +1,6 @@
 """
 网易云WeAPI解码
-Core.Ver.1.3.0.240707
+Core.Ver.1.3.1.240707
 Author: CooooldWind_, 半岛的孤城
 References: 
 1. 网易云解参数（获取网易云歌词，获取评论同理）[https://www.bilibili.com/read/cv12754897/]
@@ -62,7 +62,10 @@ class NeteaseParams:
             "params": self.__get_params(json.dumps(self.encode_data)),
             "encSecKey": self.encode_sec_key,
         }
-        get_headers = {"User-Agent": random.choice(USER_AGENTS)}
+        get_headers = {
+            "User-Agent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.2pre) Gecko/20070215 K-Ninja/2.1.1",
+            'Connection': 'close',
+        }
         response = self.session.post(
             self.url, data=get_data, headers=get_headers, cookies=cookies, timeout=10
         )

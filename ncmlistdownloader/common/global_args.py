@@ -1,6 +1,6 @@
 """
 list_downloader/global_args.py
-Core.Ver.1.1.2.240614
+Core.Ver.1.3.1.240707
 Author: CooooldWind_, 是青旨啊
 """
 from ncmlistdownloader.common.version import *
@@ -18,7 +18,6 @@ SEC_KEY_PART = [
     "c66fe536c9e2056d2032c884d764cf419e8ce7bd245f56bde140deccbaed",
     "83995285ee66ccda",
 ]
-M = "Mozilla/5.0 ("
 json_file = {
     "FUNC_F": "".join(FUNC_F_PART),
     "LYRIC_API": "https://music.163.com/weapi/song/lyric?csrf_token=",
@@ -27,15 +26,7 @@ json_file = {
     "SONG_FILE_API": "https://music.163.com/song/media/outer/url?id=",
     "SONG_FILE_API_2": "https://music.163.com/weapi/song/enhance/player/url/v1?",
     "SONG_INFO_API": "https://music.163.com/weapi/v3/song/detail",
-    "USER_AGENTS": [
-        M
-        + "X11; U; Linux; en-US) AppleWebKit/527+ (KHTML, like Gecko, Safari/419.3) Arora/0.6",
-        M
-        + "Windows; U; Windows NT 5.1; en-US; rv:1.8.1.2pre) Gecko/20070215 K-Ninja/2.1.1",
-        M + "X11; Linux i686; U;) Gecko/20070322 Kazehakase/0.4.5",
-    ],
 }
-USER_AGENTS = json_file["USER_AGENTS"]
 FUNC_F = json_file["FUNC_F"]
 SEC_KEY = json_file["SEC_KEY"]
 PLAYLIST_API = json_file["PLAYLIST_API"]
