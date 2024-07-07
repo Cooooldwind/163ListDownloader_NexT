@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/__init__.py
-Ver.1.2.0.240705
+Ver.1.3.0.240707
 Author: CooooldWind_
 """
 
@@ -10,21 +10,28 @@ from ncmlistdownloader.playlist import *
 from ncmlistdownloader.common import *
 from ncmlistdownloader.common.global_args import *
 from ncmlistdownloader.editer import cover_compress
+from ncmlistdownloader.login import login
 
 def t_or_f(s = str()) -> bool:
-    return (s.capitalize == "True" or s.capitalize == "T" or s == "")
+    return (s.capitalize == "True" or s.capitalize == "T" or s == "" or s == 't' or s == "T" or s == "true")
 
 
 def main():
     for i in CMD_START_WORDS:
         print(i)
     print(f"[*]{CORE_VERSION}")
-    c_str = str(input("Cookies(Press Enter if you have not): "))
-    c = {"MUSIC_U": c_str}
-    if c_str != "":
-        print("Got cookies! ")
-    else:
-        print("No cookies! ")
+    d = int(input("Scan QRCode or input cookies? Scan -> 1 and input -> 2: "))
+    c = {}
+    if d == 2:
+        c_str = str(input("Cookies(Press Enter if you have not): "))
+        c = {"MUSIC_U": c_str}
+        if c_str != "":
+            print("Got cookies! ")
+        else:
+            print("No cookies! ")
+    else: 
+        c_str = login()
+        c = {"MUSIC_U": c_str}
     id = str(input("ID/URL: "))
     p = Playlist(id)
     if c["MUSIC_U"] == "":

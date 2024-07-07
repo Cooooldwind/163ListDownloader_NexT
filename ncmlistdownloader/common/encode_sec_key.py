@@ -1,6 +1,6 @@
 """
 网易云WeAPI解码
-Core.Ver.1.0.5.240429
+Core.Ver.1.3.0.240707
 Author: CooooldWind_, 半岛的孤城
 References: 
 1. 网易云解参数（获取网易云歌词，获取评论同理）[https://www.bilibili.com/read/cv12754897/]
@@ -31,6 +31,7 @@ class NeteaseParams:
         self.func_g = "0CoJUm6Qyw8W8jud"
         self.func_i = "vlgPRPyGhwA6F4Sq"
         self.encode_sec_key = SEC_KEY
+        self.session = requests.Session()
 
     def __to_hex(self, encode_data):
         """16进制解码"""
@@ -62,7 +63,7 @@ class NeteaseParams:
             "encSecKey": self.encode_sec_key,
         }
         get_headers = {"User-Agent": random.choice(USER_AGENTS)}
-        response = requests.post(
+        response = self.session.post(
             self.url, data=get_data, headers=get_headers, cookies=cookies, timeout=10
         )
         return response.json()
