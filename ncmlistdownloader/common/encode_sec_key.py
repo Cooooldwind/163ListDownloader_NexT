@@ -1,6 +1,6 @@
 """
 网易云WeAPI解码
-Core.Ver.1.3.1.240707
+Core.Ver.1.3.2.240707
 Author: CooooldWind_, 半岛的孤城
 References: 
 1. 网易云解参数（获取网易云歌词，获取评论同理）[https://www.bilibili.com/read/cv12754897/]
@@ -11,7 +11,7 @@ import json
 from base64 import b64encode
 import requests
 from Crypto.Cipher import AES
-from ncmlistdownloader.common.global_args import USER_AGENTS, FUNC_F, SEC_KEY
+from ncmlistdownloader.common.global_args import FUNC_F, SEC_KEY
 
 
 class NeteaseParams:

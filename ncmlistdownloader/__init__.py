@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/__init__.py
-Ver.1.3.1.240707
+Ver.1.3.2.240707
 Author: CooooldWind_
 """
 
