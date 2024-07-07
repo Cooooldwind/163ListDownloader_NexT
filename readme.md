@@ -1,10 +1,20 @@
 # 163ListDownloader_NexT
 
+**目前最新版本是: `Core.Ver.1.3.2.240707`**
+
+## 简介
+
+这堆东西源于我想下下我网易云上的歌单，然后就断断续续写了两年，最后发展成这个个人认为蛮有意义的小程序。
+
+现在能扫码登录，下载无损音质（前提是你有VIP啦），选择是否下载歌词，添加封面啥的。
+
+使用的API在网上公开，所以（可能）不会造成什么法律上的风险。
+
+## 163ListDownloader_NexT 建库声明
+
 这将会是新的开始：一个更好的库，和一个更好的UI（虽然目前来看可能还是基于Win32的Tkinter）！
 
 所以可以紧跟我们的脚步，看看究竟会发生什么。
-
-**目前最新版本是: `Core.Ver.1.0.4.240427`**
 
 ## 安装与使用
 
@@ -58,7 +68,13 @@ for i in p.track:
 
 如果直接 ```import ncmlistdownloader``` 然后 ```p = ncmlistdownloader.Playlist(id="")``` 貌似也是可以的喔（喜
 
-### 3 - 不存在的（至少目前是
+### 3 - 求Star，但是跳转到issues界面
+
+[![pkW3eQe.png](https://s21.ax1x.com/2024/07/07/pkW3eQe.png)](https://imgse.com/i/pkW3eQe)
+
+下个版本一定改（罢？）
+
+### 4 - 不存在的（至少目前是
 
 都说了没有了你看个锤子喔！
 
@@ -68,14 +84,8 @@ for i in p.track:
 
 特别鸣谢：[是青旨啊](https://sayqz.com)，[bilibili@半岛的孤城](https://space.bilibili.com/32187583)
 
-文本编辑于 Core.Ver.1.0.4.240427
+文本编辑于 Core.Ver.1.3.2.240707
 
 2024.02.20 CooooldWind_
 
-update: 2024.03.02 CooooldWind_(紧急更新)
-
-update: 2024.04.09 CooooldWind_
-
-update: 2024.04.14 CooooldWind_
-
-update: 2024.04.27 CooooldWind_
+latest_update: 2024.07.07 CooooldWind_
