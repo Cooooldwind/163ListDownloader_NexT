@@ -1,6 +1,6 @@
 """
 ncmlistdownloader/song/__init__.py
-Core.Ver.1.1.3.240630
+Core.Ver.x.x.x.240719
 Author: CooooldWind_
 """
 
@@ -50,9 +50,6 @@ class Song:
         self.processed_info = {}
         self.url_info = {}
         self.filename_info = {}
-        self.filename_format = "$title$ - $artist$"
-        self.is_get = False
-        self.is_dl = False
 
     def __str__(self):
         """
@@ -62,26 +59,6 @@ class Song:
         如果直接`print`这个类就是调用这个函数了。
         """
         return str(self.processed_info)
-
-    def get_formated_filename(self, suffix):
-        formated = (
-            format(
-                filename=self.filename_format,
-                artist=clean(self.artist_str),
-                album=clean(self.album),
-                id=clean(self.id),
-                title=clean(self.title),
-            )
-            + "."
-            + suffix
-        )
-        """if formated.rfind("/") != -1:
-            formated = formated[:formated.rfind("/") + 1] + clean(
-                formated[formated.rfind("/") + 1:])
-        else:
-            formated = clean(formated)
-        formated += "." + suffix"""
-        return formated
 
     def get_info(self):
         """
@@ -109,22 +86,8 @@ class Song:
                 "song_file": SONG_FILE_API + self.id,
             }
         )
-        self.filename_info = {
-            "song": self.get_formated_filename("mp3"),
-            "pic": self.get_formated_filename("jpg"),
-            "lyric": self.get_formated_filename("lrc"),
-        }
         self.is_get = True
         return self.raw_info
-
-    def multi_get_info(self):
-        """
-        获取歌曲信息（多线程用）
-        ----------
-        无参数。
-        """
-        with threading.Semaphore(8):
-            self.get_info()
 
     def song_download_enhanced(self, level: str, cookies=None):
         """
@@ -189,7 +152,7 @@ class Song:
         file_origin.auto_start(filename=filename)
         return filename
 
-    def lyric_get(self, encoding='gb18030'):
+    def lyric_get(self, encoding="gb18030"):
         self.lyric = (
             NeteaseParams(url=LYRIC_API, encode_data=self.lyric_encode_data)
             .get_resource()["lrc"]["lyric"]
@@ -244,38 +207,3 @@ class Song:
         if lyric_filename == "No lyric_filename":
             lyric_filename = self.filename_info["lyric"]
         lyric_write(filename=filename, lyric_filename=lyric_filename)
-
-    def auto_run(self, d=None):
-        """
-        自动获取信息&下载。
-        ----------
-        参数:
-        1. `d`: 包含6个键: `song_download`, `cover_download`, `lyric_download`, `attribute_write`, `cover_write`, `lyric_write` 的字典。这几个键的值都是 `bool` 类型的。
-        """
-        if self.is_get == False:
-            self.get_info()
-        if d["song_download"] == True:
-            c = self.song_download()
-            if c == -1:
-                self.is_dl = True
-                return -1
-        if d["cover_download"] == True:
-            self.cover_download()
-        if d["lyric_download"] == True:
-            self.lyric_get()
-        if d["attribute_write"] == True:
-            self.attribute_write()
-        if d["cover_write"] == True:
-            self.cover_write()
-        if d["lyric_write"] == True:
-            self.lyric_write()
-        self.is_dl = True
-
-    def multi_run(self, d=None):
-        """
-        多开线程的时候用的函数。
-        ----------
-        参数:
-        1. `d`: 同 `auto_run` 的定义。
-        """
-        threading.Thread(target=self.auto_run, args=(d,)).start()
