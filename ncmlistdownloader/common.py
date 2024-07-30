@@ -1,5 +1,5 @@
 """
-ncmlistdownloader/Common/__init__.py
+ncmlistdownloader/common.py
 存储常用函数。
 Core.Ver.1.0.5.240429
 Author: CooooldWind_

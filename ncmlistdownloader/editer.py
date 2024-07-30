@@ -1,5 +1,5 @@
 """
-ncmlistdownloader/Editer/__init__.py
+ncmlistdownloader/editer.py
 Core.Ver.1.0.8.240501
 Author: CooooldWind_
 """
