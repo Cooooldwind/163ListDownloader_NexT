@@ -1,7 +1,8 @@
 """
 ncmlistdownloader/editer.py
-Core.Ver.1.0.8.240501
-Author: CooooldWind_
+Core.Ver.2.0.0.240731b1
+Copyright @CooooldWind_
+Following GNU_AGPLV3+ License
 """
 
 from PIL import Image

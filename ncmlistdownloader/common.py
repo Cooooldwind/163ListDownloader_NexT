@@ -1,8 +1,8 @@
 """
 ncmlistdownloader/common.py
-存储常用函数。
-Core.Ver.1.0.5.240429
-Author: CooooldWind_
+Core.Ver.2.0.0.240731b1
+Copyright @CooooldWind_
+Following GNU_AGPLV3+ License
 """
 
 import os
